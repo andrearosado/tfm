@@ -6,10 +6,29 @@
 \chapter{Metodología}
 El desarrollo del software requiere de una metodología de trabajo colaborativo basado en una serie de herramientas de contenerización y orquestación de manera eficiente, extensible y reproducible.
 
-\subsection*{2.1. Software y plataformas}
+\section{Software y plataformas}
+A lo largo de este proyecto se han utilizado una serie de softwares y plataformas para el desarrollo de la nueva herramienta, clasificados en diferentes grupos. Dentro de estos conjuntos se encuentran explicados con más detalle los procesos que corresponden según las aplicaciones que se utilizaron.  Estas tareas se llevaban a cabo de forma diaria y se solían efectuar cada cierto tiempo. Estos procesos se dividen en tres: (1) actualización de ficheros, (2) trabajo colaborativo e (3) integración continua.
 
-\subsection*{2.2. Conjunto de datos}
+Antes que nada, se debe de tener en cuenta que los procesos están representados mediante diagramas de secuencia. Por ello, la lectura debe realizar de izquierda a derecha y de arriba a abajo. Las líneas discontinuas corresponden a las notificaciones o mensajes intercambiables que son enviados y recibidos entre distintos actores, y las líneas continuas corresponden a las operaciones que realiza y recibe cualquier actor. Además, con ello podemos relacionar la activación y desactivación del actor cuando éste envía o realiza cualquier operación. Finalmente, entre actores aparecen expresiones como condicionantes o alternativas (alt), opcionales (opt) y bucles o ciclos (loop), es decir, una operación que se repite tantas veces sea necesario o quiera el usuario. Y no menos importante, los actores son los softwares o plataformas utilizados durante el proceso.
 
+\subsection{Control de versiones}
+
+\subsection{Contenerización y orquestación de servicios}
+
+\subsection{Extensibilidad}
+El \textit{makefile} (fichero encargado de organizar todo el código compilado de todos los programas que se deseen utilizar en la extensión) obtiene la capacidad para ampliar las funcionalidades de cualquier aplicación, como es el caso de la siguiente extensión:
+\begin{itemize}
+\item\textbf{PostgreSQL/PostGIS}: por un lado, PostgreSQL es un poderoso sistema de bases de datos relacional el cual ayuda a organizar todos los objetos en un conjunto de tablas y, en cuanto a PostGIS es una extensión que añade objetos geográficos a la base de datos relacional de PostgreSQL, pasando a ser una base de datos espacial. Ambas extensiones han permitido la construcción de consultas sobre las bases de datos utilizadas en el proyecto, tanto los de prueba como de los casos de estudio a partir de datos del SIOSE.
+\end{itemize}
+
+\subsection{Aplicaciones}
+Tanto para el conjunto de datos como para las consultas y funciones de SQL, se utilizaron aplicaciones que realizan unas determinadas tareas:
+\begin{itemize}
+\item\textbf{PgAdmin4}: es una aplicación de código abierto capaz de administrar y gestionar bases de datos PostgreSQL. En este caso, desde una interfaz web donde se han construido todas las consultas, funciones, agregados,... etc.
+\item\textbf{QGIS 2.18}: es una aplicación de escritorio SIG, de código abierto o libre, que analiza, maneja y opera con datos vectoriales, datos ráster y bases de datos. Además facilita la conexión entre las bases de datos espaciales como PostGIS. Gracias a este software se ha elaborado un conjunto de datos que se ha utilizado para comprobar el funcionamiento de las métricas de paisaje.
+\end{itemize}
+
+\section{Conjunto de datos}
 Antes de seleccionar las métricas de paisaje que han sido utilizadas para complementar el nuevo software, ha sido necesario elaborar y procesar conjuntos de datos que posteriormente se han utilizado para realizar comprobaciones del funcionamiento de las métricas. Así pues, por una parte se ha creado un paisaje ficticio y por otra, se han utilizado los datos del SIOSE de dos zonas de estudio como casos de estudio reales.
 
 Para el paisaje ficticio, se ha digitalizado desde cero todos los polígonos que comprenden esta zona de estudio a partir de herramientas de geoprocesamiento, geometría, vectorial y edición, utilizando QGIS. En la tabla de atributos del shapefile, cada polígono tiene identificador único, geometría, clasificación según el tipo de cobertura del suelo y color según el tipo de categoría al que pertenece.
@@ -18,7 +37,7 @@ Para el paisaje ficticio, se ha digitalizado desde cero todos los polígonos que
 % \usepackage{booktabs}
 \begin{table}[]
 \centering
-\caption{. Atributos del primer conjunto de datos.}
+\caption{Atributos del primer conjunto de datos.}
 \label{my-label}
 \begin{tabular}{@{}lll@{}}
 \toprule
@@ -31,22 +50,18 @@ svg\_color      & character varying (text) & Color según tipo de categoría    
 \end{table}
 
 
-\subsection*{2.3. Selección de métricas}
+\section{Selección de métricas}
 
-\subsection*{2.4. Implementación/desarrollo de funciones en PostgreSQL}
+\section{Implementación/desarrollo de funciones en PostgreSQL}
 
-\subsection*{2.5. Documentación de la extensión}
-
+\section{Documentación de la extensión}
 A lo largo del trabajo, se aplican una serie de lenguajes de marcado para la documentación de la extensión. Pero antes se obtienen conocimientos previos sobre ellos y su funcionamiento para utilizarlos durante el proyecto. Los lenguajes utilizados son:
 \begin{itemize}
 \item\textbf{Markdown}\footnote{\url{https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet}} es un lenguaje ligero capaz de convertir texto plano a lenguaje HTML. Permite una escritura sencilla y conserva un diseño fácil de lectura. Es compatible con muchas plataformas. Este tipo de lenguaje es utilizado para documentar la extensión en la plataforma de GitHub y la descripción de cada una de las métricas de paisaje.
-
 \item\textbf{TeX}\footnote{\url{https://www.latex-project.org/}} es el lenguaje que se utiliza en el sistema de textos LaTeX y que crea documentos con una alta calidad tipográfica. Se utiliza para escribir artículos o libros científicos, y desde hace tiempo este lenguaje se emplea por un gran número de usuarios. Este tipo de lenguaje es utilizado para redactar este trabajo. Para trabajar con este lenguaje, se utiliza la aplicación Texmaker que se ejecuta desde un contenedor Docker.
-
 \item\textbf{Scalable Vector Graphics (SVG)} es un lenguaje capaz de crear gráficos basados en vectores escalables a partir de archivos vectoriales en 2D y en formato XML. En esta década muchos de los navegadores web utilizan este tipo de lenguaje para sus gráficos. Gracias a este lenguaje, los gráficos no pierden calidad, pueden ser escalables y ocupan menos espacio en la memoria. Este tipo de lenguaje es utilizado para crear las figuras del trabajo.
 
 Por ello, se desarolla una función SQL, como primera propuesta, que dibuja y colorea los gráficos vectoriales que acompañan en el trabajo y en la documentación de la extensión en la plataforma GitHub. Para que las figuras tengan el color correspondiente al tipo de cobertura al que pertenecen, se aplica el código SVG que acompaña a cada polígono en la tabla de atributos del primer conjuntos de datos. La función SVG puede consultarse en el Anexo II.
-
 \item\textbf{Mermaid}\footnote{\url{https://mermaidjs.github.io/}} es un lenguaje de secuencia, que utiliza etiquetas similares a las que son empleadas en el lenguaje de marcado, capaz de generar gráficos a partir de texto por medio de JavaScript. Este tipo de lenguaje se ha utilizado para crear los diagramas de secuencia y el diagrama de Gantt.
 \end{itemize}
 
