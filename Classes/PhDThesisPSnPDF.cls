@@ -1303,3 +1303,17 @@ wish to left align your text}
   }}
 \makeatother
 
+
+%% GRAYBOX
+\usepackage{xcolor}
+
+\newsavebox{\itemBox}
+\newenvironment{graybox}
+{\newcommand\colboxcolor{EEEEEE}%
+\begin{lrbox}{\itemBox}%
+\begin{minipage}{\dimexpr\columnwidth-2\fboxsep\relax}
+\begin{minipage}{\dimexpr\columnwidth-2\fboxsep\relax} \textbf{Puntos de interés:} }
+{\vspace{5pt}\end{minipage}\end{minipage}\end{lrbox}%
+\begin{center}
+  \colorbox[HTML]{\colboxcolor}{\usebox{\itemBox}}
+\end{center} }
