@@ -1280,3 +1280,26 @@ wish to left align your text}
 }
 }
 
+
+%%%%%%%%%%%%%%%%%%%%
+%%%%% CUSTOM ANDREA
+%%%%%%%%%%%%%%%%%%%%
+
+\makeatletter
+\def\@makechapterhead#1{%
+  %%\vspace*{50\p@}%
+  {\parindent \z@ \raggedright \normalfont
+    %%\ifnum \c@secnumdepth >\m@ne
+      %%\if@mainmatter
+      %%  \huge\bfseries \@chapapp\space \thechapter
+      %%  \par\nobreak
+      %%  \vskip 20\p@
+      %%\fi
+    %%\fi
+    
+    \interlinepenalty\@M
+    \Huge \bfseries \thechapter.\space \uppercase{#1}\par\nobreak
+    \vskip 40\p@
+  }}
+\makeatother
+
