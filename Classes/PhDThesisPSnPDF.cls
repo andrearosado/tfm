@@ -269,7 +269,6 @@ supported!}
 \RequirePackage{ifpdf}    % Check for pdfLaTeX
 \RequirePackage{ifxetex}  % XeLaTeX
 
-\RequirePackage[utf8]{inputenc}
 
 % *********************** Table of Contents & Appendices ***********************
 % add Bibliography, List of figures and tables to contents
@@ -1285,6 +1284,9 @@ wish to left align your text}
 %%%%% CUSTOM ANDREA
 %%%%%%%%%%%%%%%%%%%%
 
+\usepackage[spanish]{babel}
+\usepackage{graphicx}
+
 \makeatletter
 \def\@makechapterhead#1{%
   %%\vspace*{50\p@}%
@@ -1305,7 +1307,9 @@ wish to left align your text}
 
 
 %% GRAYBOX
+\usepackage{multirow}
 \usepackage{xcolor}
+\usepackage{booktabs}
 
 \newsavebox{\itemBox}
 \newenvironment{graybox}
