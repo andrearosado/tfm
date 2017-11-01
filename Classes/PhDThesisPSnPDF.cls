@@ -1286,6 +1286,7 @@ wish to left align your text}
 
 \usepackage[spanish]{babel}
 \usepackage{graphicx}
+\setlength{\parskip}{0.3cm}
 
 \makeatletter
 \def\@makechapterhead#1{%
