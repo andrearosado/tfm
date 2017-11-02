@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TexmakerSession quickmode="11">
-    <document line="0" bookmark3="0" bookmark1="0" bookmark2="0" hasfocus="true" file="/home/texmaker/main.tex" master="false"/>
+    <document file="/home/texmaker/main.tex" line="6" bookmark3="0" master="false" bookmark2="0" hasfocus="true" bookmark1="0"/>
+    <document file="/home/texmaker/Anexo/anexo.tex" line="6" bookmark3="0" master="false" bookmark2="0" hasfocus="false" bookmark1="0"/>
+    <document file="/home/texmaker/Metodologia/metodologia.tex" line="227" bookmark3="0" master="false" bookmark2="0" hasfocus="false" bookmark1="0"/>
+    <document file="/home/texmaker/Metodologia/Listings/Type/metric.tex" line="72" bookmark3="0" master="false" bookmark2="0" hasfocus="false" bookmark1="0"/>
 </TexmakerSession>

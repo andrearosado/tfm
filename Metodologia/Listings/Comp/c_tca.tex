@@ -1,0 +1,5 @@
+\lstset{caption=Crear una función para calcular el IDW (I),label= IDW1}
+\begin{SQL}
+SELECT SUM(St_Area(St_Buffer(geom, -100)))/10000 FROM sample_patches_25830 GROUP BY category;
+SELECT SUM(St_Area(St_Buffer(geom, -100)))/10000 FROM sample_patches_4326 GROUP BY category;
+\end{SQL}
