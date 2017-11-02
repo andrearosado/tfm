@@ -534,6 +534,7 @@ supported!}
   biblatex package with required style in the Preamble.tex file}
 \fi
 
+
 % ********************************** Fonts **********************************
 \RequirePackage{textcomp}
 % Font Selection
