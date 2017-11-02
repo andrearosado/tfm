@@ -78,6 +78,7 @@
 % Uncomment to change page style
 %\pagestyle{PageStyleII}
 
+
 % ********************************** Preamble **********************************
 % Preamble: Contains packages and user-defined commands and settings
 \input{Preamble/preamble}
@@ -126,12 +127,18 @@
 \include{Abstract/abstract}
 
 % *********************** Adding TOC and List of Figures ***********************
-
 \tableofcontents
 
 \listoffigures
 
+\renewcommand{\listtablename}{Índice de tablas}
+\renewcommand{\tablename}{Tabla}
 \listoftables
+
+\newpage
+\addcontentsline{toc}{chapter}{Ejemplos de código}
+\lstlistoflistings
+
 
 % \printnomenclature[space] space can be set as 2em between symbol and description
 %\printnomenclature[3em]
