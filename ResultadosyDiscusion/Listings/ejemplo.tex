@@ -1,0 +1,13 @@
+\lstset{caption=Crear una función para calcular el IDW (I),label= IDW1}
+\begin{SQL}
+-- Function: _plr_idw2ascii(text, text, integer, boolean)
+-- DROP FUNCTION _plr_idw2ascii(text, text, integer, boolean);
+CREATE OR REPLACE FUNCTION _plr_idw2ascii(text, text, integer, boolean)
+  RETURNS text AS
+$BODY$
+--codigo de R que realiza una interpolacion
+$BODY$
+  LANGUAGE 'plr' VOLATILE
+  COST 100;
+ALTER FUNCTION _plr_idw2ascii(text, text, integer, boolean) OWNER TO postgres;
+\end{SQL}

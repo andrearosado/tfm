@@ -275,10 +275,14 @@ supported!}
 \RequirePackage[nottoc]{tocbibind}
 % Add appendices
 \RequirePackage[title,titletoc]{appendix}
+\usepackage{listings}
+
 
 \renewcommand{\contentsname}{Índice de contenidos}
 \renewcommand{\listfigurename}{Índice de figuras}
 \renewcommand{\listtablename}{Índice de tablas}
+\renewcommand{\lstlistlistingname}{Ejemplos de código}
+
 
 % Hides Contents appearing from TOC, but adds it to bookmarks
 \let\temptableofcontents\tableofcontents
@@ -1322,3 +1326,40 @@ wish to left align your text}
 \begin{center}
   \colorbox[HTML]{\colboxcolor}{\usebox{\itemBox}}
 \end{center} }
+
+
+%% ENTORNOS PARA LISTINGS (formateo de códigos fuente)-------------------------
+
+\renewcommand{\lstlistlistingname}{Ejemplos de código}
+\renewcommand{\lstlistingname}{Ejemplo de código}
+
+% Colores
+\definecolor{gray98}{gray}{.98}
+\definecolor{gray75}{gray}{.75}
+\definecolor{gray45}{gray}{.45}
+
+
+% Defino un entorno SQL
+\lstnewenvironment{SQL}{\lstset{
+language=SQL,                % choose the language of the code
+ frame=Ltbr,
+ framerule=0.2pt,
+ aboveskip=0.5cm,
+ framextopmargin=3pt,
+ framexbottommargin=3pt,
+ framexleftmargin=0.4cm,
+ framesep=0.4pt,
+ rulesep=0.4pt,
+ %backgroundcolor=\color{white},
+ rulesepcolor=\color{gray45},
+ stringstyle=\ttfamily\color{Purple},
+ showstringspaces = false,
+ basicstyle=\small\ttfamily,
+ commentstyle=\color[rgb]{0.133,0.545,0.133},
+ keywordstyle=\color[rgb]{0,0,1},%\bfseries 
+ morekeywords={text,serial,with,owner,to, replace, function, for, if, begin, loop, exit,
+ return,returns,cost,row,volatile,into, setof, double, precision,declare,record,reverse,boolean},
+ numbers=left,
+ numbersep=14pt,
+ breaklines=true
+}}{}
