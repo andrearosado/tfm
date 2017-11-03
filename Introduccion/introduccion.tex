@@ -5,42 +5,55 @@
 
 \chapter{Introducción}\label{chap:intro}
 
+\ifpdf
+    \graphicspath{{Introduccion/Figs/Raster/}{Introduccion/Figs/PDF/}{Introduccion/Figs/}}
+\else
+    \graphicspath{{Introduccion/Figs/Vector/}{Introduccion/Figs/}}
+\fi
+
+
+Un párrafo de presentación...
+
+
+\section{Análisis de la estructura del paisaje a través del SIOSE}
+
 \begin{graybox}
 \begin{itemize}
 \item El SIOSE es una valiosa \textbf{base de datos de ocupación del suelo} que contiene un gran volumen de información territorial de toda España.
 \item Desde su aparición en 2005, SIOSE se ha convertido en un repositorio de referencia para sus homólogos europeos, llegando a ser un \textbf{modelo para la iniciativa EAGLE} (\textit{SIOSE europeo}). 
 \item A pesar de su gran potencial, el SIOSE presenta ciertos problemas de \textit{usabilidad} debidos a su gran volumen y complejidad (p.ej. desde aplicaciones SIG de escritorio).
-\item Las \textbf{métricas de paisaje} son métodos cuantitativos que sirven para analizar la estructura del paisaje y otros fenómenos (p.ej. evolución del paisaje, conectividad de ecosistemas, entre otros).
-\item FRAGSTATS, Conefor Sensinode, Patch Analyst, entre otros, son aplicaciones de escritorio muy utilizadas para el cálculo de métricas del paisaje. No obstante, \textbf{no hay ninguna aplicación} que sea fácilmente \textbf{escalable y extensible} como para realizar análisis sobre una geodatabase similar a la del SIOSE.
-\item El principal objetivo de este trabajo es \textbf{desarrollar una extensión} (PostgreSQL/PostGIS) capaz de calcular métricas de paisaje a partir de geodatabases tan voluminosas o más como la del SIOSE \textit{actual} (2014).
 \end{itemize}
 \end{graybox}
 
-\ifpdf
-    \graphicspath{{Chapter1/Figs/Raster/}{Chapter1/Figs/PDF/}{Chapter1/Figs/}}
-\else
-    \graphicspath{{Chapter1/Figs/Vector/}{Chapter1/Figs/}}
-\fi
 
-
-\section{Análisis de la estructura del paisaje a través del SIOSE}
-
-
-El SIOSE caracteristicas
+El SIOSE caracteristicas \citep{EquipoTecnicoNacionalSIOSE2015}
 
 El SIOSE importancia/alcance
 
-Aplicaciones de los usos/coberturas del suelo...
+Aplicaciones de los usos/coberturas del suelo... riesgos naturales \cite{Vazquez2017}
 
-Usabilidad del SIOSE. En jornada de girona (2011)
+Usabilidad del SIOSE problemas de volumen y modelo de datos... \cite{FernandezVillarino2012}
 
-SIOSE-INNOVA
+El proyecto SIOSE-INNOVA pretende investigar y proponer soluciones para los problemas de \textit{usabilidad} descritos en \citet{FernandezVillarino2012}
 
 
 
-\section{Métricas de paisaje y software que las calcula} 
+\section{Métricas de paisaje y software que las calcula}
 
-Métricas del paisaje como técnica/metodología para el estudio del paisaje... aplicaciones agua, biodiversidad, riesgos naturales (), estructura urbana,  etc
+\begin{graybox}
+\begin{itemize}
+\item Las \textbf{métricas de paisaje} son métodos cuantitativos que sirven para analizar la estructura del paisaje y otros fenómenos (p.ej. evolución del paisaje, conectividad de ecosistemas, entre otros).
+\item FRAGSTATS, Conefor Sensinode, Patch Analyst, entre otros, son aplicaciones de escritorio muy utilizadas para el cálculo de métricas del paisaje. No obstante, \textbf{no hay ninguna aplicación} que sea fácilmente \textbf{escalable y extensible} como para realizar análisis sobre una geodatabase similar a la del SIOSE.
+\end{itemize}
+\end{graybox}
+
+Métricas del paisaje como técnica/metodología para el estudio del paisaje... aplicaciones agua, biodiversidad, riesgos naturales (), estructura urbana,  etc  
+
+Use and selection of metrics
+Hay muchas métricas ...
+No todas las métricas tendrán significado en todos los contextos y/o estudios... \cite{Uuemaa2009} 
+
+Por ejemplo, en \cite{Uuemaa2017} se investigan aquellas métricas que parecen estar más relacionadas con los estudios forestales...
 
 Software.  En \cite{Zaragozi2012} se establece una comparativa entre programas específicos para el cálculo de métricas del paisaje, destacando entre ellos FRAGSTATS. Otros programas como... Evidentemente, esta lista no puede estar completa. Existen muchos otros programas especializados que permiten el cálculo de este tipo de métricas/índices
 
@@ -50,5 +63,23 @@ También es posible calcular determinadas métricas con herramientas típicas de
 
 
 \section{Objetivos}
+
+
+\begin{itemize}
+\item El principal objetivo de este trabajo es \textbf{desarrollar una extensión} (PostgreSQL/PostGIS) capaz de calcular métricas de paisaje a partir de geodatabases tan voluminosas o más como la del SIOSE \textit{actual} (2014).
+\end{itemize}
+
+
+Enlazando con el objetivo principal de este trabajo de desarrollar una extensión escalable para el cálculo de métricas del paisaje, surgen una serie de objetivos más específicos relacionados con la metodología planteada en el proyecto SIOSE-INNOVA y con conseguir adaptar este trabajo a una dinámica más amplia desarrollada desde hace pocos años en el Laboratorio de Geomática de la Universidad de Alicante. Esta metodología de trabajo es también aplicada en algunas de las principales empresas del sector...
+
+\begin{enumerate}
+\item Aplicar herramientas de desarrollo colaborativo para trabajar con los otros investigadores del proyecto SIOSE-INNOVA.
+\item Validar sistemáticamente que la extensión desarrollada funciona correctamente (\textit{integración continua}; tests de unidad).
+\item Aplicar las prácticas y estándares de desarrollo más novedosos.
+\item Realizar un experimento con una geodatabase de usos del suelo de gran complejidad y volumen, como es el SIOSE (2011).
+\end{enumerate}
+
+
+
 
 

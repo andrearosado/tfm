@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TexmakerSession quickmode="11">
-    <document master="false" bookmark2="0" bookmark1="0" hasfocus="false" file="/home/texmaker/main.tex" bookmark3="0" line="11"/>
-    <document master="false" bookmark2="0" bookmark1="0" hasfocus="false" file="/home/texmaker/Metodologia/metodologia.tex" bookmark3="0" line="15"/>
-    <document master="false" bookmark2="0" bookmark1="0" hasfocus="false" file="/home/texmaker/Introduccion/introduccion.tex" bookmark3="0" line="28"/>
-    <document master="false" bookmark2="0" bookmark1="0" hasfocus="true" file="/home/texmaker/Classes/PhDThesisPSnPDF.cls" bookmark3="0" line="535"/>
+    <document master="false" file="/home/texmaker/main.tex" line="3" bookmark2="0" bookmark1="0" bookmark3="0" hasfocus="true"/>
 </TexmakerSession>
