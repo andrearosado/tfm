@@ -105,6 +105,13 @@ Antes de seleccionar las métricas de paisaje que han sido utilizadas para compl
 
 Para el paisaje ficticio, se ha digitalizado desde cero todos los polígonos que comprenden esta zona de estudio a partir de herramientas de geoprocesamiento, geometría, vectorial y edición, utilizando QGIS. En la tabla de atributos del shapefile, cada polígono tiene identificador único, geometría, clasificación según el tipo de cobertura del suelo y color según el tipo de categoría al que pertenece.
 
+\begin{figure}
+\begin{center}
+\includegraphics[width=\textwidth]{Metodologia/Figs/land_test.png}
+\caption{Flujo de proceso de integración continua. \label{fig:lan_test}}
+\end{center}
+\end{figure}
+
 % Please add the following required packages to your document preamble:
 % \usepackage{booktabs}
 \begin{table}[]
@@ -146,54 +153,6 @@ Water body          & mediumblue             \\ \bottomrule
 Los colores definidos han sido utilizados posteriormente para elaborar y colorear las figuras de la documentación, tanto del trabajo como para la plataforma del proyecto en GitHub, a partir de la función SVG que se ha creado expresamente para ello (véase \label{sec:Documentación de la extensión}).
 
 En el segundo conjunto de datos, se han utilizado los datos del SIOSE de dos zonas de estudio distintas para realizar una comprobación de los resultados de las métricas de paisaje a partir de casos reales y comparar ambos paisajes. La estructura de la tabla de atributos se compone de identificadores únicos, geometría, tipos de coberturas, información en XML, superficie, dos campos para almacenar nueva información y códigos numéricos de producción.
-
-% Please add the following required packages to your document preamble:
-% \usepackage{booktabs}
-\begin{table}[]
-\centering
-\caption{Atributos del primer conjunto de datos.}
-\label{my-label}
-\begin{tabular}{@{}lll@{}}
-\toprule
-\textbf{Nombre} & \textbf{Tipo de campo}   & \textbf{Descripción}                    \\ \midrule
-ID\_POLYGON      & integer                  & Identificador único de cada polígono    \\
-GEOMETRY        & geometry                 & Geometría del polígono                  \\
-SIOSE\_CODE      & character varying (text) & Tipo de cobertura de cada polígono \\
-SIOSE\_XML       & character varying (text) & Información completa del tipo de cobertura \\
-& & al que pertenece cada polígono, en formato XML \\
-
-
-SUPERF\_HA       & character varying (text) & Superficie del polígono en hectáreas \\
-OBSER\_C         & character varying (text) & Campo información auxiliar (texto) \\
-OBSER\_N         & character varying (text) & Campo información auxiliar (numérico) \\
-CODBLQ          & character varying (text) & Código numérico al bloque de producción del SIOSE al que pertenece   \\ \bottomrule
-\end{tabular}
-\end{table}
-
-
-
-
-% Please add the following required packages to your document preamble:
-% \usepackage{booktabs}
-% \usepackage{multirow}
-\begin{table}[]
-\centering
-\caption{My caption}
-\label{my-label}
-\begin{tabular}{@{}lll@{}}
-\toprule
-\textbf{Nombre}             & \textbf{Tipo de campo}  & \textbf{Descripción}                                               \\ \midrule
-ID\_POLYGON                 & string                  & Identificador único de cada polígono                               \\
-GEOMETRY                    & geometry                & Geometría del polígono                                             \\
-SIOSE\_CODE                 & string                  & Tipo de cobertura de cada polígono                                 \\
-\multirow{2}{*}{SIOSE\_XML} & \multirow{2}{*}{string} & Información completa del tipo de cobertura al                      \\
-                            &                         & que pertenece cada polígono, en formato XML                        \\
-SUPERF\_HA                  & real                    & Superficie del polígono en hectáreas                               \\
-OBSER\_C                    & string                  & Información auxiliar (texto)                                       \\
-OBSER\_N                    & integer                 & Información auxiliar (numérico)                                    \\
-CODBLQ                      & integer                 & Código numérico al bloque de producción del SIOSE al que pertenece \\ \bottomrule
-\end{tabular}
-\end{table}
 
 
 
@@ -249,11 +208,5 @@ Por ello, se desarolla una función SQL, como primera propuesta, que dibuja y co
 \input{Metodologia/Listings/Comp/c_tca}
 \input{Metodologia/Listings/Comp/l_ed}
 
-\input{Metodologia/Listings/Funciones/p_area}
-\input{Metodologia/Listings/Agregados/c_area}
-\input{Metodologia/Listings/Agregados/l_area}
-
 \input{Metodologia/Listings/SampleUsage/p_core}
 \input{Metodologia/Listings/SampleUsage/c_tca}
-
-\input{Metodologia/Listings/Type/metric}

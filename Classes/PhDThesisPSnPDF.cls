@@ -637,9 +637,9 @@ supported!}
     breaklinks=true,
     linktocpage,
     colorlinks=true,
-    linkcolor=black,
-    urlcolor=black,
-    citecolor=black,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=blue,
     anchorcolor=black
   }
   \ifsetCustomMargin
