@@ -5,15 +5,7 @@
 
 \chapter{Introducción}\label{chap:intro}
 
-\ifpdf
-    \graphicspath{{Introduccion/Figs/Raster/}{Introduccion/Figs/PDF/}{Introduccion/Figs/}}
-\else
-    \graphicspath{{Introduccion/Figs/Vector/}{Introduccion/Figs/}}
-\fi
-
-
-Un párrafo de presentación...
-
+La interacción de los factores naturales y/o naturales son el origen de la estructura espacial compleja y heterogénea que presenta el paisaje \cite{Forman1986}  \cite{Turner2001}. Desde las últimas décadas, la ecología del paisaje centra sus estudios en la configuración, tamaño y forma que estructuran el territorio a partir de métricas de paisaje \cite{Aguilera2010}. Hoy en día, para conocer la estructura se utilizan bases de datos de ocupación del suelo como por ejemplo el Sistema de Información de Ocupación del Suelo en España (SIOSE). Existen aplicaciones de escritorio que calculan métricas de paisaje pero ninguna de ellas es escalable y extensible para analizar geodatabases con gran volumen y complejidad. Es por ello, que en este trabajo se va a desarrollar una extensión PostgreSQL/PostGIS capaz de calcular métricas a partir de geodatabases tan complejas como es la del SIOSE.
 
 \section{Análisis de la estructura del paisaje a través del SIOSE}
 
@@ -42,7 +34,7 @@ El análisis de la estructura del paisaje a partir de datos de usos y coberturas
 \item Demografía, urbanismo y planificación del territorio \cite{Aguilera2011}, \cite{Blaschke1999}, \cite{Jacquin2008}, \cite{Tudor2014}, \cite{Aguilera2010}, \cite{Prastacos2017}, entre otros.
 \item Infraestructuras, energía y transporte.
 \item Riesgos naturales, por ejemplo \cite{Vazquez2017}.
-\item Dinámica de la ocupación del suelo \cite{VanderKwast2011}, \cite{Dunk2011}, \cite{Herold2002}, \cite{Roces-Diaz2014}, \cite{Aguilera2012}, \cite{Liu2016}, entre otros.
+\item Dinámica de la ocupación del suelo \cite{VanderKwast2011}, \cite{Dunk2011}, \cite{Herold2002}, \cite{Roces-Diaz2014}, \cite{Aguilera2012}, \cite{Liu2016}, \cite{Rodriguez-Rodriguez2017}, entre otros.
 \end{itemize}
 
 Los principales usuarios que trabajan con información sobre ocupación del suelo son la Administración General, gobiernos autonómicos, universidades, organismos de investigación, organismos europeos e internacionales, empresas públicas y privadas, y usuarios particulares.
@@ -67,22 +59,20 @@ El proyecto SIOSE-INNOVA pretende investigar y proponer soluciones para los prob
 \end{itemize}
 \end{graybox}
 
-Métricas del paisaje como técnica/metodología para el estudio del paisaje... aplicaciones agua, biodiversidad, riesgos naturales (), estructura urbana,  etc  
+El paisaje comprende la interacción entre los factores naturales y artificiales, causantes de la evolución y estructura compleja y heterogénea que presenta el suelo. Por este motivo, se utilizan las métricas de paisaje como técnica/metodología para el estudio del paisaje y otros fenómenos. Las métricas son métodos cuantitativos que funcionan como algorítmos matemáticos encargados de aportar resultados numéricos \cite{Gine2014}.
 
-Use and selection of metrics
-Hay muchas métricas ...
-No todas las métricas tendrán significado en todos los contextos y/o estudios... \cite{Uuemaa2009} 
+Hay cientos de métricas de paisaje, correlacionadas entre sí, pero no todas las métricas tendrán significado en todos los contextos y/o estudios. Algunas de las investigaciones que utilizan las métricas de paisaje son aquellas relacionadas con biodiversidad, hábitats, aplicaciones de agua, cambios de suelo, estructura urbana, infraestructura vial, riesgos naturales, estética del paisaje, planificación territorial, entre otros \cite{Uuemaa2009}.
 
-Por ejemplo, en \cite{Uuemaa2017} se investigan aquellas métricas que parecen estar más relacionadas con los estudios forestales...
+Por ejemplo, en \cite{Uuemaa2017} se investigan aquellas métricas que parecen estar más relacionadas con los estudios forestales para explicar las relaciones entre los procesos ecológicos y los patrones espaciales. Como dice la misma autora, hay cientos de métricas de paisaje que se han desarrollado para cuantificar la heterogeneidad del espacio y las proporciones de uso y cobertura del suelo.
 
-Software.  En \cite{Zaragozi2012} se establece una comparativa entre programas específicos para el cálculo de métricas del paisaje, destacando entre ellos FRAGSTATS. Otros programas como... Evidentemente, esta lista no puede estar completa. Existen muchos otros programas especializados que permiten el cálculo de este tipo de métricas/índices
+Las métricas de paisaje se pueden calcular a partir de aplicaciones de escritorio. En \cite{Zaragozi2012} se establece una comparativa entre programas específicos para el cálculo de métricas del paisaje, destacando entre ellos FRAGSTATS \cite{McGarigal1994}, \cite{McGarigal2015}. Por otro lado, hay otros programas como Conefor Sensinode \cite{Saura2009}, Patch Analyst \cite{Zaragozi2012}, r.le de GRASS \cite{Baker1992}, LecoS \cite{Jung2016}, ZonalMetrics \cite{Adamczyk2017}, entre otros. Evidentemente, esta lista no puede estar completa. 
 
-También es posible calcular determinadas métricas con herramientas típicas de un SIG...
+Existen muchos otros programas especializados que permiten el cálculo de este tipo de métricas/índices pero no siempre tiene que ser una aplicación específica que las calcule. También es posible calcular determinadas métricas con herramientas típicas de un SIG como por ejemplo QGIS o ArcGIS.
 
-
+No obstante, no hay ninguna aplicación escalable y extensible capaz de relaizar análisis sobre bases de datos de ocupación del suelo tan complejas como es la del SIOSE. Por este motivo, se quiere llevar a cabo el objetivo principal de este trabajo (ver \ref{sec:objetivos}).
 
 
-\section{Objetivos}
+\section{Objetivos}\label{sec:objetivos}
 
 \begin{graybox}
 \begin{itemize}
