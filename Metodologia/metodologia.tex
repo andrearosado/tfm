@@ -108,7 +108,7 @@ Para el paisaje ficticio, se ha digitalizado desde cero todos los polígonos que
 \begin{figure}
 \begin{center}
 \includegraphics[width=\textwidth]{Metodologia/Figs/land_test.png}
-\caption{Flujo de proceso de integración continua. \label{fig:lan_test}}
+\caption{Uso y cobertura del suelo del paisaje de ejemplo. \label{fig:lan_test}}
 \end{center}
 \end{figure}
 
@@ -130,29 +130,28 @@ svg\_color      & character varying (text) & Color según tipo de categoría    
 
 En este paisaje se ha optado por una clasificación de etiquetas simples. En cuanto al color de cada tipo de categoría se ha definido y escogido a partir de los 147 colores que presenta Scalable Vector Graphics (SVG) Specification\footnote{http://www.december.com/html/spec/colorsvg.html}, además del apoyo de la clasificación de colores que especifica la leyenda del Corine Land Cover.v
 
-% Please add the following required packages to your document preamble:
-% \usepackage{booktabs}
 \begin{table}[]
 \centering
-\caption{My caption}
+\caption{Color SVG según el tipo de categoría al que corresponde.}
 \label{my-label}
-\begin{tabular}{@{}ll@{}}
-\toprule
-\textbf{Category}   & \textbf{svg\_color} \\ \midrule
-Agricultural area   & lightsalmon            \\
-Continuous urban    & lightcoral             \\
-Discontinuous urban & lightpink              \\
-Forest              & forestgreen            \\
-Main road           & gray                   \\
-Secondary road      & lightgrey              \\
-River               & royalblue              \\
-Water body          & mediumblue             \\ \bottomrule
+\begin{tabular}{ll}
+\hline
+\textbf{Category}   & \textbf{svg\_color} \\ \hline
+Agricultural area   & lightsalmon         \\
+Continuous urban    & lightcoral          \\
+Discontinuous urban & lightpink           \\
+Forest              & forestgreen         \\
+Main road           & gray                \\
+Secondary road      & lightgrey           \\
+River               & royalblue           \\
+Water body          & mediumblue          \\ \hline
 \end{tabular}
 \end{table}
 
 Los colores definidos han sido utilizados posteriormente para elaborar y colorear las figuras de la documentación, tanto del trabajo como para la plataforma del proyecto en GitHub, a partir de la función SVG que se ha creado expresamente para ello (véase \label{sec:Documentación de la extensión}).
 
 En el segundo conjunto de datos, se han utilizado los datos del SIOSE de dos zonas de estudio distintas para realizar una comprobación de los resultados de las métricas de paisaje a partir de casos reales y comparar ambos paisajes. La estructura de la tabla de atributos se compone de identificadores únicos, geometría, tipos de coberturas, información en XML, superficie, dos campos para almacenar nueva información y códigos numéricos de producción.
+
 
 
 
@@ -165,6 +164,44 @@ En el segundo conjunto de datos, se han utilizado los datos del SIOSE de dos zon
 \item Resulta esencial determinar unas \textbf{métricas representativas} para esta primera propuesta.
 \end{itemize}
 \end{graybox}
+
+
+% Please add the following required packages to your document preamble:
+% \usepackage{multirow}
+\begin{table}[]
+\centering
+\caption{Listado de métricas de paisaje disponibles en la extensión.}
+\label{my-label}
+\begin{tabular}{lll}
+\hline
+\textbf{Nivel}             & \textbf{Métrica}                     & \textbf{Abreviatura} \\ \hline
+\multirow{8}{*}{Patch}     & Patch Area                           & AREA                 \\
+                           & Patch Perimeter                      & PERIM                \\
+                           & Perimeter-Area-Ratio                 & PARA                 \\
+                           & Shape Index                          & SHAPE                \\
+                           & Core Area                            & CORE                 \\
+                           & Number of Core Areas                 & NCORE                \\
+                           & Core Area Index                      & CAI                  \\
+                           & Euclidean Nearest Neighbour Distance & ENN                  \\ \hline
+\multirow{8}{*}{Class}     & Total (Class) Area                   & CA                   \\
+                           & Percentage of Landscape              & PLAND                \\
+                           & Total Edge                           & TE                   \\
+                           & Edge Density                         & ED                   \\
+                           & Total Core Area                      & TCA                  \\
+                           & Core Area Percentage of Landscape    & CPLAND               \\
+                           & Number of Patches                    & NP                   \\
+                           & Patch Density                        & PD                   \\ \hline
+\multirow{9}{*}{Landscape} & Total Area                           & TA                   \\
+                           & Total Edge                           & TE                   \\
+                           & Edge Density                         & ED                   \\
+                           & Number of Patches                    & NP                   \\
+                           & Patch Density                        & PD                   \\
+                           & Patch Richness                       & PR                   \\
+                           & Patch Richness Density               & PRD                  \\
+                           & Shannon's Diversity Index            & SHDI                 \\
+                           & Simpson's Diversity Index            & SHIDI                \\ \hline
+\end{tabular}
+\end{table}
 
 
 \section{Implementación/desarrollo de funciones en PostgreSQL}

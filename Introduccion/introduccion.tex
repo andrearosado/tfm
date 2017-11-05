@@ -1,4 +1,4 @@
-%!TEX root = ../thesis.tex
+ %!TEX root = ../thesis.tex
 %*******************************************************************************
 %*********************************** Introduccion *****************************
 %*******************************************************************************
@@ -26,16 +26,40 @@ Un párrafo de presentación...
 \end{graybox}
 
 
-El SIOSE caracteristicas \citep{EquipoTecnicoNacionalSIOSE2015}
+El Sistema de Información de Ocupación del Suelo en España (SIOSE) se lanzó en el año 2005 por la Dirección General del Instituto Geográfico Nacional de España (IGN)\footnote{\url{http://www.ign.es/web/ign/portal}} ante la necesidad de adquirir información más detallada a nivel nacional. El SIOSE está integrado en el Plan Nacional de Observación del Territorio (PNOT) con el objetivo de alcanzar una infraestructura de datos espaciales multidisciplinar. Este conjunto de datos va a ser un componente imprescindible para llevar a cabo los objetivos de este trabajo.
 
-El SIOSE importancia/alcance
+El SIOSE es una base de datos que recoge información de la ocupación del suelo de España en forma de malla continua de polígonos a partir de la fotointerpretación de imágenes. Cada polígono se especifica por dos componentes: la cobertura del suelo (\textit{Land Cover, LC}) se refiere a las características de la cubierta natural, como por ejemplo cuerpos de agua, bosques, superficies urbanas, zonas agrícolas, etc., y el uso del suelo (\textit{Land Use, LU})se define por las funciones socioeconómicas en el territorio, como por ejemplo uso industrial, residencial, forestal, agrícola, etc.
 
-Aplicaciones de los usos/coberturas del suelo... riesgos naturales \cite{Vazquez2017}
+La escala de referencia es 1:25.000 y el sistema geodésico de referencia es European Terrestrial Reference System 1989 (ETRS89) con proyección Universal Transversa de Mercator (UTM). El tamaño mínimo de los polígonos depende del tipo de cobertura: 2 Ha para las zonas agrícolas, forestales y naturales, 1 Ha para las superficies artificiales y 0,5 Ha para agua, cultivos forzados, coberturas húmedas, playas, vegetación de ribera y acantilados. El SIOSE es un modelo orientado a objetos (entidad-relación) que describe los objetos, atributos y relaciones, y que permite la asignación de una o varias coberturas de suelo a un único polígono (datos semiestructurados). Cuando el polígono presente una única cobertura tendrá una \textit{cobertura simple}, pero cuando esté formado por dos o más coberturas tendrá una \textit{cobertura compuesta}, o también conocido como multietiqueta o \textit{multilabel} \citep{EquipoTecnicoNacionalSIOSE2015}. El hecho de que sea un modelo orientado a objetos, garantiza la compatibilidad y comparabilidad con otras bases de datos de ocupación del suelo como por ejemplo el \textit{Corine Land Cover (CLC)}.
 
-Usabilidad del SIOSE problemas de volumen y modelo de datos... \cite{FernandezVillarino2012}
 
-El proyecto SIOSE-INNOVA pretende investigar y proponer soluciones para los problemas de \textit{usabilidad} descritos en \citet{FernandezVillarino2012}
+El grupo EAGLE (Eionet Action Group on Land monitoring in Europe) tiene como objetivo solucionar la vigilancia de la tierra sobre la información europea de las fuentes de datos nacionales para una mejor integración y armonización a partir del concepto \textit{bottom-up}, además de facilitar el intercambio y comparación de datos entre países europeos \citep{Arnold2013}. Gracias a la iniciativa de EAGLE, el Instituto Geográfico Nacional de España (IGN) crea el SIOSE que se ha convertido en un repositorio de ocupación del suelo de referencia a nivel europeo \citep{EquipoTecnicoNacionalSIOSE2015}. Así pues, uno de los objetivos futuros del SIOSE es obtener una base de datos de ocupación del suelo europea para que resulte más fácil trabajar entre fronteras.
 
+El análisis de la estructura del paisaje a partir de datos de usos y coberturas del suelo implica la aplicación por parte de diversos campos de la ciencia, como por ejemplo:
+\begin{itemize}
+\item Medio Ambiente, estudios de hábitat, etc.
+\item Análisis litoral.
+\item Agricultura.
+\item Urbanismo y planificación del territorio.
+\item Demografía.
+\item Infraestructuras.
+\item Energía.
+\item Transporte.
+\item Riesgos naturales \cite{Vazquez2017}.
+\item Dinámica de la ocupación del suelo.
+\end{itemize}
+
+Los principales usuarios que trabajan con información sobre ocupación del suelo son la Administración General, gobiernos autonómicos, universidades, organismos de investigación, organismos europeos e internacionales, empresas públicas y privadas, y usuarios particulares.
+
+El SIOSE presenta dos dificultades de \textit{usabilidad}: el gran volumen de datos y la complejidad del modelo de datos. La base de datos está formada por unos 2,5 millones de geometrías poligonales con sus coberturas de suelo adjunto. Este volumen de datos también influye en la velocidad de publicarlos o manejarlos por parte de los usuarios. La complejidad del modelo de datos es mayor ya que se compone de 85 clases, un total de 820.632 casos de coberturas de suelo diferentes (simples y compuestas) \cite{FernandezVillarino2012}. Debido a que la base de datos es un modelo orientado a objetos, hace que haya escasa \textit{usabilidad} por parte de usuarios no expertos. Toda esta información que se almacena para una gran cantidad de geometrías, gestionarla a través de aplicaciones SIG (Sistemas de Información Geográfica) puede llegar a superar la capacidad de éstas, por lo que es necesario estudiar otras tecnologías \cite{NavarroCarrion2016}.
+
+El proyecto SIOSE-INNOVA pretende investigar y proponer soluciones para los problemas de \textit{usabilidad} descritos en \citet{FernandezVillarino2012}. Durante el desarrollo del proyecto, se quieren alcanzar los siguientes objetivos específicos:
+\begin{enumerate}
+\item Crear un marco de experimentación reproducible y fácilmente utilizable por un gran número de usuarios.
+\item Analizar las necesidades y rendimiento de distintas tecnologías de bases de datos NoSQL para la explotación del SIOSE.
+\item Desarrollar e implementar un nuevo modelo de datos auxiliar que permita extender las posibilidades de análisis del SIOSE con técnicas de \textit{Big Data} o \textit{Data Mining}.
+\item Evaluar la \textit{usabilidad} de los datos SIOSE en distintas plataformas tecnológicas, mediante su aplicación en casos de uso reales en los que utilizar datos de ocupación del suelo resulte esencial.
+\end{enumerate}
 
 
 \section{Métricas de paisaje y software que las calcula}
@@ -64,19 +88,22 @@ También es posible calcular determinadas métricas con herramientas típicas de
 
 \section{Objetivos}
 
-
+\begin{graybox}
 \begin{itemize}
 \item El principal objetivo de este trabajo es \textbf{desarrollar una extensión} (PostgreSQL/PostGIS) capaz de calcular métricas de paisaje a partir de geodatabases tan voluminosas o más como la del SIOSE \textit{actual} (2014).
 \end{itemize}
+\end{graybox}
 
+Enlazando con el objetivo principal de este trabajo de desarrollar una extensión escalable para el cálculo de métricas del paisaje, surgen una serie de objetivos más específicos relacionados con la metodología planteada en el proyecto SIOSE-INNOVA y con conseguir adaptar este trabajo a una dinámica más amplia desarrollada desde hace pocos años en el Laboratorio de Geomática de la Universidad de Alicante. Esta metodología de trabajo es también aplicada en algunas de las principales empresas del sector de Tecnologías de la Información.
 
-Enlazando con el objetivo principal de este trabajo de desarrollar una extensión escalable para el cálculo de métricas del paisaje, surgen una serie de objetivos más específicos relacionados con la metodología planteada en el proyecto SIOSE-INNOVA y con conseguir adaptar este trabajo a una dinámica más amplia desarrollada desde hace pocos años en el Laboratorio de Geomática de la Universidad de Alicante. Esta metodología de trabajo es también aplicada en algunas de las principales empresas del sector...
-
+Para alcanzar este objetivo, se han considerado los siguientes objetivos específicos:
 \begin{enumerate}
 \item Aplicar herramientas de desarrollo colaborativo para trabajar con los otros investigadores del proyecto SIOSE-INNOVA.
 \item Validar sistemáticamente que la extensión desarrollada funciona correctamente (\textit{integración continua}; tests de unidad).
 \item Aplicar las prácticas y estándares de desarrollo más novedosos.
 \item Realizar un experimento con una geodatabase de usos del suelo de gran complejidad y volumen, como es el SIOSE (2011).
+\item Adquirir nuevos conocimientos a lo largo de este trabajo sobre herramientas de desarrollo colaborativo, contenerización y orquestación, lenguajes de programación y lenguajes procedurales.
+\item Poner en práctica los conocimientos adquiridos durante el aprendizaje en el \textit{máster} de las distintas asignaturas impartidas sobre teoría e implementación de bases de datos, lenguajes de programación, software libre, aplicaciones infográficas y análisis espacial.
 \end{enumerate}
 
 
