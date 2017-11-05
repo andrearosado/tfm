@@ -6,9 +6,7 @@
 
 \chapter{Metodología}\label{chap:metod}
 
-Este trabajo aplica una metodología de \textbf{integración continua y desarrollo colaborativo} de acuerdo con los objetivos del proyecto SIOSE-INNOVA.
-
-La implementación de \textit{pg\_landmetrics} requiere de una metodología de trabajo colaborativo basado en una serie de herramientas de contenerización y orquestación de manera eficiente, extensible y reproducible.
+Este trabajo aplica una metodología de \textbf{integración continua y desarrollo colaborativo} de acuerdo con los objetivos del proyecto SIOSE-INNOVA para la implementación de \textit{pg\_landmetrics}.
 
 
 \section{Integración continua y desarrollo colaborativo}
@@ -233,12 +231,11 @@ Water body          & mediumblue          \\ \hline
 \end{itemize}
 \end{graybox}
 
-A lo largo del trabajo, se aplican una serie de lenguajes de marcado para la documentación de la extensión. Pero antes se obtienen conocimientos previos sobre ellos y su funcionamiento para utilizarlos durante el proyecto. Los lenguajes utilizados son:
-\begin{itemize}
-\item\textbf{Markdown}\footnote{\url{https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet}} es un lenguaje ligero capaz de convertir texto plano a lenguaje HTML. Permite una escritura sencilla y conserva un diseño fácil de lectura. Es compatible con muchas plataformas. Este tipo de lenguaje es utilizado para documentar la extensión en la plataforma de GitHub y la descripción de cada una de las métricas de paisaje.
-\item\textbf{TeX}\footnote{\url{https://www.latex-project.org/}} es el lenguaje que se utiliza en el sistema de textos LaTeX y que crea documentos con una alta calidad tipográfica. Se utiliza para escribir artículos o libros científicos, y desde hace tiempo este lenguaje se emplea por un gran número de usuarios. Este tipo de lenguaje es utilizado para redactar este trabajo. Para trabajar con este lenguaje, se utiliza la aplicación Texmaker que se ejecuta desde un contenedor Docker.
-\item\textbf{Scalable Vector Graphics (SVG)} es un lenguaje capaz de crear gráficos basados en vectores escalables a partir de archivos vectoriales en 2D y en formato XML. En esta década muchos de los navegadores web utilizan este tipo de lenguaje para sus gráficos. Gracias a este lenguaje, los gráficos no pierden calidad, pueden ser escalables y ocupan menos espacio en la memoria. Este tipo de lenguaje es utilizado para crear las figuras del trabajo.
+La documentación del desarrollo y uso de la extensión es una de las partes más importante de la metodología. Una buena documentación facilita la aplicación de todas las medidas necesarias para llevar a cabo el funcionamiento de la extensión a cualquier usuario, sobretodo a aquellos menos expertos en la materia. Así pues, se han aplicado los siguientes lenguajes de marcado:
 
-Por ello, se desarolla una función SQL, como primera propuesta, que dibuja y colorea los gráficos vectoriales que acompañan en el trabajo y en la documentación de la extensión en la plataforma GitHub. Para que las figuras tengan el color correspondiente al tipo de cobertura al que pertenecen, se aplica el código SVG que acompaña a cada polígono en la tabla de atributos del primer conjuntos de datos. La función SVG puede consultarse en el Anexo II.
-\item\textbf{Mermaid}\footnote{\url{https://mermaidjs.github.io/}} es un lenguaje de secuencia, que utiliza etiquetas similares a las que son empleadas en el lenguaje de marcado, capaz de generar gráficos a partir de texto por medio de JavaScript. Este tipo de lenguaje se ha utilizado para crear los diagramas de secuencia y el diagrama de Gantt.
+\begin{itemize}
+\item\textbf{Markdown}\footnote{\url{https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet}} es un lenguaje ligero que permite una escritura sencilla y de fácil lectura usando texto plano.
+\item\textbf{TeX}\footnote{\url{https://www.latex-project.org/}} es el lenguaje que se utiliza en el sistema de textos LaTeX y que crea documentos con una alta calidad tipográfica. Desde hace tiempo este lenguaje se emplea por un gran número de usuarios para escribir artículos o libros científicos. Para trabajar con este lenguaje, se utiliza la aplicación Texmaker.
+\item\textbf{Scalable Vector Graphics (SVG)}\footnote{\url{https://www.w3schools.com/graphics/svg_intro.asp}} es un lenguaje capaz de crear gráficos basados en vectores escalables de alta calidad de resolución. A partir de este lenguaje se ha desarrollado una función capaz de reprsentar gráficos vectoriales a partir de las geometrías de cualquier geodatabase (ver en el \nameref{chap:anexoIII}).
+\item\textbf{Mermaid}\footnote{\url{https://mermaidjs.github.io/}} es un lenguaje que genera gráficos a partir de texto mediante JavaScript. Se pueden generar desde diagramas de flujo hasta diagramas de secuencia y de Gantt.
 \end{itemize}
