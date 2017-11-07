@@ -154,7 +154,26 @@ Water body          & mediumblue          \\ \hline
 
 
 
-
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+% \usepackage{multirow}
+\begin{table}[]
+\centering
+\caption{Tablas usadas para \textit{pg\_landmetrics}.}
+\label{my-label}
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{Tipo}               & \textbf{Tablas} & \textbf{Filas} & \textbf{Tamaño total} \\ \midrule
+\multirow{4}{*}{Relational} & t\_nomes        & 36.790.972     & 6116 MB               \\
+                            & t\_poli\_atrib  & 2.562.800      & 451 MB                \\
+                            & t\_poli\_geo    & 2.562.800      & 3981 MB               \\
+                            & t\_valores      & 10.932.639     & 1041 MB               \\ \midrule
+\multirow{4}{*}{Grids}      & g25k            & 756            & 232,3 kB              \\
+                            & g50k            & 192            & 57,8 kB               \\
+                            & g100k           & 48             & 13,8 kB               \\
+                            & g500k           & 2              & 677bytes              \\ \bottomrule
+\end{tabular}
+\end{table}
 
 
 
@@ -171,7 +190,7 @@ Water body          & mediumblue          \\ \hline
 
 Como se indica en la sección \ref{sec:metrica}, existen cientos de métricas de paisaje que no siempre tienen significado para todas las aplicaciones de estudio ya que dependen de muchos factores, como por ejemplo los objetivos del estudio, el modelo de datos, la escala, nivel de agregación etc. Por este mismo motivo y según los objetivos específicados en este trabajo y en el proyecto SIOSE-INNOVA, se han seleccionado unas determinadas métricas de paisaje.
 
-En la tabla \ref{tab:listmetricas} se aprecian las métricas, acompañadas por su abreviatura, que se han escogido divididas en tres niveles de agregación: a nivel polígono (\textit{patch}), nivel categoría (\textit{class}) y nivel paisaje (\textit{landscape}). 
+En la tabla \ref{tab:listmetricas} se aprecian las métricas, acompañadas por su abreviatura, que se han escogido divididas en tres niveles de agregación: a nivel polígono (\textit{patch}), nivel categoría (\textit{class}) y nivel paisaje (\textit{landscape}). Para ello se ha seleccionado un número equitativo entre los niveles de agregación. Además, se han querido escoger algunas métricas que calculen operaciones simples como por ejemplo el área o perímetro, y por otro lado, métricas cuyos cálculos sean más complejos como por ejemplo la distancia del vecino más próximo o la densidad, entre otros.
 
 % Please add the following required packages to your document preamble:
 % \usepackage{multirow}
@@ -219,6 +238,64 @@ En la tabla \ref{tab:listmetricas} se aprecian las métricas, acompañadas por s
 \end{itemize}
 \end{graybox}
 
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+% \usepackage{multirow}
+\begin{table}[]
+\centering
+\caption{My caption}
+\label{my-label}
+\begin{tabular}{@{}lllll@{}}
+\toprule
+\textbf{id} & \textbf{level}              & \textbf{s\_name} & \textbf{l\_name}                     & \textbf{unit\_id} \\ \midrule
+1           & \multirow{8}{*}{Patch}      & AREA             & Patch Area                           & 1                 \\
+2           &                             & PERIM            & Patch Perimeter                      & 2                 \\
+3           &                             & PARA             & Perimeter Area Ratio                 & 3                 \\
+4           &                             & SHAPE            & Shape Index                          & 5                 \\
+5           &                             & CORE             & Core Area                            & 1                 \\
+6           &                             & NCORE            & Number of Core Area                  & 5                 \\
+7           &                             & CAI              & Core Area Index                      & 4                 \\
+8           &                             & ENN              & Euclidean Nearest Neighbour Distance & 2                 \\ \midrule
+9           & \multirow{8}{*}{Class}      & CA               & Total (Class) Area                   & 1                 \\
+10          &                             & PLAND            & Percentage of Landscape              & 4                 \\
+11          &                             & TE               & Total Edge                           & 2                 \\
+12          &                             & ED               & Edge Density                         & 6                 \\
+13          &                             & TCA              & Total Core Area                      & 1                 \\
+14          &                             & CPLAND           & Core Area Percentage of Landscape    & 4                 \\
+15          &                             & NP               & Number of Patches                    & 5                 \\
+16          &                             & PD               & Patch Density                        & 7                 \\ \midrule
+17          & \multirow{9}{*}{Landscape}  & TA               & Total Area                           & 1                 \\
+18          &                             & TE               & Total Edge                           & 5                 \\
+19          &                             & ED               & Edge Density                         & 6                 \\
+20          &                             & NP               & Number of Patches                    & 5                 \\
+21          &                             & PD               & Patch Density                        & 7                 \\
+22          &                             & PR               & Patch Richness                       & 5                 \\
+23          &                             & PRD              & Patch Richness Density               & 7                 \\
+24          &                             & SHDI             & Shannon's Diversity Index            & 5                 \\
+25          &                             & SHIDI            & Simpson's Diversity Index            & 5                 \\ \midrule
+26          & \multirow{2}{*}{Proportion} & PC               & Proportion Class                     & 4                 \\
+27          &                             & PL               & Proportion Landscape                 & 4                 \\ \bottomrule
+\end{tabular}
+\end{table}
+
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+\begin{table}[]
+\centering
+\caption{My caption}
+\label{my-label}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{id\_unit} & \textbf{s\_unit} & \textbf{l\_unit}         \\ \midrule
+1                 & Ha.              & Hectáreas                \\
+2                 & m.               & Metros                   \\
+3                 & m²               & Metros cuadrados         \\
+4                 & \%               & Porcentaje               \\
+5                 & -                & Ninguno                  \\
+6                 & m/Ha             & Metros por Hectárea      \\
+7                 & num/100 Ha       & Número por 100 Hectáreas \\ \bottomrule
+\end{tabular}
+\end{table}
 
 \input{Metodologia/Listings/Simp/p_area}
 \input{Metodologia/Listings/Simp/c_area}
