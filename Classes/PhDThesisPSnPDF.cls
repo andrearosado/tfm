@@ -1295,7 +1295,7 @@ wish to left align your text}
 
 \makeatletter
 \def\@makechapterhead#1{%
-  %%\vspace*{50\p@}%
+  \vspace*{50\p@}%
   {\parindent \z@ \raggedright \normalfont
     %%\ifnum \c@secnumdepth >\m@ne
       %%\if@mainmatter

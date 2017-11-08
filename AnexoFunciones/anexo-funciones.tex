@@ -1,0 +1,18 @@
+%!TEX root = ../thesis.tex
+% ******************************* Thesis Appendix A ****************************
+\chapter{Funciones tipo}\label{anex:funcionestipo}
+
+<-------Mover texto de los anexos a resultados-------->
+
+En el anexo \ref{anex:funcionestipo} se presentan los ejemplos más básicos de funciones para calcular los distintos tipos de métricas. Se pueden distinguir métricas que requieren un único registro (\textbf{\textit{funciones SQL}}), frente a aquellas funciones que necesitan considerar más de un registro (\textbf{\textit{funciones agregadas}}).
+
+La programación puede variar en complejidad. Por ejemplo, hay funciones agregadas que aplican cálculos posteriores a la agregación de valores o funciones que realizan más de un cálculo simultáneo. Además, las métricas no siempre se calculan igual si son proyectadas (\textit{geometry}) o en coordenadas esféricas (\textit{geography}).
+
+Los ejemplos más sencillos de los distintos tipos de métricas serían las que se calculan únicamente a partir de las áreas de uno o más polígonos: \textit{Patch Area}, \textit{Class Area} y \textit{Landscape Area}. La implementación del resto de métricas puede consultarse en el repositorio del proyecto en GitHub.
+
+\input{AnexoFunciones/Listings/Funciones/p_area}\pagebreak
+
+
+\input{AnexoFunciones/Listings/Agregados/c_area}\pagebreak
+
+\input{AnexoFunciones/Listings/Agregados/l_area}\pagebreak
