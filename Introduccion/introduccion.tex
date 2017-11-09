@@ -5,9 +5,16 @@
 
 \chapter{Introducción}\label{chap:intro}
 
-La interacción de los factores naturales y/o naturales son el origen de la estructura espacial compleja y heterogénea que presenta el paisaje \cite{Forman1986}  \cite{Turner2001}. Desde las últimas décadas, la ecología del paisaje centra sus estudios en la configuración, tamaño y forma que estructuran el territorio a partir de métricas de paisaje \cite{Aguilera2010}. Hoy en día, para conocer la estructura se utilizan bases de datos de ocupación del suelo como por ejemplo el Sistema de Información de Ocupación del Suelo en España (SIOSE). Existen aplicaciones de escritorio que calculan métricas de paisaje pero ninguna de ellas es escalable y extensible para analizar geodatabases con gran volumen y complejidad. Es por ello, que en este trabajo se va a desarrollar una extensión PostgreSQL/PostGIS capaz de calcular métricas a partir de geodatabases tan complejas como es la del SIOSE.
+La interacción de los factores naturales y antrópicos es el origen de la estructura espacial compleja y heterogénea que presenta el paisaje \citep{Forman1986,Turner2001}. En las últimas décadas, la ecología del paisaje ha estudiado la configuración, el tamaño y la forma de los componentes que estructuran el territorio utilizando \textbf{métricas de paisaje} \citep{Aguilera2010}. Hoy en día, para estudiar la estructura del paisaje se dispone de \textbf{gran cantidad de información y herramientas}. 
 
-\section{Análisis de la estructura del paisaje a través del SIOSE}
+En primer lugar, las bases de datos de ocupación del suelo, como por ejemplo el Sistema de Información de Ocupación del Suelo en España (SIOSE), representan el territorio de un modo adecuado para aplicar conceptos fundamentales como los de conectividad o diversidad del paisaje. Además, estas bases de datos aumentan progresivamente en riqueza semántica y resolución geométrica, por lo que \textbf{la información disponible no para de crecer}.
+
+Complementariamente, también existe software específico o de carácter más general que facilita el cálculo de métricas del paisaje. Sin embargo, \textbf{ninguna de las aplicaciones encontradas es lo suficientemente escalable y extensible como para analizar grandes bases de datos de ocupación del suelo tan complejas como las actuales} (p.ej. SIOSE). 
+
+Evidentemente, los problemas existentes al analizar las geodatabases actuales irá en aumento con la cada vez mayor disponibilidad de datos obtenidos a partir de imágenes de satélite o datos de campo. Este trabajo se enmarca en este contexto de creciente complejidad y busca \textbf{proponer herramientas más sencillas y eficientes en el cálculo de métricas del paisaje}.
+
+
+\section{Estudio de la estructura del paisaje utilizando el SIOSE}
 
 \begin{graybox}
 \begin{itemize}
@@ -24,24 +31,25 @@ El SIOSE es una base de datos que recoge información de la ocupación del suelo
 
 La escala de referencia es 1:25.000 y el sistema geodésico de referencia es European Terrestrial Reference System 1989 (ETRS89) con proyección Universal Transversa de Mercator (UTM). El tamaño mínimo de los polígonos depende del tipo de cobertura: 2 Ha para las zonas agrícolas, forestales y naturales, 1 Ha para las superficies artificiales y 0,5 Ha para agua, cultivos forzados, coberturas húmedas, playas, vegetación de ribera y acantilados. El SIOSE es un modelo orientado a objetos (entidad-relación) que describe los objetos, atributos y relaciones, y que permite la asignación de una o varias coberturas de suelo a un único polígono (datos semiestructurados). Cuando el polígono presente una única cobertura tendrá una \textit{cobertura simple}, pero cuando esté formado por dos o más coberturas tendrá una \textit{cobertura compuesta}, o también conocido como multietiqueta o \textit{multilabel} \citep{EquipoTecnicoNacionalSIOSE2015}. El hecho de que sea un modelo orientado a objetos, garantiza la compatibilidad y comparabilidad con otras bases de datos de ocupación del suelo como por ejemplo el \textit{Corine Land Cover (CLC)}.
 
+El SIOSE tiene una proyección internacional ya que hay iniciativas similares en otros muchos países. Concretamente, el grupo EAGLE (Eionet Action Group on Land monitoring in Europe) tiene como objetivo solucionar la vigilancia de la tierra sobre la información europea de las fuentes de datos nacionales para una mejor integración y armonización a partir del concepto \textit{bottom-up}, además de facilitar el intercambio y comparación de datos entre países europeos \citep{Arnold2013}. Gracias a la iniciativa de EAGLE, el Instituto Geográfico Nacional de España (IGN) crea el SIOSE que se ha convertido en un repositorio de ocupación del suelo de referencia a nivel europeo \citep{EquipoTecnicoNacionalSIOSE2015}. Así pues, uno de los objetivos futuros del SIOSE es obtener una base de datos de ocupación del suelo europea para que resulte más fácil trabajar entre fronteras.
 
-El grupo EAGLE (Eionet Action Group on Land monitoring in Europe) tiene como objetivo solucionar la vigilancia de la tierra sobre la información europea de las fuentes de datos nacionales para una mejor integración y armonización a partir del concepto \textit{bottom-up}, además de facilitar el intercambio y comparación de datos entre países europeos \citep{Arnold2013}. Gracias a la iniciativa de EAGLE, el Instituto Geográfico Nacional de España (IGN) crea el SIOSE que se ha convertido en un repositorio de ocupación del suelo de referencia a nivel europeo \citep{EquipoTecnicoNacionalSIOSE2015}. Así pues, uno de los objetivos futuros del SIOSE es obtener una base de datos de ocupación del suelo europea para que resulte más fácil trabajar entre fronteras.
+El análisis de la estructura del paisaje a partir de datos de usos y coberturas del suelo ha sido aplicado habitualmente desde diversas disciplinas y ámbitos de estudio. Por ejemplo, se han realizado estudios sobre Medio Ambiente, hábitats naturales \citep{Gine2014,Hamilton2009,Hebeisen2008}\citep{GimenezFont2010,Lin2014,Brennan2005}.
 
-El análisis de la estructura del paisaje a partir de datos de usos y coberturas del suelo implica la aplicación por parte de diversos campos de la ciencia, como por ejemplo:
-\begin{itemize}
-\item Medio Ambiente, estudios de hábitat, etc., \cite{Gine2014}, \cite{Hamilton2009}, \cite{Hebeisen2008}, \cite{GimenezFont2010}, \cite{Lin2014}, \cite{Brennan2005}, entre otros.
-\item Agricultura, por ejemplo \cite{Zaragozi2011}.
-\item Demografía, urbanismo y planificación del territorio \cite{Aguilera2011}, \cite{Blaschke1999}, \cite{Jacquin2008}, \cite{Tudor2014}, \cite{Aguilera2010}, \cite{Prastacos2017}, entre otros.
-\item Infraestructuras, energía y transporte.
-\item Riesgos naturales, por ejemplo \cite{Vazquez2017}.
-\item Dinámica de la ocupación del suelo \cite{VanderKwast2011}, \cite{Dunk2011}, \cite{Herold2002}, \cite{Roces-Diaz2014}, \cite{Aguilera2012}, \cite{Liu2016}, \cite{Rodriguez-Rodriguez2017}, entre otros.
-\end{itemize}
+Demografía, urbanismo y planificación del territorio \cite{Aguilera2011}, \citep{Blaschke1999,Jacquin2008,Tudor2014,Aguilera2010,Prastacos2017}
 
-Los principales usuarios que trabajan con información sobre ocupación del suelo son la Administración General, gobiernos autonómicos, universidades, organismos de investigación, organismos europeos e internacionales, empresas públicas y privadas, y usuarios particulares.
+Infraestructuras, energía y transporte.
 
-El SIOSE presenta dos dificultades de \textit{usabilidad}: el gran volumen de datos y la complejidad del modelo de datos. La base de datos está formada por unos 2,5 millones de geometrías poligonales con sus coberturas de suelo adjunto. Este volumen de datos también influye en la velocidad de publicarlos o manejarlos por parte de los usuarios. La complejidad del modelo de datos es mayor ya que se compone de 85 clases, un total de 820.632 casos de coberturas de suelo diferentes (simples y compuestas) \cite{FernandezVillarino2012}. Debido a que la base de datos es un modelo orientado a objetos, hace que haya escasa \textit{usabilidad} por parte de usuarios no expertos. Toda esta información que se almacena para una gran cantidad de geometrías, gestionarla a través de aplicaciones SIG (Sistemas de Información Geográfica) puede llegar a superar la capacidad de éstas, por lo que es necesario estudiar otras tecnologías \cite{NavarroCarrion2016}.
+Dinámica de la ocupación del suelo \citep{VanderKwast2011,Dunk2011,Herold2002}, \citep{Roces-Diaz2014,Aguilera2012,Liu2016,Rodriguez-Rodriguez2017}
 
-El proyecto SIOSE-INNOVA pretende investigar y proponer soluciones para los problemas de \textit{usabilidad} descritos en \citet{FernandezVillarino2012}. Durante el desarrollo del proyecto, se quieren alcanzar los siguientes objetivos específicos:
+También se han realizado estudios sobre abandono agrícola \citep{Zaragozi2011} y otros sobre el riesgo de incendio asociado a nuevas formas de ocupación del suelo \citet{Vazquez2017}.
+
+
+
+Los principales usuarios que trabajan con información sobre ocupación del suelo son la Administración General, gobiernos autonómicos, universidades, organismos de investigación, organismos europeos e internacionales, empresas públicas y privadas y, en menor medida, los usuarios particulares.
+
+Todos estos usuarios del SIOSE se ven afectados por dos dificultades relacionadas con la \textit{usabilidad} de los datos: \textbf{el gran volumen de datos y la complejidad del modelo de datos}. La base de datos está formada por unos 2,5 millones de geometrías poligonales con sus coberturas de suelo. Este volumen de datos influye de manera importante en la capacidad de los usuarios para consultar o manejar esta información. La complejidad del modelo de datos es mayor que en bases de datos más tradicionales. El modelo SIOSE se compone de 85 clases, que forman un total de 820.632 casos de coberturas de suelo diferentes (simples y compuestas) \citep{FernandezVillarino2012}. Este nivel de complejidad del modelo de datos hace que el SIOSE sea dificil de utilizar por parte de usuarios que no conozcan el modelo o que no son especialistas en geodatabases. La gran cantidad de geometrías y la complejidad de las clasificaciones dificultan gestionar esta información mediante a aplicaciones SIG (Sistemas de Información Geográfica) convencionales, ya que se puede llegar a superar la capacidad de éstas. Todo ello hace que sea necesario estudiar otras nuevas tecnologías \citep{NavarroCarrion2016}.
+
+En el proyecto SIOSE-INNOVA se plantea investigar y proponer soluciones para los problemas de \textit{usabilidad} descritos por el mismo equipo de desarrollo del SIOSE en \citet{FernandezVillarino2012}. Durante el desarrollo de este proyecto de tres años de duración, se quieren alcanzar los siguientes objetivos específicos:
 \begin{enumerate}
 \item Crear un marco de experimentación reproducible y fácilmente utilizable por un gran número de usuarios.
 \item Analizar las necesidades y rendimiento de distintas tecnologías de bases de datos NoSQL para la explotación del SIOSE.
@@ -59,33 +67,31 @@ El proyecto SIOSE-INNOVA pretende investigar y proponer soluciones para los prob
 \end{itemize}
 \end{graybox}
 
-El paisaje comprende la interacción entre los factores naturales y artificiales, causantes de la evolución y estructura compleja y heterogénea que presenta el suelo. Por este motivo, se utilizan las métricas de paisaje como técnica/metodología para el estudio del paisaje y otros fenómenos. Las métricas son métodos cuantitativos que funcionan como algorítmos matemáticos encargados de aportar resultados numéricos \cite{Gine2014}.
+El paisaje comprende la interacción entre los factores naturales y artificiales, causantes de la evolución y estructura compleja y heterogénea que presenta el suelo. Por este motivo, se utilizan las métricas de paisaje como técnica/metodología para el estudio del paisaje y otros fenómenos. Las métricas son métodos cuantitativos que funcionan como algorítmos matemáticos encargados de aportar resultados numéricos \citep{Gine2014}.
 
-Hay cientos de métricas de paisaje, correlacionadas entre sí, pero no todas las métricas tendrán significado en todos los contextos y/o estudios. Algunas de las investigaciones que utilizan las métricas de paisaje son aquellas relacionadas con biodiversidad, hábitats, aplicaciones de agua, cambios de suelo, estructura urbana, infraestructura vial, riesgos naturales, estética del paisaje, planificación territorial, entre otros \cite{Uuemaa2009}.
+Hay cientos de métricas de paisaje, correlacionadas entre sí, pero no todas las métricas tendrán significado en todos los contextos y/o estudios. Algunas de las investigaciones que utilizan las métricas de paisaje son aquellas relacionadas con biodiversidad, hábitats, aplicaciones de agua, cambios de suelo, estructura urbana, infraestructura vial, riesgos naturales, estética del paisaje, planificación territorial, entre otros \citep{Uuemaa2009}. Por ejemplo, en \citet{Uuemaa2017} se investigan aquellas métricas que parecen estar más relacionadas con los estudios forestales para explicar las relaciones entre los procesos ecológicos y los patrones espaciales existentes en una zona. \textbf{Esto indica que los investigadores necesitarán calcular un gran número de métricas para cada paisaje y después aplicar algún criterio de selección para determinar cuales son las más descriptivas en cada caso.}
 
-Por ejemplo, en \cite{Uuemaa2017} se investigan aquellas métricas que parecen estar más relacionadas con los estudios forestales para explicar las relaciones entre los procesos ecológicos y los patrones espaciales. Como dice la misma autora, hay cientos de métricas de paisaje que se han desarrollado para cuantificar la heterogeneidad del espacio y las proporciones de uso y cobertura del suelo.
+Las métricas de paisaje se pueden calcular a partir de aplicaciones de escritorio. En \citet{Zaragozi2012} se establece una comparativa entre \textbf{programas específicos} para el cálculo de métricas del paisaje, destacando entre ellos FRAGSTATS \citep{McGarigal1994,McGarigal2015}. Por otro lado, hay otros programas como Conefor Sensinode \citep{Saura2009}, Patch Analyst \citep{Zaragozi2012}, varios módulos de GRASS GIS \citep{Baker1992}, LecoS \cite{Jung2016}, ZonalMetrics \cite{Adamczyk2017}, entre otros. Evidentemente, esta lista no puede estar completa, ya que hay muchos otros programas que pueden calcular un número de métricas variable según un gran número de factores.
 
-Las métricas de paisaje se pueden calcular a partir de aplicaciones de escritorio. En \cite{Zaragozi2012} se establece una comparativa entre programas específicos para el cálculo de métricas del paisaje, destacando entre ellos FRAGSTATS \cite{McGarigal1994}, \cite{McGarigal2015}. Por otro lado, hay otros programas como Conefor Sensinode \cite{Saura2009}, Patch Analyst \cite{Zaragozi2012}, r.le de GRASS \cite{Baker1992}, LecoS \cite{Jung2016}, ZonalMetrics \cite{Adamczyk2017}, entre otros. Evidentemente, esta lista no puede estar completa. 
+Existen muchos otros programas especializados que permiten el cálculo de este tipo de métricas/índices pero no siempre tiene que ser una aplicación específica que las calcule. También es posible calcular facilmente determinadas métricas con \textbf{herramientas típicas de un SIG} de escritorio (calculadora de campos y/o calculadora raster, entre otras posibilidades).
 
-Existen muchos otros programas especializados que permiten el cálculo de este tipo de métricas/índices pero no siempre tiene que ser una aplicación específica que las calcule. También es posible calcular determinadas métricas con herramientas típicas de un SIG como por ejemplo QGIS o ArcGIS.
-
-No obstante, no hay ninguna aplicación escalable y extensible capaz de relaizar análisis sobre bases de datos de ocupación del suelo tan complejas como es la del SIOSE. Por este motivo, se quiere llevar a cabo el objetivo principal de este trabajo (ver \ref{sec:objetivos}).
+En cualquier caso, no hay ninguna aplicación escalable y extensible capaz de realizar análisis sobre bases de datos de ocupación del suelo tan voluminosas y complejas como lo es la del SIOSE.
 
 
 \section{Objetivos}\label{sec:objetivos}
 
-El principal objetivo de este trabajo es \textbf{desarrollar una extensión} (PostgreSQL/PostGIS) que facilite el cálculo de métricas de paisaje. Se quiere facilitar las definición de las consultas y permitir consultas sobre geodatabases tan voluminosas como la del SIOSE \textit{actual}, o incluso más.
+El principal objetivo de este trabajo es \textbf{desarrollar una extensión (PostgreSQL/PostGIS) que facilite el cálculo de métricas de paisaje}. Se quiere facilitar la realización de consultas y permitir el manejo de bases de datos voluminosas como lo es la del SIOSE \textit{actual}. 
 
-Enlazando con el objetivo principal de este trabajo de desarrollar una extensión escalable para el cálculo de métricas del paisaje, surgen una serie de objetivos más específicos relacionados con la metodología planteada en el proyecto SIOSE-INNOVA y con conseguir adaptar este trabajo a una dinámica más amplia desarrollada desde hace pocos años en el Laboratorio de Geomática de la Universidad de Alicante. Esta metodología de trabajo es también aplicada en algunas de las principales empresas del sector de Tecnologías de la Información.
+Previsiblemente, las bases de datos de ocupación del suelo no harán sino aumentar en volumen y complejidad, por lo que si hoy en día existen los mencionados problemas de usabilidad del SIOSE, estos no harán sino ir a más. Así el trabajo desarrollado tendrá continuidad en el tiempo.
 
-Para alcanzar este objetivo, se han considerado los siguientes objetivos específicos:
+Enlazando con el objetivo principal de este trabajo surgen una serie de objetivos más específicos relacionados con la metodología planteada en el proyecto SIOSE-INNOVA. En este sentido, se han considerado los siguientes \textbf{objetivos específicos}:
 \begin{enumerate}
-\item Aplicar herramientas de desarrollo colaborativo para trabajar con los otros investigadores del proyecto SIOSE-INNOVA.
+\item Aplicar herramientas de \textbf{desarrollo colaborativo} para trabajar con los otros investigadores del proyecto SIOSE-INNOVA.
 \item Validar sistemáticamente que la extensión desarrollada funciona correctamente (\textit{integración continua}; tests de unidad).
 \item Aplicar las prácticas y estándares de desarrollo más novedosos.
-\item Realizar un experimento con una geodatabase de usos del suelo de gran complejidad y volumen, como es el SIOSE (2011).
-\item Adquirir nuevos conocimientos a lo largo de este trabajo sobre herramientas de desarrollo colaborativo, contenerización y orquestación, lenguajes de programación y lenguajes procedurales.
-\item Poner en práctica los conocimientos adquiridos durante el aprendizaje en el \textit{máster} de las distintas asignaturas impartidas sobre teoría e implementación de bases de datos, lenguajes de programación, software libre, aplicaciones infográficas y análisis espacial.
+\item Realizar un \textbf{experimento con una geodatabase de usos del suelo de gran complejidad y volumen}, como es el SIOSE (2011).
+\item Adquirir \textbf{nuevos conocimientos} a lo largo de este trabajo sobre herramientas de desarrollo colaborativo, contenerización y orquestación, lenguajes de programación y lenguajes procedurales.
+\item Poner en práctica los \textbf{conocimientos adquiridos durante el aprendizaje en el \textit{máster}} de las distintas asignaturas impartidas sobre teoría e implementación de bases de datos, lenguajes de programación, software libre, aplicaciones infográficas y análisis espacial.
 \end{enumerate}
 
 
