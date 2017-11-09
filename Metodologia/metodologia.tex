@@ -165,19 +165,20 @@ Water body          & mediumblue          \\ \hline
 % \usepackage{multirow}
 \begin{table}[]
 \centering
-\caption{Tablas usadas para \textit{pg\_landmetrics}.}
-\label{my-label}
+\caption{Características de los conjuntos de datos utilizados\label{tab:datos}}
 \begin{tabular}{@{}llll@{}}
 \toprule
 \textbf{Tipo}               & \textbf{Tablas} & \textbf{Filas} & \textbf{Tamaño total} \\ \midrule
-\multirow{4}{*}{Relational} & t\_nomes        & 36.790.972     & 6116 MB               \\
+\multirow{4}{*}{SIOSE-2011} & t\_nomes        & 36.790.972     & 6116 MB               \\
                             & t\_poli\_atrib  & 2.562.800      & 451 MB                \\
                             & t\_poli\_geo    & 2.562.800      & 3981 MB               \\
                             & t\_valores      & 10.932.639     & 1041 MB               \\ \midrule
 \multirow{4}{*}{Grids}      & g25k            & 756            & 232,3 kB              \\
                             & g50k            & 192            & 57,8 kB               \\
                             & g100k           & 48             & 13,8 kB               \\
-                            & g500k           & 2              & 677bytes              \\ \bottomrule
+                            & g500k           & 2              & 677bytes              \\ \midrule
+\multirow{2}{*}{Sample}      & sample\_25830            & 756            & 232,3 kB              \\
+                            & sample\_4326            & 192            & 57,8 kB               \\ \bottomrule
 \end{tabular}
 \end{table}
 
@@ -302,6 +303,7 @@ En la tabla \ref{tab:listmetricas} se aprecian las métricas, acompañadas por s
 7                 & num/100 Ha       & Número por 100 Hectáreas \\ \bottomrule
 \end{tabular}
 \end{table}
+
 
 \input{Metodologia/Listings/Simp/p_area}
 \input{Metodologia/Listings/Simp/c_area}
