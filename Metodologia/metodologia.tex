@@ -28,13 +28,16 @@ Es importante destacar que en esta sección se presenta el procedimiento que se 
 
 \subsection{Control de versiones}\label{subsec:control}
 
+El control de versiones es la gestión de los cambios que se realizan sobre un archivo o conjunto de archivos en un repositorio y que se utiliza para controlar las versiones del código de fuente, de modo que se puedan recuperar versiones anteriores en un momento específico. Un repositorio es donde se almacenan todos los datos actualizados y los registros históricos de los cambios realizados, principalmente en un servidor. 
+
+En este caso, se trabaja de forma colaborativa donde cada usuario modifica desde su máquina local, comparte los cambios y luego el sistema de control combina las modificaciones. En este trabajo se ha utilizado los siguientes sistemas de control de versiones:
 
 \begin{itemize}
-\item\textbf{Git}: 
-\item\textbf{GitHub}: 
+\item\textbf{Git}: es un sistema de control para el mantenimiento de versiones de código fuente de archivos. Es el más popular de los últimos años y es utilizado por muchos proyectos como por ejemplo PostGIS, QGIS, CARTO y decenas de proyectos de ESRI, entre otros más. Para la actualización de archivos desde la máquina local se utilzan formas verbales como \textit{pull}, \textit{push}, \textit{add}, \textit{commit}, \textit{clone}, entre otros.
+\item\textbf{GitHub}: es una plataforma de desarrollo colaborativo que alberga proyectos y almacena de forma pública el código fuente utilizando el sistema de control de versiones de \textit{Git}.
 \end{itemize}
 
-
+En este trabajo...
 
 \begin{figure}
 \begin{center}
@@ -55,19 +58,13 @@ Es importante destacar que en esta sección se presenta el procedimiento que se 
 
 \subsection{Contenerización y orquestación de servicios}\label{subsec:conten-orquest}
 
+La contenerización o \textit{docker} es una novedosa tecnología que aporta portabilidad y que virtualiza softwares y servicios frente a la virtualización de sistemas operativos completos como son por ejemplo las máquinas virtuales. Las herramientas de \textit{docker} ofrecen las funciones de construir (\textit{build}), subir o iniciar (\textit{up}) y bajar o detener (\textit{down}) los contenedores que son como ''cajas'' donde se almacena lo esencial para ejecutar un determinado software o servicio. En cuanto a la orquestación de contenedores, éste permite organizar complejos sistemas de información con muchas facilidades. En este trabajo se ha utilziado las siguientes herramientas:
 
-
-
-
-Se han utilizado los siguientes elementos:
 \begin{itemize}
 \item\textbf{Docker}: 
 \item\textbf{Docker Hub}: 
 \item\textbf{Docker-compose}: 
 \end{itemize}
-
-
-
 
 \begin{figure}
 \begin{center}
@@ -84,6 +81,7 @@ Se han utilizado los siguientes elementos:
 \begin{itemize}
 \item\textbf{PostgreSQL/PostGIS}: 
 \end{itemize}
+
 
 \subsection{Aplicaciones}\label{subsec:aplic}
 
@@ -231,7 +229,6 @@ En la tabla \ref{tab:listmetricas} se aprecian las métricas, acompañadas por s
 
 \input{Metodologia/Listings/SampleUsage/p_core}
 \input{Metodologia/Listings/SampleUsage/c_tca}
-
 
 
 \section{Documentación de la extensión}
