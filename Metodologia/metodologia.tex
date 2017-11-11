@@ -28,14 +28,16 @@ Es importante destacar que en esta sección se presenta el procedimiento que se 
 
 \subsection{Control de versiones}\label{subsec:control}
 
-El control de versiones es la gestión de los cambios que se realizan sobre un archivo o conjunto de archivos en un repositorio y que se utiliza para controlar las versiones del código de fuente, de modo que se puedan recuperar versiones anteriores en un momento específico. Un repositorio es donde se almacenan todos los datos actualizados y los registros históricos de los cambios realizados, principalmente en un servidor. 
+El control de versiones es la gestión de los cambios que se realizan sobre un archivo o conjunto de archivos en un repositorio y que se utiliza para controlar las versiones del código de fuente, de modo que se puedan recuperar versiones anteriores en un momento específico. Un repositorio es donde se almacenan todos los datos actualizados y los registros históricos de los cambios realizados, principalmente en un servidor.
 
 En este caso, se trabaja de forma colaborativa donde cada usuario modifica desde su máquina local, comparte los cambios y luego el sistema de control combina las modificaciones. En este trabajo se ha utilizado los siguientes sistemas de control de versiones:
 
 \begin{itemize}
-\item\textbf{Git}: es un sistema de control para el mantenimiento de versiones de código fuente de archivos. Es el más popular de los últimos años y es utilizado por muchos proyectos como por ejemplo PostGIS, QGIS, CARTO y decenas de proyectos de ESRI, entre otros más. Para la actualización de archivos desde la máquina local se utilzan formas verbales como \textit{pull}, \textit{push}, \textit{add}, \textit{commit}, \textit{clone}, entre otros.
-\item\textbf{GitHub}: es una plataforma de desarrollo colaborativo que alberga proyectos y almacena de forma pública el código fuente utilizando el sistema de control de versiones de \textit{Git}.
+\item\textbf{Git}\footnote{\url{https://git-scm.com/}} es un sistema de control para el mantenimiento de versiones de código fuente de archivos. Es el más popular de los últimos años y es utilizado por muchos proyectos como por ejemplo PostGIS, QGIS, CARTO y decenas de proyectos de ESRI, entre otros más. Para la actualización de archivos desde la máquina local se utilzan formas verbales como \textit{pull}, \textit{push}, \textit{add}, \textit{commit}, \textit{clone}, entre otros.
+\item\textbf{GitHub}\footnote{\url{https://github.com/}} es una plataforma de desarrollo colaborativo que alberga proyectos y almacena de forma pública el código fuente utilizando el sistema de control de versiones de \textit{Git}.
 \end{itemize}
+
+Todos los archivos que se han generado para la extensión \textit{pg\_landmetrics} se encuentran en el repositorio de este trabajo\footnote{\url{https://github.com/andrearosado/pg_landmetrics}} y en el repositorio proyecto SIOSE-INNOVA\footnote{\url{https://github.com/siose-innova/pg_landmetrics}}.
 
 En este trabajo...
 
@@ -58,12 +60,12 @@ En este trabajo...
 
 \subsection{Contenerización y orquestación de servicios}\label{subsec:conten-orquest}
 
-La contenerización o \textit{docker} es una novedosa tecnología que aporta portabilidad y que virtualiza softwares y servicios frente a la virtualización de sistemas operativos completos como son por ejemplo las máquinas virtuales. Las herramientas de \textit{docker} ofrecen las funciones de construir (\textit{build}), subir o iniciar (\textit{up}) y bajar o detener (\textit{down}) los contenedores que son como ''cajas'' donde se almacena lo esencial para ejecutar un determinado software o servicio. En cuanto a la orquestación de contenedores, éste permite organizar complejos sistemas de información con muchas facilidades. En este trabajo se ha utilziado las siguientes herramientas:
+La contenerización o \textit{docker} es una novedosa tecnología que aporta portabilidad y que virtualiza softwares y servicios frente a la virtualización de sistemas operativos completos como son por ejemplo las máquinas virtuales. Las herramientas de \textit{docker} ofrecen las funciones de construir (\textit{build}), subir o iniciar (\textit{up}) y bajar o detener (\textit{down}) los contenedores que son como ''cajas'' donde se almacena lo esencial para ejecutar un determinado software o servicio. En cuanto a la orquestación de contenedores, éste permite organizar complejos sistemas de información con muchas facilidades. En este trabajo se ha utilizado las siguientes herramientas:
 
 \begin{itemize}
-\item\textbf{Docker}: 
-\item\textbf{Docker Hub}: 
-\item\textbf{Docker-compose}: 
+\item\textbf{Docker}\footnote{\url{https://www.docker.com/}}: es un proyecto de código abierto que proporciona el despliegue y movilidad de contenedores a través de la nube. Permite autosuficiencia entre las aplicaciones y la infraestructura y los desarrolladores y operaciones para crear un modelo colaborativo e innovador.
+\item\textbf{Docker Hub}\footnote{\url{https://hub.docker.com/}}: es un servicio en la nube que permite vincular repositorios y crear y almacenar sus imágenes. Es una plataforma que centraliza y distribuye las imágenes en contenedores, además de auomatización en el proceso de desarrollo.
+\item\textbf{Docker-compose}: es un fichero de configuración que despliega todos los servicios que sean necesarios durante el desarrollo de manera rápida y eficaz.
 \end{itemize}
 
 \begin{figure}
@@ -76,10 +78,10 @@ La contenerización o \textit{docker} es una novedosa tecnología que aporta por
 
 \subsection{Extensibilidad}\label{subsec:exten}
 
-
+La extensibilidad es la fácil adaptación del software a los nuevos cambios realizados en su especificación. Para ello se utiliza un \textit{makefile} que es un fichero que se encarga de organizar todo el código compilado de todos los softwares necesarios para el desarrollo. Este fichero tiene la capacidad de ampliar las funcionalidades de cualquier aplicación. En este trabajo se ha utilizado la siguiente extensión:
 
 \begin{itemize}
-\item\textbf{PostgreSQL/PostGIS}: 
+\item\textbf{PostgreSQL/PostGIS}: es la geodatabase libre más potente del mercado diseñada para ser extensible. PostGIS, como extensión, habilita y agrega soporte a objetos espaciales a la base de datos relacional de PostgreSQL.
 \end{itemize}
 
 
@@ -88,8 +90,8 @@ La contenerización o \textit{docker} es una novedosa tecnología que aporta por
 Para la elaboración del conjunto de datos que se han utilizado en este trabajo y las consultas y funciones que se han desarrollado para la extensión \textit{pg\_landmetrics}, se han utilizado las siguientes aplicaciones:
 
 \begin{itemize}
-\item\textbf{PgAdmin4}\footnote{\url{https://www.pgadmin.org/}} es una plataforma que administra, gestiona y desarrolla código abierto en bases de datos PostgreSQL. En la figura \ref{fig:carga} se muestra el interfaz en el cual se ha trabajado.
-\item\textbf{QGIS 2.18}\footnote{\url{https://www.qgis.org/es/site/}} es una aplicación de escritorio SIG, de código abierto, que analiza, maneja y opera con datos como \textit{raster/vector} y bases de datos. Además, facilita la conexión entre bases de datos espaciales como PostGIS.
+\item\textbf{PgAdmin4}\footnote{\url{https://www.pgadmin.org/}}: es una plataforma que administra, gestiona y desarrolla código abierto en bases de datos PostgreSQL. En la figura \ref{fig:carga} se muestra el interfaz en el cual se ha trabajado.
+\item\textbf{QGIS 2.18}\footnote{\url{https://www.qgis.org/es/site/}}: es una aplicación de escritorio SIG, de código abierto, que analiza, maneja y opera con datos como \textit{raster/vector} y bases de datos. Además, facilita la conexión entre bases de datos espaciales como PostGIS.
 \end{itemize}
 
 \begin{figure}
