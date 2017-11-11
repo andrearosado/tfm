@@ -105,18 +105,18 @@ Se han utilizado los siguientes elementos:
 \end{itemize}
 \end{graybox}
 
-Antes de escoger las métricas de paisaje adecuadas, se han utilizado dos conjuntos de datos, un paisaje de ejemplo y el SIOSE 2011, para someter a prueba la extensión \textit{pg\_landmetrics}.
+Para someter a prueba la extensión \textit{pg\_landmetrics} se han utilizados dos conjuntos de datos: un paisaje de ejemplo y el SIOSE de 2011.
 
-En el paisaje de ejemplo se han digitalizado todos los polígonos que lo comprenden. Se ha querido obtener un paisaje lo menos complejo posible para comprobar de manera más fácil si las métricas de paisaje funcionan correctamente. Para la elaboración de este paisaje se han utilizado las herramientas de geoproceso y edición de la aplicación de escritorio QGIS 2.18. 
+El \textbf{paisaje de ejemplo} se ha utilizado para comprobar si las métricas de paisaje funcionan correctamente desde PgAdmin como también en QGIS. La escala de referencia es 1:50.000 en dos sistemas geodésicos de referencia: European Terrestrial Reference System 1989 (ETRS89) y World Geodetic System 84 (WGS84), ya que las métricas no se calculan igual si son proyectadas (\textit{geometry}) o son coordenadas esféricas (\textit{geography}). 
 
-Este paisaje se ha elaborado con escala de referencia 1:50.000 en dos sistemas geodésicos de referencia: European Terrestrial Reference System 1989 (ETRS89) y World Geodetic System 84 (WGS84), para comprobar que las métricas de paisaje funcionan desde una geometría o desde unas coordenadas geográficas. En cuanto a sus características técnicas, 
+En este conjunto de datos hay un total de 51 polígonos que se han digitalizado a partir de las herramientas de geoproceso y edición avanzada mediante la aplicación de QGIS. En total hay 8 categorías de cobertura de suelo donde a cada polígono le corresponde un tipo de categoría representada por un color (ver figura \ref{fig:zona_andrea}). Se han definido los colores a partir de los 147 que presenta Scalable Vector Graphics (SVG) Specification\footnote{\url{http://www.december.com/html/spec/colorsvg.html}} además del apoyo de la clasificación de color que especifica el \textit{Corine Land Cover (CLC)}.
 
 
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=\textwidth]{Metodologia/Figs/land_test.png}
-\caption{Uso y cobertura del suelo del paisaje de ejemplo. \label{fig:lan_test}}
+\includegraphics[width=\textwidth]{Metodologia/Figs/zona_andrea.png}
+\caption{Cobertura del suelo del paisaje de ejemplo. \label{fig:zona_andrea}}
 \end{center}
 \end{figure}
 
@@ -157,15 +157,15 @@ Este paisaje se ha elaborado con escala de referencia 1:50.000 en dos sistemas g
 \end{itemize}
 \end{graybox}
 
-Como se indica en la sección \ref{sec:metrica}, existen cientos de métricas de paisaje que no siempre tienen significado para todas las aplicaciones de estudio ya que dependen de muchos factores, como por ejemplo los objetivos del estudio, el modelo de datos, la escala, nivel de agregación etc. Por este mismo motivo y según los objetivos específicados en este trabajo y en el proyecto SIOSE-INNOVA, se han seleccionado unas determinadas métricas de paisaje.
+Como se indica en la sección \ref{sec:metrica}, existen cientos de métricas de paisaje que no siempre tienen significado para todas las aplicaciones de estudio ya que dependen de muchos factores, como por ejemplo los objetivos del estudio, el modelo de datos, la escala, nivel de agregación etc. Por este mismo motivo y según los objetivos específicados en este trabajo y en el proyecto SIOSE-INNOVA, se han seleccionado unas determinadas métricas de paisaje para esta primera propuesta de extensión.
 
-En la tabla \ref{tab:listmetricas} se aprecian las métricas, acompañadas por su abreviatura, que se han escogido divididas en tres niveles de agregación: a nivel polígono (\textit{patch}), nivel categoría (\textit{class}) y nivel paisaje (\textit{landscape}). Para ello se ha seleccionado un número equitativo entre los niveles de agregación. Además, se han querido escoger algunas métricas que calculen operaciones simples como por ejemplo el área o perímetro, y por otro lado, métricas cuyos cálculos sean más complejos como por ejemplo la distancia del vecino más próximo o la densidad, entre otros.
+En la tabla \ref{tab:listmetricas} se aprecian las métricas, acompañadas por su abreviatura, que se han escogido divididas en tres niveles de agregación: a nivel de polígono (\textit{patch}), nivel de categoría (\textit{class}) y nivel de paisaje (\textit{landscape}). Para ello se ha seleccionado un número equitativo entre los niveles de agregación. Además, se han querido escoger algunas métricas que calculen operaciones simples como por ejemplo el área o perímetro, y por otro lado, métricas cuyos cálculos sean más complejos como por ejemplo la distancia del vecino más próximo o la densidad, entre otros.
 
 % Please add the following required packages to your document preamble:
 % \usepackage{multirow}
 \begin{table}[]
 \centering
-\caption{Listado de métricas de paisaje disponibles en la extensión.}
+\caption{Métricas de paisaje disponibles en la extensión.}
 \label{tab:listmetricas}
 \begin{tabular}{lll}
 \hline
