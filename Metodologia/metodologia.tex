@@ -102,6 +102,7 @@ Se han utilizado los siguientes elementos:
 \begin{graybox}
 \begin{itemize}
 \item En este trabajo se han utilizado dos conjuntos de datos, \textbf{un paisaje de ejemplo y el SIOSE de 2011 completo}, para poner a prueba la extensión \textit{pg\_landmetrics} propuesta en los objetivos.
+\item Para demostrar que la \textbf{extensión} es \textbf{escalable}, se han utilizado distintas escalas de referencia a partir de \textit{grids}.
 \end{itemize}
 \end{graybox}
 
@@ -111,7 +112,19 @@ El \textbf{paisaje de ejemplo} se ha utilizado para comprobar si las métricas d
 
 En este conjunto de datos hay un total de 51 polígonos que se han digitalizado a partir de las herramientas de geoproceso y edición avanzada mediante la aplicación de QGIS. En total hay 8 categorías de cobertura de suelo donde a cada polígono le corresponde un tipo de categoría representada por un color (ver figura \ref{fig:zona_andrea}). Se han definido los colores a partir de los 147 que presenta Scalable Vector Graphics (SVG) Specification\footnote{\url{http://www.december.com/html/spec/colorsvg.html}} además del apoyo de la clasificación de color que especifica el \textit{Corine Land Cover (CLC)}.
 
+Una vez se han comprobado que las métricas de paisaje funcionan correctamente, el segundo conjuntos de datos que se ha utilizado para obtener los resultados es el \textbf{SIOSE 2011}, datos que se han obtenido a partir del equipo técnico del SIOSE que colabora en el proyecto SIOSE-INNOVA. 
 
+Esta base de datos tan voluminosa se componen de 4 tablas. En la tabla de datos \texttt{t\_nomes} se encuentran todas las nomenclaturas de cada polígono, en \texttt{t\_poli\_atrib} todos los atributos de los polígonos como por ejemplo el código multietiqueta de clasificación del SIOSE o de clasificación de las distintas nomenclaturas (iberpix, perfil ambiental, toponimia, \textit{Corine Land Cover}, etc.), en cuanto a la tabla \texttt{t\_poli\_geo} ofrece la geometría de cada uno de los 2.562.800 de polígonos en total y finalmente, en la tabla \texttt{t\_valores} calculos estádisticos como por ejemplo la superficie en hectáreas.
+
+Como se menciona en la sección \ref{sec:siose}, los polígonos del SIOSE presentan una \textit{cobertura simple} o una \textit{cobertura compuesta}. Dentro de esta última cobertura se encuentran las coberturas no predefindidas, es decir, que un mismo polígono puede contener varías coberturas de suelo. A raíz de esta característica, se ha realizado una reclasificación de los polígonos a partir de la cobertura prevalente que presenta la jerarquización de la clasificación de los usos y coberturas del suelo del SIOSE. Con ello se ha obtenido una nueva tabla con 85 coberturas prevalentes asignadas a cada uno de los polígonos. Para que las consultas sean más rápidas entre las distintas tablas se generaron índices para indexar las categorías. 
+
+Una vez se han reclasificado todos los polígonos del SIOSE 2011, se han obtenido \textbf{\textit{grids}} (cuadrículas cartográficas) para el cálculo de métricas del paisaje en distintas escalas de referencia, a través del Centro de Descargas del Instituto Geográfico Nacional (CNIG)\footnote{\url{http://centrodedescargas.cnig.es/CentroDescargas/index.jsp}}. 
+
+A partir del grid 1:500.000 se han escogido dos celdas de las zonas de estudio en las cuales se han calculado algunas métricas de paisaje. Estas dos zonas comprenden en su mayor parte a la provincia de Alicante y a la provincia de Zaragoza, y los alrededores de cada una. El motivo de por qué se han escogido estas dos zonas es por hacer referencia al lugar donde se han realizado las prácticas de empresa y dónde se ha impartido el \textit{máster}.
+
+Dado que ya se han escogido las zonas de estudio, a continuación se han seleccionado y extraído todas aquellas celdas que comprenden las dos celdas de las áreas de estudio con escala de referencia 1:25.000, 1:50.000 y 1:100.000. A partir de éstas se han realizado todos los resultados que pueden consultarse en el capítulo \ref{chap:result}.
+
+Todas las características técnicas de los conjuntos de datos que se han utilizado en este trabajo se encuentran en la tabla \ref{tab:datos}.
 
 \begin{figure}
 \begin{center}
@@ -119,8 +132,6 @@ En este conjunto de datos hay un total de 51 polígonos que se han digitalizado 
 \caption{Cobertura del suelo del paisaje de ejemplo. \label{fig:zona_andrea}}
 \end{center}
 \end{figure}
-
-
 
 % Please add the following required packages to your document preamble:
 % \usepackage{booktabs}
@@ -135,12 +146,12 @@ En este conjunto de datos hay un total de 51 polígonos que se han digitalizado 
                             & t\_poli\_atrib  & 2.562.800      & 451 MB                \\
                             & t\_poli\_geo    & 2.562.800      & 3981 MB               \\
                             & t\_valores      & 10.932.639     & 1041 MB               \\ \midrule
-\multirow{4}{*}{Grids}      & g25k            & 756            & 232,3 kB              \\
-                            & g50k            & 192            & 57,8 kB               \\
-                            & g100k           & 48             & 13,8 kB               \\
-                            & g500k           & 2              & 677bytes              \\ \midrule
+\multirow{4}{*}{Grids}      & grid\_25k       & 756            & 232,3 kB              \\
+                            & grid\_50k       & 192            & 57,8 kB               \\
+                            & grid\_100k      & 48             & 13,8 kB               \\
+                            & grid\_500k      & 2              & 677bytes              \\ \midrule
 \multirow{2}{*}{Sample}     & sample\_25830   & 51             & 122,6 kB              \\
-                            & sample\_4326    & 51             & 122,5 kB               \\ \bottomrule
+                            & sample\_4326    & 51             & 122,5 kB              \\ \bottomrule
 \end{tabular}
 \end{table}
 
