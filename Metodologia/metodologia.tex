@@ -44,7 +44,7 @@ Uno de los procesos de integración continua y desarrollo colaborativo que se ha
 \begin{figure}
 \begin{center}
 \includegraphics[width=0.9\textwidth]{Metodologia/Figs/diary.png}
-\caption{Flujo de proceso de actualización de ficheros. \label{fig:diary}}
+\caption{Integración continua de la actualización del sistema de ficheros de la extensión \textit{pg\_landmetrics}. \label{fig:diary}}
 \end{center}
 \end{figure}
 
@@ -53,7 +53,7 @@ Otro de los procesos de integración continua y desarrollo colaborativo que se h
 \begin{figure}
 \begin{center}
 \includegraphics[width=0.9\textwidth]{Metodologia/Figs/pullrequest.png}
-\caption{Flujo de proceso de trabajo colaborativo entre repositorios. \label{fig:pullrequest}}
+\caption{Desarrollo colaborativo entre repositorios. \label{fig:pullrequest}}
 \end{center}
 \end{figure}
 
@@ -73,7 +73,7 @@ Finalmente, otro de los procesos de integración continua y desarrollo colaborat
 \begin{figure}
 \begin{center}
 \includegraphics[width=\textwidth]{Metodologia/Figs/ci.png}
-\caption{Flujo de proceso de integración continua. \label{fig:ci}}
+\caption{Integración continua en la implementación y desarrollo de funciones en PostgreSQL. \label{fig:ci}}
 \end{center}
 \end{figure}
 
@@ -99,7 +99,7 @@ Para la elaboración del conjunto de datos que se han utilizado en este trabajo 
 \begin{figure}
 \begin{center}
 \includegraphics[width=\textwidth]{Metodologia/Figs/carga-siose-2011.png}
-\caption{Flujo de proceso de integración continua. \label{fig:carga}}
+\caption{Interfaz web de la plataforma de PgAdmin. \label{fig:carga}}
 \end{center}
 \end{figure}
 
@@ -194,20 +194,30 @@ En la tabla \ref{tab:listmetricas} se aprecian las métricas, acompañadas por s
 
 \begin{graybox}
 \begin{itemize}
-\item Los desarrollos en PostgreSQL se pueden realizar en lenguajes de programación como ANSI C, SQL y/o distintos lenguajes procedurales (p.ej. PLpgSQL, PL/R, PL/Python, entre muchos otros), \textbf{dependiendo de las necesidades}.
+\item Los desarrollos en PostgreSQL se pueden realizar en lenguajes de programación como ANSI C, SQL y/o distintos lenguajes procedurales (p.ej. PL/pgSQL, PL/R, PL/Python, entre muchos otros), \textbf{dependiendo de las necesidades}.
 \end{itemize}
 \end{graybox}
 
+La implementación y desarrollo en PostgreSQL se puede realizar desde distintos lenguajes de programación como por ejemplo ANSI C que es un estándar del lenguaje de programación C. Es el más popular en el desarrollo de softwares y aplicaciones, y además su código es portable entre distintas plataformas. Otro de los lenguajes de programación más conocido y utilizado hasta la fecha es SQL. Es un lenguaje de consulta estructurada en gestión de bases de datos relacionales que maneja algébra y cálculo relacional. Este tipo de lenguaje es declarativo ya que ofrece la posibilidad de realizar consultas para obtener un resultado, además de estar orientados a resolver problemas. Por otra parte están los lenguajes procedurales que están incoporados en PostgreSQL para implementar funciones y disparadores como pueden ser PL/pgSQL, PL/R, PL/Python, entre muchos otros.
 
-\input{Metodologia/Listings/Simp/p_area}
-\input{Metodologia/Listings/Simp/c_area}
-\input{Metodologia/Listings/Simp/l_area}
 
-\input{Metodologia/Listings/Comp/p_enn}
-\input{Metodologia/Listings/Comp/c_tca}
-\input{Metodologia/Listings/Comp/l_ed}
+Dado que se ha trabajado sobre una base de datos relacional y orientada a objetos como es el SIOSE y se ha utilizado tanto PgAdmin como la extensión de PostgreSQL/PostGIS, se ha empleado como lenguaje de programación SQL en la mayoría de los casos para simplificar o compactar lo máximo posible todas las funciones de la extensión y que éstas no dependan de otras por si en un futuro se desconfiguraran y ocasionasen errores. Sin embargo, es cierto que en algunos casos se ha tenido que aplicar PL/pgSQL como lenguaje procedural cuando no era posible elaborar funciones en SQL.
 
-\input{Metodologia/Listings/SampleUsage/p_core}
+Una vez se ha decidido sobre qué lenguaje de programación se ha utilizado para implementar y desarrollar las funciones, con las métricas de paisaje que se han seleccionado, se ha construido su consulta SQL a partir de las fórmulas matemáticas que acompañan a cada métrica en FRAGSTATS, como referencia. A continuación, se han comprobado estas consultas tanto en QGIS como en PgAdmin a partir del conjunto de datos del paisaje de ejemplo. 
+
+Cuando estas últimas comprobaciones han resultado satisfactorias, se ha procedido a desarrollar la función de cada una de las métricas. Cabe mencionar que todas las funciones se han desarrollado para calcular las métricas proyectadas (\textit{geometry}) o en coordenadas esféricas (\textit{geography}) para poder trabajar con conjuntos de datos con cualquier sistema geodésico de referencia. Dicho esto, se han elaborado dos tipos de funciones: simples y de agregado.
+
+Las funciones simples corresponden a las métricas de paisaje a nivel de polígono. Como ejemplo de ello, la métrica de paisaje \textit{Patch Area (AREA)} devuelve la suma del área del polígono dividido por 10.000 para obtener un valor en unidades de hectárea. Como se puede observar en el ejemplo de código
+
+
+
+\input{Metodologia/Listings/Query/p_area}
+\input{Metodologia/Listings/FunSimple/p_area}
+\input{Metodologia/Listings/SampleUsage/p_area}
+
+
+\input{Metodologia/Listings/Query/c_tca}
+\input{Metodologia/Listings/FunAgregado/c_tca}
 \input{Metodologia/Listings/SampleUsage/c_tca}
 
 

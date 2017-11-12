@@ -1,5 +1,5 @@
-\lstset{caption=Crear una función para calcular el IDW (I),label= IDW1}
+\lstset{caption=Ejemplo de uso para calcular la métrica TCA.,label= IDW1}
 \begin{SQL}
-SELECT c_totalarea(geom,category) FROM sample_patches_25830;
-SELECT c_totalarea(geom,category) FROM sample_patches_4326;
+SELECT c_totalcorearea(geom,category).value As c_totalcorearea FROM sample_patches_25830;
+SELECT c_totalcorearea(geom,category).value As c_totalcorearea FROM sample_patches_4326;
 \end{SQL}
