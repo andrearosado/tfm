@@ -39,7 +39,7 @@ En este caso, se trabaja de forma colaborativa donde cada usuario modifica desde
 
 Todos los archivos que se han generado para la extensión \textit{pg\_landmetrics} se encuentran en el repositorio de este trabajo\footnote{\url{https://github.com/andrearosado/pg_landmetrics}} y en el repositorio proyecto SIOSE-INNOVA\footnote{\url{https://github.com/siose-innova/pg_landmetrics}}.
 
-En este trabajo...
+Uno de los procesos de integración continua y desarrollo colaborativo que se ha realizado es la actualización de ficheros de la extensión \textit{pg\_landmetrics} al repositorio del trabajo (ver la figura \ref{fig:diary}). El procedimiento consistía en que el usuario ejecutaba el comando \textit{pull} desde la máquina local cuando el sistema de ficheros de la extensión no estaba actualizado y éste se encargaba de obtener la última versión. Este paso es opcional si el sistema de ficheros tenía la última versión y no era necesario ejecutar la anterior instrucción. Una vez el usuario recibía un mensaje de notificación de que su sistema de fichero estaba actualizado, se procedía a editar los archivos. Cuando la edición finalizaba, el usuario se encargaba de transmitir todas las modificaciones realizadas a partir de los comandos \textit{add} y \textit{commit}, y a continuación recibía un mensaje de notificación con un \textit{hash} (identificador único) por cada cambio que se había realizado en el proceso. Finalmente, el usuario desde la máquina local subía esta última versión del sistema de ficheros de la extensión al repositorio del trabajo a partir del comando \textit{pull} y así obtener una nueva versión actualizada.
 
 \begin{figure}
 \begin{center}
@@ -48,7 +48,7 @@ En este trabajo...
 \end{center}
 \end{figure}
 
-
+Otro de los procesos de integración continua y desarrollo colaborativo que se ha realizado es la actualización de la extensión entre el repositorio del trabajo y el repositorio \textit{upstream} del proyecto SIOSE-INNOVA (ver la figura \ref{fig:pullrequest}). Una de las primeras tareas era realizar un \textit{fork}, es decir, una copia de todos los ficheros del repositorio \textit{upstream} a un nuevo repositorio de este trabajo. La ventaja es que si en cualquier momento el repositorio del usuario sufría algún contratiempo, se podía volver a realizar un \textit{fork} del repositorio \textit{upstream}. Lo mismo ocurre cuando en nuestra máquina local se tenía el sistema de ficheros de la extensión a partir del comando \textit{clone}. Éste último comando era ejecutado solamente cuando en la máquina local no existía el sistema de ficheros de \textit{pg\_landmetrics}. A continuación se realizaba o no un chequeo de la última versión de la extensión, como se realizaba en el anterior proceso. A partir de aquí, se inicia el trabajo colaborativo entre usuarios y repositorios. En este caso, se vuelve a repetir las mismas acciones de edición y actualización de archivos como en el anterior proceso. Una vez se tenían todos los ficheros de la extensión con una nueva última versión, el usuario enviaba una petición al repositorio \textit{upstream} para emparejar ambos repositorios a través de la función \textit{pull request} que se encuentra en la plataforma de \textit{GitHub}. Si la petición era aceptada por el personal encargado del repositorio \textit{upstream}, se ejecutaba el comando \textit{merge} (unión) y se recibía una notificación de sincronización completada. Finalmente los repositorios quedaban sincronizados y los ficheros con la última versión. Se volvían a subir los cambios al repositorio del trabajo y se recibía una notificación de que los cambios habían sido correctos.
 
 \begin{figure}
 \begin{center}
@@ -67,6 +67,8 @@ La contenerización o \textit{docker} es una novedosa tecnología que aporta por
 \item\textbf{Docker Hub}\footnote{\url{https://hub.docker.com/}}: es un servicio en la nube que permite vincular repositorios y crear y almacenar sus imágenes. Es una plataforma que centraliza y distribuye las imágenes en contenedores, además de auomatización en el proceso de desarrollo.
 \item\textbf{Docker-compose}: es un fichero de configuración que despliega todos los servicios que sean necesarios durante el desarrollo de manera rápida y eficaz.
 \end{itemize}
+
+Finalmente, otro de los procesos de integración continua y desarrollo colaborativo que se ha realizado es el funcionamiento de los \textit{dockers} y extensiones a la hora de implementar y desarrollar las funciones en la extensión \textit{pg\_landmetrics} (ver la figura \ref{fig:ci}). Desde el punto de vista del usuario, se ejecutaba el comando \textit{docker-compose build} si la extensión había sido modificada. En el caso de que no lo estuviera y no fuera necesario volver a construir el \textit{docker-compose}, solamente era necesario ejecutar el comando \textit{docker-compose up} para iniciarlo. A partir de aquí, el \textit{docker-compose} orquestaba y se ocupaba de lanzar dos contenedores: PostgreSQL/PostGIS y PgAdmin. Una vez han sido lanzados dichos contenedores y se han recibido las notificaciones de que la conexión había sido satisfactoria, el usuario realizaba consultas a los contenedores. A continuación, los contenedores realizaban consultas entre ambos y luego se enviaban al usuario los resultados de las consultas acompañado de una vista previa de ellos. Cuando ya eran adquiridos todos los resultados deseados, se ejecutaba el comando \textit{docker-compose down} para que el \textit{docker-compose} dejase de funcionar y el usuario recibiese una notificación por parte de este actor de que había dejado de ''funcionar'' sin ningún problema.
 
 \begin{figure}
 \begin{center}
@@ -135,30 +137,6 @@ Una vez se han reclasificado todos los polígonos del SIOSE 2011, se han obtenid
 A partir del grid 1:500.000 se han escogido dos celdas de las zonas de estudio en las cuales se han calculado algunas métricas de paisaje. Estas dos zonas comprenden en su mayor parte a la provincia de Alicante y a la provincia de Zaragoza, y los alrededores de cada una. El motivo de por qué se han escogido estas dos zonas es por hacer referencia al lugar donde se han realizado las prácticas de empresa y dónde se ha impartido el \textit{máster}.
 
 Dado que ya se han escogido las zonas de estudio, a continuación se han seleccionado y extraído todas aquellas celdas que comprenden las dos celdas de las áreas de estudio con escala de referencia 1:25.000, 1:50.000 y 1:100.000. A partir de éstas se han realizado todos los resultados que pueden consultarse en el capítulo \ref{chap:result}.
-
-Todas las características técnicas de los conjuntos de datos que se han utilizado en este trabajo se encuentran en la tabla \ref{tab:datos}.
-
-% Please add the following required packages to your document preamble:
-% \usepackage{booktabs}
-% \usepackage{multirow}
-\begin{table}[]
-\centering
-\caption{Características de los conjuntos de datos utilizados\label{tab:datos}}
-\begin{tabular}{@{}llll@{}}
-\toprule
-\textbf{Tipo}               & \textbf{Tablas} & \textbf{Filas} & \textbf{Tamaño total} \\ \midrule
-\multirow{4}{*}{SIOSE-2011} & t\_nomes        & 36.790.972     & 6116 MB               \\
-                            & t\_poli\_atrib  & 2.562.800      & 451 MB                \\
-                            & t\_poli\_geo    & 2.562.800      & 3981 MB               \\
-                            & t\_valores      & 10.932.639     & 1041 MB               \\ \midrule
-\multirow{4}{*}{Grids}      & grid\_25k       & 756            & 232,3 kB              \\
-                            & grid\_50k       & 192            & 57,8 kB               \\
-                            & grid\_100k      & 48             & 13,8 kB               \\
-                            & grid\_500k      & 2              & 677bytes              \\ \midrule
-\multirow{2}{*}{Sample}     & sample\_25830   & 51             & 122,6 kB              \\
-                            & sample\_4326    & 51             & 122,5 kB              \\ \bottomrule
-\end{tabular}
-\end{table}
 
 
 \section{Selección de métricas}

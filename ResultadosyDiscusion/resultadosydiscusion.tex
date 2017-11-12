@@ -128,5 +128,25 @@ Figuras correlación entre dos zonas de estudio grandes...
 
 Volumen de los datos (TABLA). La base de datos del SIOSE 2011 proporcionada por el equipo nacional del SIOSE era muy voluminosa ()
 
-
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+% \usepackage{multirow}
+\begin{table}[]
+\centering
+\caption{Características de los conjuntos de datos utilizados\label{tab:datos}}
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{Tipo}               & \textbf{Tablas} & \textbf{Filas} & \textbf{Tamaño total} \\ \midrule
+\multirow{4}{*}{SIOSE-2011} & t\_nomes        & 36.790.972     & 6116 MB               \\
+                            & t\_poli\_atrib  & 2.562.800      & 451 MB                \\
+                            & t\_poli\_geo    & 2.562.800      & 3981 MB               \\
+                            & t\_valores      & 10.932.639     & 1041 MB               \\ \midrule
+\multirow{4}{*}{Grids}      & grid\_25k       & 756            & 232,3 kB              \\
+                            & grid\_50k       & 192            & 57,8 kB               \\
+                            & grid\_100k      & 48             & 13,8 kB               \\
+                            & grid\_500k      & 2              & 677bytes              \\ \midrule
+\multirow{2}{*}{Sample}     & sample\_25830   & 51             & 122,6 kB              \\
+                            & sample\_4326    & 51             & 122,5 kB              \\ \bottomrule
+\end{tabular}
+\end{table}
 
