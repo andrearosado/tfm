@@ -1,0 +1,24 @@
+\lstset{caption=Extracción de los resultados de las métricas en diferentes escalas de referencia a partir de grids.} \label{list:runtests}
+\begin{SQL}
+CREATE OR REPLACE FUNCTION test.runtests() 
+  RETURNS TABLE ( 
+    grid_tablename regclass,
+    zone_id int,
+    cell_id int,
+    total_landscape_area numeric,
+    avg_patch_area numeric,
+    total_class_area numeric) 
+LANGUAGE 'plpgsql'
+AS $$ 
+DECLARE
+  script text;
+
+BEGIN 
+  SELECT DISTINCT string_agg('SELECT * from test.runtests(' || quote_literal(table_schema || '.' || table_name) || ')', ' UNION ALL ') into script
+  FROM information_schema.tables where table_schema = 'test' and table_name like 'grid_%';
+
+  RETURN QUERY EXECUTE script;
+
+END
+$$;
+\end{SQL}

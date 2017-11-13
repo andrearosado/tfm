@@ -139,7 +139,7 @@ A partir del grid 1:500.000 se han escogido dos celdas de las zonas de estudio e
 Dado que ya se han escogido las zonas de estudio, a continuación se han seleccionado y extraído todas aquellas celdas que comprenden las dos celdas de las áreas de estudio con escala de referencia 1:25.000, 1:50.000 y 1:100.000. A partir de éstas se han realizado todos los resultados que pueden consultarse en el capítulo \ref{chap:result}.
 
 
-\section{Selección de métricas}
+\section{Selección de métricas}\label{sec:metricas}
 
 \begin{graybox}
 \begin{itemize}
@@ -207,18 +207,37 @@ Una vez se ha decidido sobre qué lenguaje de programación se ha utilizado para
 
 Cuando estas últimas comprobaciones han resultado satisfactorias, se ha procedido a desarrollar la función de cada una de las métricas. Cabe mencionar que todas las funciones se han desarrollado para calcular las métricas proyectadas (\textit{geometry}) o en coordenadas esféricas (\textit{geography}) para poder trabajar con conjuntos de datos con cualquier sistema geodésico de referencia. Dicho esto, se han elaborado dos tipos de funciones: simples y de agregado.
 
-Las funciones simples corresponden a las métricas de paisaje a nivel de polígono. Como ejemplo de ello, la métrica de paisaje \textit{Patch Area (AREA)} devuelve la suma del área del polígono dividido por 10.000 para obtener un valor en unidades de hectárea. Como se puede observar en el ejemplo de código... 
+Las funciones simples corresponden a las métricas de paisaje a nivel de polígono. Como ejemplo de ello, la métrica de paisaje \textit{Patch Area (AREA)} devuelve la suma del área del polígono dividido por 10.000 para obtener un valor en unidades de hectárea. Como se puede observar en el ejemplo de código (\ref{list:area1}), a partir de la fórmula matemática que calcula esta métrica, se ha construido su consulta SQL.
 
+\input{Metodologia/Listings/Query/p_area}\label{list:area1}
 
+A partir de ésta, se ha desarrollado la función la cual sigue una estructura sencilla. Como se observa en el ejemplo de código \ref{list:area2}, la función se estructura por el nombre de la propia función, el tipo de valor que devuelve, la consulta SQL que se ha construido anteriormente y finalmente, un comentario en el que explique qué tiene que devolver como resultado. Como se ha mencionado, la función se ha elaborado tanto para \textit{geometry} como para \textit{geography}.
 
-\input{Metodologia/Listings/Query/p_area}
-\input{Metodologia/Listings/FunSimple/p_area}
-\input{Metodologia/Listings/SampleUsage/p_area}
+\input{Metodologia/Listings/FunSimple/p_area}\label{list:area2}
 
+Una vez se ha desarrollado la función, se ha ejecutado un ejemplo de uso (ver ejemplo de código \ref{list:area3}) para obtener el cálculo de la métrica AREA a partir de un conjunto de datos (ver en la figura ref polig area).
+
+\input{Metodologia/Listings/SampleUsage/p_area}\label{list:area3}
+
+Sin embargo, las funciones de agregado son distintas a las funciones simples. Éstas corresponden a las métricas de paisaje tanto a nivel de categoría como a nivel de paisaje. En este caso, como ejemplo a nivel de categoría, la métrica de paisaje \textit{Total Core Area (TCA)} devuelve la suma de los núcleos de las áreas (m2) de cada polígono correspondiente al tipo de polígono, dividido por 10.000 (unidades: Hectáreas). Como se puede observar en el ejemplo de código (\ref{list:tca1}), a partir de la fórmula matemática que calcula esta métrica, se ha construido su consulta SQL.
 
 \input{Metodologia/Listings/Query/c_tca}\label{list:tca1}
+
+A partir de ésta, se ha desarrollado la función de agregado. La diferencia que tiene esta función respecto a la de \textit{Patch Area} es que se necesita crear un agregado dentro de la función ya que el resultado que se quería obtener era agrupado según el tipo de categoría. Como se observa en el ejemplo de código \ref{list:tca2}, la función se estructura por el nombre de la propia función, el tipo de valor que devuelve que en este caso será etiquetado el resultado según el tipo cobertura de suelo al que corresponde, la consulta SQL que se ha construido anteriormente desglosada de distinta forma que la anterior ya que se quería obtener el sumatorio del resultado de los polígonos agrupados por categoría, un agregado que forma la estructura del resultado con el valor y la etiqueta de cobertura, y finalmente, un comentario en el que explique qué tiene que devolver como resultado. Como se ha mencionado, la función se ha elaborado tanto para \textit{geometry} como para \textit{geography}.
+
 \input{Metodologia/Listings/FunAgregado/c_tca}\label{list:tca2}
+
+Una vez se ha desarrollado la función de agregado, se ha ejecutado un ejemplo de uso (ver ejemplo de código \ref{list:tca3}) para obtener el cálculo de la métrica TCA a partir de un conjunto de datos (ver en la figura ref polig tca).
+
 \input{Metodologia/Listings/SampleUsage/c_tca}\label{list:tca3}
+
+En cuanto a las métricas de paisaje a nivel de paisaje también se han desarrollado de tipo agregado para obtener un solo resultado en conjunto de todo el paisaje. A partir de este punto, se han elaborado todas las funciones de las métricas que se han seleccionado en la sección \ref{sec:metricas}.
+
+Finalmente, con todas las funciones implementadas, desarrolladas y testeadas, el conjunto de datos del SIOSE 2011 preparado y todos los grids dispuestos en sus diferentes escalas, se ha elaborado una última función para obtener todos los resultados de este trabajo que se encuentran en el capítulo \ref{chap:result} (ver ejemplo de código \ref{list:runtests}).
+
+\input{Metodologia/Listings/Results/runtests}\label{list:runtests}
+
+El que realiza esta función concretamente es construir una tabla virtual con los resultados organizados por columnas según la zona de estudio a la que corresponden, el grid sobre el que está intersectado, y los valores de cada métrica en su columna correcta. Luego se ha ejecutado un \textit{script} el cual extrae todos los valores calculados en todas las escalas de referencia en una sola tabla que más adelante se ha extraído como csv para manejar los resultados.
 
 
 \section{Documentación de la extensión}
