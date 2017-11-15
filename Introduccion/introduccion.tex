@@ -7,20 +7,20 @@
 
 La interacción de los factores naturales y antrópicos es el origen de la estructura espacial compleja y heterogénea que presenta el paisaje \citep{Forman1986,Turner2001}. En las últimas décadas, la ecología del paisaje ha estudiado la configuración, el tamaño y la forma de los componentes que estructuran el territorio utilizando \textbf{métricas de paisaje} \citep{Aguilera2010}. Hoy en día, para estudiar la estructura del paisaje se dispone de \textbf{gran cantidad de información y herramientas}. 
 
-En primer lugar, las bases de datos de ocupación del suelo, como por ejemplo el Sistema de Información de Ocupación del Suelo en España (SIOSE), representan el territorio de un modo adecuado para aplicar conceptos fundamentales como los de conectividad o diversidad del paisaje. Además, estas bases de datos aumentan progresivamente en riqueza semántica y resolución geométrica, por lo que \textbf{la información disponible no para de crecer}.
+Las bases de datos de ocupación del suelo, como por ejemplo el Sistema de Información de Ocupación del Suelo en España (SIOSE), representan el territorio de un modo adecuado para aplicar conceptos fundamentales como los de conectividad o diversidad del paisaje. Además, estas bases de datos aumentan progresivamente en riqueza semántica y resolución geométrica, por lo que \textbf{la información disponible no para de crecer}.
 
 Complementariamente, también existe software específico o de carácter más general que facilita el cálculo de métricas del paisaje. Sin embargo, \textbf{ninguna de las aplicaciones encontradas es lo suficientemente escalable y extensible como para analizar grandes bases de datos de ocupación del suelo tan complejas como las actuales} (p.ej. SIOSE). 
 
 Evidentemente, los problemas existentes al analizar las geodatabases actuales irá en aumento con la cada vez mayor disponibilidad de datos obtenidos a partir de imágenes de satélite o datos de campo. Este trabajo se enmarca en este contexto de creciente complejidad y busca \textbf{proponer herramientas más sencillas y eficientes en el cálculo de métricas del paisaje}.
 
 
-\section{Estudio de la estructura del paisaje utilizando el SIOSE}\label{sec:siose}
+\section{El SIOSE como fuente para el estudio de la estructura del paisaje}\label{sec:siose}
 
 \begin{graybox}
 \begin{itemize}
 \item El SIOSE es una valiosa \textbf{base de datos de ocupación del suelo} que contiene un gran volumen de información territorial de toda España.
 \item Desde su aparición en 2005, SIOSE se ha convertido en un repositorio de referencia para sus homólogos europeos, llegando a ser un \textbf{modelo para la iniciativa EAGLE} (\textit{SIOSE europeo}). 
-\item A pesar de su gran potencial, el SIOSE presenta ciertos problemas de \textit{usabilidad} debidos a su gran volumen y complejidad (p.ej. desde aplicaciones SIG de escritorio).
+\item A pesar de su gran potencial, el SIOSE presenta ciertos problemas de \textit{usabilidad} debidos a su gran volumen y complejidad.
 \end{itemize}
 \end{graybox}
 
@@ -29,9 +29,16 @@ El Sistema de Información de Ocupación del Suelo en España (SIOSE) se lanzó 
 
 El SIOSE es una base de datos que recoge información de la ocupación del suelo de España en forma de malla continua de polígonos a partir de la fotointerpretación de imágenes. Cada polígono se especifica por dos componentes: la cobertura del suelo (\textit{Land Cover, LC}) se refiere a las características de la cubierta natural, como por ejemplo cuerpos de agua, bosques, superficies urbanas, zonas agrícolas, etc., y el uso del suelo (\textit{Land Use, LU})se define por las funciones socioeconómicas en el territorio, como por ejemplo uso industrial, residencial, forestal, agrícola, etc.
 
-La escala de referencia es 1:25.000 y el sistema geodésico de referencia es European Terrestrial Reference System 1989 (ETRS89) con proyección Universal Transversa de Mercator (UTM). El tamaño mínimo de los polígonos depende del tipo de cobertura: 2 Ha para las zonas agrícolas, forestales y naturales, 1 Ha para las superficies artificiales y 0,5 Ha para agua, cultivos forzados, coberturas húmedas, playas, vegetación de ribera y acantilados. El SIOSE es un modelo orientado a objetos (entidad-relación) que describe los objetos, atributos y relaciones, y que permite la asignación de una o varias coberturas de suelo a un único polígono (datos semiestructurados). Cuando el polígono presente una única cobertura tendrá una \textit{cobertura simple}, pero cuando esté formado por dos o más coberturas tendrá una \textit{cobertura compuesta}, o también conocido como multietiqueta o \textit{multilabel} \citep{EquipoTecnicoNacionalSIOSE2015}. El hecho de que sea un modelo orientado a objetos, garantiza la compatibilidad y comparabilidad con otras bases de datos de ocupación del suelo como por ejemplo el \textit{Corine Land Cover (CLC)}.
+La escala de referencia es 1:25.000 y el sistema geodésico de referencia es European Terrestrial Reference System 1989 (ETRS89) con proyección Universal Transversa de Mercator (UTM). El tamaño mínimo de los polígonos depende del tipo de cobertura: 2 Ha para las zonas agrícolas, forestales y naturales, 1 Ha para las superficies artificiales y 0,5 Ha para agua, cultivos forzados, coberturas húmedas, playas, vegetación de ribera y acantilados. La base de datos del SIOSE ha sido diseñada utilizando un \textbf{modelo orientado a objetos} que describe los objetos, atributos y relaciones de los elementos del territorio. Esto permite la asignación de una o varias coberturas de suelo a un único polígono (datos semiestructurados). Cuando el polígono presente una única cobertura tendrá una \textit{cobertura simple}, pero cuando esté formado por dos o más coberturas tendrá una \textit{cobertura compuesta}, o también conocido como multietiqueta o \textit{multilabel} \citep{EquipoTecnicoNacionalSIOSE2015}. El hecho de que sea un modelo orientado a objetos, garantiza la compatibilidad y comparabilidad con otras bases de datos de ocupación del suelo como por ejemplo el \textit{Corine Land Cover (CLC)}. Sin embargo, físicamente, este modelo se ha descrito como un modelo \textbf{entidad-relación} para poder implementarlo también en bases de datos espaciales relacionales, que son las más utilizadas de hoy en día y las más habituales en los SIG.
 
-El SIOSE tiene una proyección internacional ya que hay iniciativas similares en otros muchos países. Concretamente, el grupo EAGLE (Eionet Action Group on Land monitoring in Europe) tiene como objetivo solucionar la vigilancia de la tierra sobre la información europea de las fuentes de datos nacionales para una mejor integración y armonización a partir del concepto \textit{bottom-up}, además de facilitar el intercambio y comparación de datos entre países europeos \citep{Arnold2013}. Gracias a la iniciativa de EAGLE, el Instituto Geográfico Nacional de España (IGN) crea el SIOSE que se ha convertido en un repositorio de ocupación del suelo de referencia a nivel europeo \citep{EquipoTecnicoNacionalSIOSE2015}. Así pues, uno de los objetivos futuros del SIOSE es obtener una base de datos de ocupación del suelo europea para que resulte más fácil trabajar entre fronteras.
+\begin{figure}
+\includegraphics[width=\textwidth]{Introduccion/Figs/siose-oo.png}
+\caption{Riqueza descriptiva del modelo de datos orientado a objetos del SIOSE frente a una clasificación jerárquica. Fuente: \url{www.siose.es}.\label{fig:siose-oo}}
+\end{figure}
+
+El SIOSE tiene una proyección internacional ya que hay iniciativas similares en otros muchos países. Concretamente, el grupo EAGLE (Eionet Action Group on Land monitoring in Europe) tiene como objetivo solucionar la vigilancia de la tierra sobre la información europea de las fuentes de datos nacionales para una mejor integración y armonización a partir del concepto \textit{bottom-up}, además de facilitar el intercambio y comparación de datos entre países europeos \citep{Arnold2013}. 
+
+El Instituto Geográfico Nacional de España (IGN) creó el SIOSE muy tempranamente (2005) siguiendo los últimos estándares internacionales, por lo que con el tiempo se ha convertido en un repositorio de ocupación del suelo de referencia a nivel europeo \citep{EquipoTecnicoNacionalSIOSE2015}. Del mismo modo, uno de los objetivos futuros del SIOSE es avanzar hacia una base de datos de ocupación del suelo europea para que resulte más fácil trabajar a nivel internacional.
 
 El análisis de la estructura del paisaje a partir de datos de usos y coberturas del suelo ha sido aplicado habitualmente desde diversas disciplinas y ámbitos de estudio. Por ejemplo, se han realizado estudios sobre:
 
@@ -70,9 +77,15 @@ Hay cientos de métricas de paisaje, correlacionadas entre sí, pero no todas la
 
 Las métricas de paisaje se pueden calcular a partir de aplicaciones de escritorio. En \citet{Zaragozi2012} se establece una comparativa entre \textbf{programas específicos} para el cálculo de métricas del paisaje, destacando entre ellos FRAGSTATS \citep{McGarigal1994,McGarigal2015}. Por otro lado, hay otros programas como Conefor Sensinode \citep{Saura2009}, Patch Analyst, varios módulos de GRASS GIS, LecoS \citep{Jung2016}, ZonalMetrics \citep{Adamczyk2017}, entre otros. Evidentemente, esta lista no puede estar completa, ya que hay muchos otros programas que pueden calcular un número de métricas variable según un gran número de factores.
 
+\begin{figure}
+\includegraphics[width=\textwidth]{Introduccion/Figs/fragstatsmodeldialog}
+\caption{Captura de pantalla del diálogo inicial de FRAGSTATS 4.0\label{fig:fragstatsmodeldialog}. Fuente: \url{www.landscapetoolbox.org}}
+\end{figure}
+
+
 Existen muchos otros programas especializados que permiten el cálculo de este tipo de métricas/índices pero no siempre tiene que ser una aplicación específica que las calcule. También es posible calcular facilmente determinadas métricas con \textbf{herramientas típicas de un SIG} de escritorio (calculadora de campos y/o calculadora raster, entre otras posibilidades).
 
-En cualquier caso, no hay ninguna aplicación escalable y extensible capaz de realizar análisis sobre bases de datos de ocupación del suelo tan voluminosas y complejas como lo es la del SIOSE.
+En cualquier caso, no hay ninguna aplicación escalable y extensible diseñada para realizar análisis sobre bases de datos de ocupación del suelo tan voluminosas y complejas como lo es la del SIOSE. Por ejemplo, según sus especificaciones técnicas, FRAGSTATS 4.0 es un software de 32 bits, lo cual significa que puede utilizar un máximo de 2GB de memoria, tampoco está diseñado para trabajar en \textit{La Nube} o con geometrías vectoriales.
 
 
 \section{Objetivos}\label{sec:objetivos}

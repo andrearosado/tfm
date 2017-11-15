@@ -38,6 +38,11 @@ El control de versiones se aplica hoy en día en muchas plataformas de uso cotid
 \item\textbf{GitHub}\footnote{La documentación de GitHub muestra distintos flujos de trabajo con Git así como documentación para distintas aplicaciones. Por ejemplo, es posible utilizar GitHub para crear una página web o una wiki (\url{https://github.com/}).} es una plataforma de desarrollo colaborativo que alberga proyectos y almacena el código fuente utilizando el sistema de control de versiones de \textit{Git}. Esto quiere decir que muchas de las tareas de Git pueden realizarse desde un navegador de Web de un modo sencillo. Además, GitHub es completamente gratuito a condición de que el código sea público, lo cual no es un problema en proyectos de software libre. En otras circunstancias, también existen otras plataformas similares como Bitbucket\footnote{\href{https://bitbucket.org}{https://bitbucket.org}} o GitLab\footnote{\href{https://about.gitlab.com/}{https://about.gitlab.com/}} con las que es posible que los repositorios privados sean gratuitos.
 \end{itemize}
 
+\begin{figure}
+\includegraphics[width=\textwidth]{Metodologia/Figs/postgis-github}
+\caption{Estadísticas de la comunidad de desarrolladores de PostGIS en la plataforma GitHub. Paul Ramsey es un desarrollador muy activo también en foros de usuarios. \label{fig:postgis-github}}
+\end{figure}
+
 La extensión \textit{pg\_landmetrics}, principal objetivo de este trabajo, ha sido desarrollada y alojada en un repositorio personal y público en GitHub\footnote{\url{https://github.com/andrearosado/pg_landmetrics}}. Cuando se crean nuevas partes de la extensión, y funcionan correctamente, se proponen cambios al repositorio oficial del proyecto SIOSE-INNOVA\footnote{\url{https://github.com/siose-innova/pg_landmetrics}} y, si el resto de los colaboradores están de acuerdo, estos cambios pasan a formar parte de la versión oficial del proyecto.
 
 El trabajo con Git es abierto y hay muchas maneras distintas de utilizar el software y colaborar con los otros usuarios. En el Laboratorio de Geomática de la Universidad de Alicante se trabaja como se detalla a continuación:
@@ -126,7 +131,7 @@ La preparación de datos de ejemplo y la visualización de las consultas realiza
 \end{figure}
 
 
-\section{Conjuntos de datos}
+\section{Conjuntos de datos\label{sec:datos}}
 
 \begin{graybox}
 
@@ -175,7 +180,7 @@ A partir del grid 1:500.000 se han escogido dos celdas de las zonas de estudio e
 
 Como se indica en la sección \ref{sec:metrica}, existen cientos de métricas de paisaje que no siempre tienen significado para todas las aplicaciones de estudio, ya que su interés depende de muchos factores (p. ej. los objetivos del estudio, el modelo de datos, la escala, nivel de agregación etc). Por este mismo motivo y según los objetivos de este trabajo, se han seleccionado unas métricas del paisaje representativas y que aparecen frecuentemente en la bibliografía consultada.
 
-En la tabla \ref{tab:listmetricas} se listan las métricas acompañadas por su abreviatura. Se ha escogido un número de métricas repartidas por igual en tres niveles de agregación: a nivel de polígono (\textit{patch}), nivel de categoría (\textit{class}) y nivel de paisaje (\textit{landscape}). Además, se han escogido métricas que calculan operaciones simples, como por ejemplo el área o el perímetro, y por otro lado, métricas cuyos cálculos son más complejos, como por ejemplo la distancia al vecino más próximo o la densidad.
+En la tabla \ref{tab:listmetricas} se listan las métricas acompañadas por su abreviatura. Se ha escogido un número de métricas repartidas por igual en tres niveles de agregación: a nivel de polígono (\textit{patch}), nivel de categoría (\textit{class}) y nivel de paisaje (\textit{landscape}). Además, se han escogido métricas que calculan operaciones simples, como por ejemplo el área o el perímetro, y por otro lado, métricas cuyos cálculos son más complejos, como por ejemplo la distancia al vecino más próximo o la densidad. El objetivo es encontrar la mayor variedad posible de contratiempos en el desarrollo de nuevas métricas.
 
 % Please add the following required packages to your document preamble:
 % \usepackage{multirow}
@@ -215,7 +220,7 @@ En la tabla \ref{tab:listmetricas} se listan las métricas acompañadas por su a
 \end{table}
 
 
-\section{Implementación/desarrollo de funciones en PostgreSQL}
+\section{Desarrollo de funciones en PostgreSQL}
 
 \begin{graybox}
 \begin{itemize}
@@ -235,23 +240,30 @@ Cuando estas últimas comprobaciones han resultado satisfactorias, se ha procedi
 
 Dentro de las opciones que permite PostgreSQL hay métricas que se han podido implementar como \textbf{funciones simples}, pero en otros casos ha sido necesario crear \textbf{funciones agregadas} más complejas.
 
-Las funciones simples corresponden a las métricas de paisaje a nivel de polígono. Como ejemplo de ello, la métrica de paisaje \textit{Patch Area (AREA)} devuelve la suma del área del polígono dividido por 10.000 para obtener un valor en unidades de hectárea. Como se puede observar en el ejemplo de código (\ref{list:area1}), a partir de la fórmula matemática que calcula esta métrica, se ha construido su consulta SQL.
+\subsubsection{Funciones simples}
+
+Las funciones simples corresponden a las métricas de paisaje a nivel de polígono. Como ejemplo de ello, la métrica de paisaje \textit{Patch Area (AREA)} devuelve la suma del área del polígono dividido por 10.000 para obtener un valor en unidades de hectárea. Como se puede observar en el ejemplo de código (\ref{list:area1}), a partir de la fórmula matemática que calcula esta métrica, se ha construido su consulta SQL, la cual resulta sencilla de leer.
 
 \input{Metodologia/Listings/Query/p_area}\label{list:area1}
 
-A partir de ésta, se ha desarrollado la función la cual sigue una estructura sencilla. Como se observa en el ejemplo de código \ref{list:area2}, la función se estructura por el nombre de la propia función, el tipo de valor que devuelve, la consulta SQL que se ha construido anteriormente y finalmente, un comentario en el que explica lo que la función tiene que devolver como resultado. Como se ha mencionado anteriormente, la función se ha elaborado tanto para \textit{geometry} como para \textit{geography}.
+Una vez escrita una consulta SQL (ejemplo \ref{list:area1}), se puede desarrollar una función de un modo bastante estructurado. Como se observa en el ejemplo de código \ref{list:area2}, la función se define a partir del nombre de la propia función, el tipo de valor que devuelve, la consulta SQL que se ha construido anteriormente y finalmente, un comentario en el que explica lo que la función tiene que devolver como resultado. Como se ha mencionado anteriormente, la función se ha elaborado tanto para \textit{geometry} como para \textit{geography}, ya que PostGIS lo permite.
 
 \input{Metodologia/Listings/FunSimple/p_area}\label{list:area2}
 
-Una vez se ha desarrollado la función, se ha ejecutado un ejemplo de uso (ver ejemplo de código \ref{list:area3}) para obtener el cálculo de la métrica AREA a partir de un conjunto de datos (ver en la figura ref polig area).
+Una vez se ha creado la función, se valida el resultado devuelto a través de un ejemplo de uso. Por ejemplo, en el ejemplo de código \ref{list:area3}) se calcula la métrica AREA a para todo el conjunto de datos de ejemplo.
 
 \input{Metodologia/Listings/SampleUsage/p_area}\label{list:area3}
 
-Sin embargo, las funciones de agregado son distintas a las funciones simples. Éstas corresponden a las métricas de paisaje tanto a nivel de categoría como a nivel de paisaje. En este caso, como ejemplo a nivel de categoría, la métrica de paisaje \textit{Total Core Area (TCA)} devuelve la suma de los núcleos de las áreas (m2) de cada polígono correspondiente al tipo de polígono, dividido por 10.000 (unidades: Hectáreas). Como se puede observar en el ejemplo de código (\ref{list:tca1}), a partir de la fórmula matemática que calcula esta métrica, se ha construido su consulta SQL.
+
+\subsubsection{Funciones de agregación}
+
+No todas las métricas se pueden calcular como funciones simples de PostgreSQL. Las funciones simples aplican un cálculo individualmente a filas o polígonos de la base de datos. Cuando una métrica implica un sumatorio y/o operaciones entre varias filas o polígonos (diversidad, vecindad, etc), entonces es necesario utilizar funciones de agregación. Normalmente, todas las métricas a nivel de categoría o a nivel de paisaje serán funciones de agregación. Por ejemplo, las funciones SUM() o COUNT() de PostgreSQL, son algunas de las más utilizadas, pero \textbf{como se ha dicho en la subsección \ref{subsec:exten} es posible extender PostgreSQL/PostGIS con funciones de agregación propias.}
+
+A modo de ejemplo, la métrica \textit{Total Core Area (TCA)} devuelve la suma de los núcleos de las áreas (m2) de cada polígono, dividido por 10.000 (para obtener Hectáreas). Al igual que en el ejemplo de código \ref{list:area1}, se ha preparado una nueva consulta basada en la función matemática utilizada en FRAGSTATS. En el ejemplo de código (\ref{list:tca1}) se aprecian que en este caso es necesario específicar una \textit{profundidad de borde} (un buffer negativo) para calcular la métrica.
 
 \input{Metodologia/Listings/Query/c_tca}\label{list:tca1}
 
-A partir de ésta, se ha desarrollado la función de agregado. La diferencia que tiene esta función respecto a la de \textit{Patch Area} es que se necesita crear un agregado dentro de la función ya que el resultado que se quería obtener era agrupado según el tipo de categoría. Como se observa en el ejemplo de código \ref{list:tca2}, la función se estructura por el nombre de la propia función, el tipo de valor que devuelve que en este caso será etiquetado el resultado según el tipo cobertura de suelo al que corresponde, la consulta SQL que se ha construido anteriormente desglosada de distinta forma que la anterior ya que se quería obtener el sumatorio del resultado de los polígonos agrupados por categoría, un agregado que forma la estructura del resultado con el valor y la etiqueta de cobertura, y finalmente, un comentario en el que explique qué tiene que devolver como resultado. Como se ha mencionado, la función se ha elaborado tanto para \textit{geometry} como para \textit{geography}.
+A partir de ésta consulta (ver ejemplo \ref{list:tca1}), se ha desarrollado la función de agregado. La diferencia que tiene esta función respecto a la de \textit{Patch Area} es que se necesita crear un agregado dentro de la función ya que el resultado que se quería obtener era agrupado según el tipo de categoría. Como se observa en el ejemplo de código \ref{list:tca2}, la función se estructura por el nombre de la propia función, el tipo de valor que devuelve que en este caso será etiquetado el resultado según el tipo cobertura de suelo al que corresponde, la consulta SQL que se ha construido anteriormente desglosada de distinta forma que la anterior ya que se quería obtener el sumatorio del resultado de los polígonos agrupados por categoría, un agregado que forma la estructura del resultado con el valor y la etiqueta de cobertura, y finalmente, un comentario en el que explique qué tiene que devolver como resultado. Como se ha mencionado, la función se ha elaborado tanto para \textit{geometry} como para \textit{geography}.
 
 \input{Metodologia/Listings/FunAgregado/c_tca}\label{list:tca2}
 
@@ -259,13 +271,19 @@ Una vez se ha desarrollado la función de agregado, se ha ejecutado un ejemplo d
 
 \input{Metodologia/Listings/SampleUsage/c_tca}\label{list:tca3}
 
-En cuanto a las métricas de paisaje a nivel de paisaje también se han desarrollado de tipo agregado para obtener un solo resultado en conjunto de todo el paisaje. A partir de este punto, se han elaborado todas las funciones de las métricas que se han seleccionado en la sección \ref{sec:metricas}.
+En cuanto a las métricas a nivel de paisaje también se han desarrollado de tipo agregado para obtener \textbf{un solo resultado para el conjunto de todo el paisaje}. A partir de este punto, se han elaborado todas las funciones de las métricas que se han seleccionado en la sección \ref{sec:metricas}.
 
-Finalmente, con todas las funciones implementadas, desarrolladas y testeadas, el conjunto de datos del SIOSE 2011 preparado y todos los grids dispuestos en sus diferentes escalas, se ha elaborado una última función para obtener todos los resultados de este trabajo que se encuentran en el capítulo \ref{chap:result} (ver ejemplo de código \ref{list:runtests}).
+\section{Experimento sobre la capacidad de cálculo de \textit{pg\_landmetrics}}
+
+Finalmente, con todas las funciones implementadas, desarrolladas y testeadas sobre el conjunto de datos de ejemplo, resulta sencillo realizar pruebas de rendimiento de la extensión \textit{pg\_landmetrics} sobre el conjunto de datos del SIOSE-2011.
+
+\textbf{Este experimento busca simular la consulta que un usuario podría realizar en un visor web del SIOSE que calculase métricas del paisaje de un modo ágil e interactivo (ver figura \ref{fig:visorweb}).} Cada vez que el usuario hace zoom o se desplaza por el visor Web SIG, se envian consultas sobre las métricas del paisaje para la superficie del mapa visible en ese momento (normalmente será una superficie rectangular). 
+
+El movimiento del usuario se simula a partir de una secuencia de consultas utilizando como referencia los grids descritos en la sección \ref{sec:datos}. En este sentido se ha colaborado en la elaboración de una última función (ajena a la extensión) para automatizar la realización de numerosas consultas sobre el SIOSE-2011 (ver ejemplo de código \ref{list:runtests}). Los resultados de este experimento se explican en el capítulo \ref{chap:result}.
 
 \input{Metodologia/Listings/Results/runtests}\label{list:runtests}
 
-El que realiza esta función concretamente es construir una tabla virtual con los resultados organizados por columnas según la zona de estudio a la que corresponden, el grid sobre el que está intersectado, y los valores de cada métrica en su columna correcta. Luego se ha ejecutado un \textit{script} el cual extrae todos los valores calculados en todas las escalas de referencia en una sola tabla que más adelante se ha extraído como csv para manejar los resultados.
+Esta función construye una tabla virtual con los resultados organizados por columnas según la zona de estudio a la que corresponden (Zaragoza o Alicante), el número de celda sobre el que está intersectado, y los valores de cada métrica en su columna correcta. A continuación se ha ejecutado un \textit{script}, proporcionado por el personal del Laboratorio de Geomática, el cual extrae todos los valores calculados, para todas las escalas de referencia y en una sola tabla en formato CSV.
 
 
 \section{Documentación de la extensión}
@@ -277,11 +295,13 @@ El que realiza esta función concretamente es construir una tabla virtual con lo
 \end{itemize}
 \end{graybox}
 
-La documentación del desarrollo y uso de la extensión es una de las partes más importante de la metodología de este trabajo. Una buena documentación facilita la aplicación de todas las medidas necesarias para llevar a cabo el funcionamiento de la extensión a cualquier usuario, sobretodo a aquellos menos expertos en la materia. Así pues, se han aplicado los siguientes lenguajes de marcado:
+La documentación del desarrollo y uso de la extensión es una de las partes más importante de la metodología de este trabajo. Una buena documentación facilitará el despliegue y aprovechamiento de la extensión a otros usuarios, sobretodo a aquellos menos expertos en la materia. La documentación ha consistido en introducir de manera sistemática comentarios en el código de la extensión (documentación para desarrolladores) y en crear documentos de apoyo (documentación para usuarios).
+
+La documentación de proyectos también se presta a aplicar una metodología de integración continua y a trabajar en plataformas colaborativas. Ha sido necesario aprender a manejar distintos \textbf{lenguajes de marcado} (tipo HTML) para los distintos tipos de documentos:
 
 \begin{itemize}
-\item\textbf{Markdown}\footnote{\url{https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet}} es un lenguaje ligero que permite una escritura sencilla y de fácil lectura usando texto plano. Se ha utilizado para documentar el usp de la extensión.
-\item\textbf{TeX}\footnote{\url{https://www.latex-project.org/}} es el lenguaje que se utiliza en el sistema de textos LaTeX y que crea documentos con una alta calidad tipográfica. Desde hace tiempo este lenguaje se emplea por un gran número de usuarios para escribir artículos o libros científicos. Para trabajar con este lenguaje, se ha utilizado la aplicación Texmaker y se ha utilizado para escribir este trabajo.
-\item\textbf{Scalable Vector Graphics (SVG)}\footnote{\url{https://www.w3schools.com/graphics/svg_intro.asp}} es un lenguaje capaz de crear gráficos basados en vectores escalables de alta calidad de resolución. A partir de este lenguaje se ha desarrollado una función capaz de representar gráficos vectoriales a partir de las geometrías de cualquier geodatabase (ver en el anexo \ref{anex:svg}).
-\item\textbf{Mermaid}\footnote{\url{https://mermaidjs.github.io/}} es un lenguaje que genera gráficos a partir de texto mediante JavaScript. Se han generado desde diagramas de flujo hasta diagramas de secuencia y de Gantt.
+\item\textbf{Markdown para documentación Web}\footnote{\url{https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet}}. Markdown es un lenguaje ligero que permite una escritura sencilla y de fácil lectura usando texto plano. Se ha utilizado para documentar el uso de la extensión en GitHub.
+\item\textbf{TeX para documentación en PDF}\footnote{\url{https://www.latex-project.org/}}. TeX es el lenguaje que se utiliza en el sistema de textos LaTeX y que crea documentos con una alta calidad tipográfica. Desde hace tiempo este lenguaje se emplea por un gran número de usuarios para escribir artículos o libros científicos. Para trabajar con este lenguaje, se ha utilizado la aplicación Texmaker. Este trabajo ha sido creado en formato PDF mediante el uso de estos programas.
+\item\textbf{Scalable Vector Graphics (SVG) para la generación de gráficos vectoriales a partir de las geometrías de PostGIS}\footnote{\url{https://www.w3schools.com/graphics/svg_intro.asp}}. SVG es un lenguaje capaz de crear gráficos basados en vectores escalables de alta calidad de resolución. A partir de este lenguaje se ha desarrollado una función capaz de representar gráficos vectoriales a partir de las geometrías de cualquier geodatabase (ver en el anexo \ref{anex:svg}).
+\item\textbf{Mermaid para la creación de diagramas}.\footnote{\url{https://mermaidjs.github.io/}} Mermaid es un lenguaje que genera gráficos a partir de texto mediante JavaScript. Se han generado desde diagramas de flujo, diagramas de secuencia y de Gantt. Algunos de los cuales se encuentran el la página Web del GitHub.
 \end{itemize}
