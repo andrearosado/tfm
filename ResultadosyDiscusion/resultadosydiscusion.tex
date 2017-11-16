@@ -12,34 +12,58 @@
 \end{itemize}
 \end{graybox}
 
-Intro a los resultados... codigo/commits y caso de uso
 
-En la subsección \ref{sec:pglandmetrics} se describen cuantitativamente las aportaciones realizadas en este proyecto y que corresponden al grueso del presente trabajo. A continuación, en la subsección \ref{sec:caso_uso} se presentan los resultados de un caso de uso o experiencia computacional en el que se pone a prueba la extensión desarrollada. Era importante permitir que los usuarios del SIOSE calculasen métricas de una manera sencilla e intuitiva, pero también que pudiesen manejar un gran volumen de datos que en otras aplicaciones no es posible, como las citadas en el capítulo de \nameref{chap:intro}.
+En este capítulo se presentan los resultados de este trabajo siguiendo una secuencia lógica y utilizando  figuras que ayuden a \textbf{visualizar cómo \textit{pg\_landmetrics} se integra en una aplicación como la descrita en la figura \ref{fig:visorweb}.}
+
+Los resultados de este trabajo son prometedores y apuntan a que sí que se podrían publicar servicios de consulta, cómo el cálculo de las métricas del paisaje, a partir de la base de datos del SIOSE u otras de un volumen o complejidad similares.
+
+En este capítulo también se destacan los  aspectos más novedosos y relevantes de este trabajo, así como las implicaciones de carácter práctico.
+
+En la subsección \ref{sec:pglandmetrics} se describen las aportaciones realizadas al proyecto SIOSE-INNOVA y que corresponden al grueso del presente trabajo. A continuación, en la subsección \ref{sec:caso_uso} se presentan los resultados de un caso de uso o experiencia computacional en el que se ha puesto a prueba la extensión desarrollada. Entre los objetivos de este trabajo era importante permitir que los usuarios del SIOSE calculasen métricas de una manera sencilla e intuitiva, pero también que pudiesen manejar un gran volumen de datos, cosa que en otras aplicaciones muy conocidas no es posible (ver capítulo \nameref{chap:intro}).
 
 \section{pg\_landmetrics \label{sec:pglandmetrics}}
 
-Cuantitativamente, detalles de mi aportación frente al total de la extensión... y para cada una un comentario o valoración personal.
+Una parte importante de este trabajo ha consistido en aprender a colaborar en un equipo de desarrolladores de geodatabases. En la metodología de integración continua aplicada en el Laboratorio de Geomática de la Universidad de Alicante resulta relativamente sencillo hacer un repaso del trabajo realizado en cada fase del proyecto.
+
+El uso de un software de control de versiones como Git y la gestión del proyecto en la plataforma GitHub, hacen posible seguir y analizar las aportaciones que los miembros del proyecto SIOSE-INNOVA han hecho en la extensión \textit{pg\_landmetrics}.
+
+La plataforma GitHub ofrece numerosas estadísticas del trabajo de cada usuario y también de la vitalidad de cada proyecto. Por ejemplo, en la figura \ref{fig:contrib} se puede ver un diagrama de tipo \textit{calendar heatmap} extraido de GitHub, en el que se aprecia el número total de aportaciones al proyecto (\textit{commits}). 
 
 \begin{figure}
 \begin{center}
 \includegraphics[width=\textwidth]{ResultadosyDiscusion/Figs/contributions.png}
-\caption{Título. \label{fig:contrib}}
+\caption{Calendario de actividad y contribuciones de este trabajo al proyecto \textit{pg\_landmetrics} (\textit{heatmap calendar}). \label{fig:contrib}}
 \end{center}
 \end{figure}
 
-\begin{figure}
-\begin{center}
-\includegraphics[width=\textwidth]{ResultadosyDiscusion/Figs/network-1.png}
-\caption{Título. \label{fig:network1}}
-\end{center}
-\end{figure}
+Siguiendo con la figura \ref{fig:contrib}, los colores más intensos indican días de una mayor actividad, siendo el día 26 de julio el día en el que más aportaciones se realizó. Un numero tan grande de aportaciones es normal en la puesta en marcha de un proyecto de este tipo y en particular fue el día en el que se incorporaban sentencias SQL que habían sido testeadas en dias anteriores. Según la complejidad de las métricas o las funciones a desarrollar, hay días con una menor actividad y, en aquellos casos más problematicos, también hay días en los que los desarrollos los hacían otros miembros del equipo y había tiempo de preparar conjuntos de datos de ejemplo, preparar documentación o trabajar en la redacción del presente trabajo.
+
+En total se ha contribuido al proyecto con 211 aportaciones, que posteriormente han sido aceptadas en la mayoría de los casos. El proyecto oficial únicamente muestra 209 contribuciones, pero ambas cifras no están directamente relacionadas. Hay que tener en cuenta que las acciones de \textit{pull request} explicadas en la figura \ref{fig:pullrequest} de la metodología suelen empaquetar varias actualizaciones o \textit{commits} que en el repositorio oficial aparecen como una única aportación. GitHub permite analizar el trabajo y la contribución de cada miembro del equipo de un modo muy minucioso.
+
+El control de versiones sirve para recuperar un punto de trabajo anterior o también para supervisar cómo se ha ido desarrollando un trabajo. Aproximadamente, a partir de la figura \ref{fig:contrib} y otras similares es posible reconstruir las fases principales en que se desarrolló este trabajo. En julio se hizo una revisión bibliográfica y se aprendió a utilizar las herramientas vistas en la metodogía. A finales de julio se seleccionaron y se crearon consultas SQL para calcular la mayoría de las métricas. En agosto se creó un conjunto de datos de ejemplo y se validaron los resultados de cada consulta. En septiembre se convirtieron las consultas en funciones simples y, dado que no todas las métricas se podían implementar del mismo modo, en octubre se modificaron varias funciones para convertirlas en funciones de agregación. Finalmente, en noviembre se realizó el experimento computacional cuyos resultados se muestra en la sección \ref{sec:caso_uso}.
+
+En el diagrama de red de GitHub (ver figura \ref{fig:network}) se puede visualizar el trabajo colaborativo desarrollado desde el principio hasta la realización de la experiencia computacional presentada en este trabajo. Se trata de un diagrama dinámico en el cual se puede consultar el contenido de cada contribución, ya sea la creación de nuevas funciones o cambios. En la figura \ref{fig:network} se pueden ver varios \textit{commits} por parte de distintos colaboradores, una operación de \textit{pull upstream}, cuatro operaciones \textit{push} y una serie de contribuciones propias que aún no habían sido aceptadas por el equipo del proyecto SIOSE-INNOVA. Los colores de las líneas ayudan a interpretar mejor este tipo de diagramas:
+
+\begin{itemize}
+\item La línea negra muestra los \textit{commits} integrados en el repositorio oficial.
+\item Las líneas verdes y azules se refieren a aportaciones de este trabajo que finalmente fueron aceptadas por el equipo del SIOSE-INNOVA.
+\item La línea morada hace referencia a las últimas funciones creadas, pendientes de aceptación al término de este trabajo.
+\end{itemize}
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=\textwidth]{ResultadosyDiscusion/Figs/network-2.png}
-\caption{Título. \label{fig:network2}}
+\includegraphics[width=\textwidth]{ResultadosyDiscusion/Figs/network.png}
+\caption{Diagrama de red de GitHub.  \label{fig:network}}
 \end{center}
 \end{figure}
+
+En cuanto a los resultados concretos de este trabajo, se han desarrollado varias funciones sobre PostgreSQL/PostGIS que calculan métricas del paisaje de distintos tipos. Todas las funciones se han creado por duplicado (\textit{funciones sobrecargadas}) para trabajar con sistemas de coordenadas planas y con coordenadas geográficas. Esta decisión tiene que ver con que en bases de datos tan voluminosas como la del SIOSE, en ocasiones será necesario realizar cálculos con polígonos que se encuentren muy distantes, llegando incluso a representarse en usos o sistemas de referencia espacial distintos. El uso de coordenadas esféricas permite trabajar con una geodatabase sin preocuparse de este tipo de problemas, pero a cambio de poder utilizar un número menor de funciones de PostGIS. No obstante, resulta que todas las métricas seleccionadas a partir de la documentación de FRAGSTATS han podido ser calculadas partiendo del tipo \textit{geography} de PostGIS. Esto hace que las operaciones con el SIOSE resulten más sencillas si no es necesario dividir la base de datos por usos o comunidades autónomas.
+
+En la tabla \ref{tab:metrics-ext} se listan todas las métricas del paisaje implementadas en la extensión. Los colores indican si la métrica se ha podido desarrollar como una función SQL simple o si por el contrario ha sido necesario crear una función de agregación (combinación de varias funciones). 
+
+En esta tabla de resumen también se puede ver que prácticamente todas las consultas se podían calcular manualmente (independientemente de la dificultad) salvo la distancia euclídea al vecino más próximo (ENN; Euclidean Nearest Neighbour Distance). Esta métrica implica numerosos cálculos de distancia entre polígonos, el uso de índices espaciales y la aplicación de una serie de filtros. Evidentemente, el calculo del ENN resultaría muy trabajoso si no se utiliza ningún lenguaje de programación. La consulta SQL para el ENN se realizó de un modo más o menos sencillo. Sin embargo, su implementación como función SQL de agregación está aún siendo revisada por el equipo del SIOSE-INNOVA.
+
+Las métricas marcadas como pendientes de aceptación en la tabla \ref{tab:metrics-ext} devuelven el resultado correcto con el paisaje de ejemplo descrito en este trabajo, por lo que \textbf{es de esperar que pronto pasen a formar parte del repositorio oficial de \textit{pg\_landmetrics}}.
 
 % Please add the following required packages to your document preamble:
 % \usepackage{booktabs}
@@ -47,11 +71,11 @@ Cuantitativamente, detalles de mi aportación frente al total de la extensión..
 % If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
 \begin{table}[]
 \centering
-\caption{Listado de las métricas de paisaje disponibles en la extensión.}
-\label{my-label}
-\begin{tabular}{@{}lllll@{}}
+\caption{Listado de las métricas de paisaje disponibles en la extensión, según su nivel de complejidad y si han sido aceptadas en el repositorio oficial.}
+\label{tab:metrics-ext}
+\begin{tabular}{@{}lcccl@{}}
 \toprule
-\textbf{Métrica} & \textbf{Consulta QGIS} & \textbf{ Consulta SQL} & \textbf{Extensión} \\ \midrule
+\textbf{Métrica} & \textbf{Manual/QGIS} & \textbf{Consulta SQL} & \textbf{\textit{pg\_landmetrics}} \\ \midrule
 \rowcolor[HTML]{F9F9D2}
 AREA                    & \bullet       & \bullet      & \bullet            \\
 \rowcolor[HTML]{F9F9D2}
@@ -105,17 +129,22 @@ SHIDI                   & \bullet       & \bullet      & \circ
 \\ \midrule           
                         &                      &       & 
 \\
-\cellcolor[HTML]{F9F9D2}& Función simple       &       & 
+\cellcolor[HTML]{F9F9D2}Función simple &       &       & 
 \\
-\cellcolor[HTML]{DBF1DA}& Función de agregado  &       & 
+\cellcolor[HTML]{DBF1DA}Función agreg.&   &       & 
 \\
-\bullet                 & Disponible           &       & 
+\bullet \ Aceptada              &         &       & 
 \\
-\circ                   & No disponible        &       & 
+\circ \ Pendiente               &         &       & 
 \\
 \end{tabular}
 \end{table}
 
+
+
+En relación con los objetivos de este trabajo y del proyecto SIOSE-INNOVA, resulta muy significativo el modo en que se han simplificado todas las tareas de desarrollo y cálculo de las métricas del paisaje. Los miembros del equipo de trabajo pueden disponer, en cuestión de minutos, de una versión actualizada de la extensión \textit{pg\_landmetrics} con los últimos cambios realizados por otro compañero. Esta versión actualizada se obtiene mediante la ejecución de un sencillo comando (\textit{docker-compose up}) y viene acompañada de todo el software necesario para trabajar, incluyendo las mismas opciones de configuración utilizadas por todo el equipo. Igualmente, resulta también sencillo trabajar en laboratorio desde un servidor o desde un portatil en casa. Más aún, la tecnología utilizada funciona en los sistemas operativos más utilizados (Linux GNU, Windows o Mac). 
+
+Los usuarios finales de \textit{pg\_landmetrics} o de la base de datos del SIOSE, también verán facilitado su trabajo, ya que las 25 métricas implementadas simplifican en gran medida las consultas necesarias para realizar este tipo de análisis. Por ejemplo, una métrica en apariencia tan sencilla como Total Core Area (TCA) pasa a calcularse en una única línea frente a las más de 20 líneas que serían necesarias en SQL (ver ejemplos de código \ref{lst:tca2} y \ref{lst:tca3}).
 
 
 \section{Caso de uso sobre el SIOSE-2011 \label{sec:caso_uso}}
@@ -124,29 +153,4 @@ SHIDI                   & \bullet       & \bullet      & \circ
 Listing con la consulta final, una única línea frente a las n líneas que serían necesarias en una única consulta SQL.
 
 Figuras correlación entre dos zonas de estudio grandes...
-
-
-Volumen de los datos (TABLA). La base de datos del SIOSE 2011 proporcionada por el equipo nacional del SIOSE era muy voluminosa ()
-
-% Please add the following required packages to your document preamble:
-% \usepackage{booktabs}
-% \usepackage{multirow}
-\begin{table}[]
-\centering
-\caption{Características de los conjuntos de datos utilizados. \label{tab:datos}}
-\begin{tabular}{@{}llll@{}}
-\toprule
-\textbf{Tipo}               & \textbf{Tablas} & \textbf{Filas} & \textbf{Tamaño total} \\ \midrule
-\multirow{4}{*}{SIOSE-2011} & t\_nomes        & 36.790.972     & 6116 MB               \\
-                            & t\_poli\_atrib  & 2.562.800      & 451 MB                \\
-                            & t\_poli\_geo    & 2.562.800      & 3981 MB               \\
-                            & t\_valores      & 10.932.639     & 1041 MB               \\ \midrule
-\multirow{4}{*}{Grids}      & grid\_25k       & 756            & 232,3 kB              \\
-                            & grid\_50k       & 192            & 57,8 kB               \\
-                            & grid\_100k      & 48             & 13,8 kB               \\
-                            & grid\_500k      & 2              & 677bytes              \\ \midrule
-\multirow{2}{*}{Sample}     & sample\_25830   & 51             & 122,6 kB              \\
-                            & sample\_4326    & 51             & 122,5 kB              \\ \bottomrule
-\end{tabular}
-\end{table}
 

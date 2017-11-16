@@ -3,7 +3,6 @@
 %****************************** Metodologia *********************************
 %*******************************************************************************
 
-
 \chapter{Metodología}\label{chap:metod}
 
 Este trabajo aplica una metodología de \textbf{integración continua y desarrollo colaborativo} de acuerdo con los objetivos del proyecto SIOSE-INNOVA y con un marco de trabajo actual aplicado tanto en el Laboratorio de Geomática de la Universidad de Alicante, como por otras empresas conocidas del sector (CARTO, Geographica, entre otros). En \citet{Zaragozi2017} se presentan distintos flujos de trabajo basados en esta metodología, los cuales están muy relacionados con lo que se expone en este capítulo y son de uso frecuente en el Laboratorio de Geomática. En las próximas páginas se presenta un flujo de trabajo para el desarrollo de una extensión de base de datos. No obstante, utilizando la misma metodología se pueden crear y mantener páginas web, realizar simulaciones con modelos geográficos o hasta se pueden crear documentos imprimibles (como este mismo trabajo).
@@ -167,6 +166,30 @@ Como se menciona en la sección \ref{sec:siose}, los polígonos del SIOSE pueden
 Una vez se han reclasificado todos los polígonos del SIOSE-2011, se han obtenido \textbf{\textit{grids}} (cuadrículas cartográficas) para el cálculo de métricas del paisaje a distintas escalas de referencia, a través del Centro de Descargas del Instituto Geográfico Nacional (CNIG)\footnote{\url{http://centrodedescargas.cnig.es/CentroDescargas/index.jsp}}.
 
 A partir del grid 1:500.000 se han escogido dos celdas de las zonas de estudio en las cuales se han calculado algunas métricas de paisaje. Estas dos zonas contienen la mayor parte de las provincias de Alicante y Zaragoza, así como los alrededores de cada una\footnote{Se han escogido estas dos zonas es por hacer referencia al lugar donde se han realizado las prácticas de empresa y dónde se ha cursado el \textit{máster}.}. A continuación se han seleccionado y extraído todas aquellas celdas que comprenden las dos celdas de las áreas de estudio con escala de referencia 1:25.000, 1:50.000 y 1:100.000. A partir de todas estas celdas ha simulado una serie de consultas como las que podrían darse en un visor web. La Figura \ref{fig:visorweb} ayuda a visualizar en que consiste la simulación o experimento que se análiza en el capítulo \ref{chap:result}.
+
+Volumen de los datos (TABLA). La base de datos del SIOSE 2011 proporcionada por el equipo nacional del SIOSE era muy voluminosa ()
+
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+% \usepackage{multirow}
+\begin{table}[]
+\centering
+\caption{Características de los conjuntos de datos utilizados. \label{tab:datos}}
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{Tipo}               & \textbf{Tablas} & \textbf{Filas} & \textbf{Tamaño total} \\ \midrule
+\multirow{4}{*}{SIOSE-2011} & t\_nomes        & 36.790.972     & 6116 MB               \\
+                            & t\_poli\_atrib  & 2.562.800      & 451 MB                \\
+                            & t\_poli\_geo    & 2.562.800      & 3981 MB               \\
+                            & t\_valores      & 10.932.639     & 1041 MB               \\ \midrule
+\multirow{4}{*}{Grids}      & grid\_25k       & 756            & 232,3 kB              \\
+                            & grid\_50k       & 192            & 57,8 kB               \\
+                            & grid\_100k      & 48             & 13,8 kB               \\
+                            & grid\_500k      & 2              & 677bytes              \\ \midrule
+\multirow{2}{*}{Sample}     & sample\_25830   & 51             & 122,6 kB              \\
+                            & sample\_4326    & 51             & 122,5 kB              \\ \bottomrule
+\end{tabular}
+\end{table}
 
 
 \section{Selección de métricas}\label{sec:metricas}
