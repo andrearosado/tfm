@@ -152,8 +152,13 @@ Los usuarios finales de \textit{pg\_landmetrics} o de la base de datos del SIOSE
 
 La puesta a prueba de la extensión \textit{pg\_landmetrics} ha permitido obtener una experiencia computacional al adquirir resultados de un caso de uso a partir del conjunto de datos del SIOSE 2011, descrito en el capítulo \ref{chap:metod}. Además, se ha mostrado que en una única consulta SQL ha servido para obtener todos los resultados necesarios. Es cierto que en un principio se desarrolló otra consulta que tenía 55 líneas frente a la consulta final que tiene 21 líneas como se muestra en el ejemplo de código \ref{list:runtests}.
 
-Al aplicar este experimento a partir de la consulta SQL, se han extraído los resultados de las métricas \textit{Patch Area (AREA)}, \textit{Total (Class) Area (CA)} y \textit{Total Area (TCA)} en diferentes escalas de referencia. Exponer la tabla de los valores obtenidos puede tener gran complejidad a la hora de su interpretación. Por ello se han representado en una serie de figuras/mapas para mostrarlos de forma más sencilla y visual. Los resultados están representados mediante el método de clasificación de desviación estándar que muestra los valores medios en rangos iguales. 
+Al aplicar este experimento a partir de la consulta SQL, se han extraído los resultados de las métricas \textit{Patch Area (AREA)}, \textit{Total (Class) Area (CA)} y \textit{Total Area (TCA)} en diferentes escalas de referencia. Exponer la tabla de los valores obtenidos puede tener gran complejidad a la hora de su interpretación. Por ello se han representado en una serie de figuras/mapas para mostrarlos de forma más sencilla y visual. 
 
+Los resultados están representados mediante el método de clasificación de desviación estándar que muestra los valores medios en rangos iguales; aquellos valores que se encuentren alejados de la media están representandos de color naranja (aquellas celdas que presentan un área menor) y morado (aquellas celdas con un área mayor).
+
+En la figura \ref{fig:p_25}, calculada la métrica Patch Area (AREA), se puede realizar una comparación entre las distintas zonas de estudio. Este ejemplo presenta una semejanza entre los distintos paisajes. Sin embargo, en la parte derecha superior de la zona de Zaragoza se presenta una anomalía. Si se observa con más detalle, la celda de color morado más oscuro presenta unos valores más altos por encima de la media. Esto se debe a que la intersección de la celda con los polígonos haga que se calculen todos los polígonos que se encuentren dentro más aquellos polígonos donde alguna de sus partes se encuentre dentro de la respectiva celda. Por este motivo, esta celda presenta un alto valor ya que dentro de esta celda se encuentran 6 polígonos con una gran extensión (ver figura \ref{fig:ejemplo}). 
+
+Este sería uno de los ejemplos para el cálculo de AREA a nivel de polígono, donde aquellas anomalías que distingan de un paisaje a otro sea por casos como el que una celda le pertencen muchos polígonos cuyos valores de sus áreas son altos. Este tipo de fenómenos son los que caracterizan y diferencian unos paisajes de otros.
 
 \begin{figure}
 \begin{center}
@@ -161,6 +166,17 @@ Al aplicar este experimento a partir de la consulta SQL, se han extraído los re
 \caption{Calendario de actividad y contribuciones de este trabajo al proyecto \textit{pg\_landmetrics} (\textit{heatmap calendar}). \label{fig:p_25}}
 \end{center}
 \end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=\textwidth]{ResultadosyDiscusion/Figs/ejemplo.png}
+\caption{Calendario de actividad y contribuciones de este trabajo al proyecto \textit{pg\_landmetrics} (\textit{heatmap calendar}). \label{fig:ejemplo}}
+\end{center}
+\end{figure}
+
+Por otro lado, se ha querido mostrar el cálculo del área a nivel de categoría. Para ello se han seleccionado algunas que pertenezcan a la clase de forestal como: prados (290), pastizal (300), frondosas caducifolias (312), frondosas perennifolias (313), coníferas (316) y matorral (320). Cabe mencionar que la elaboración de esta clasificación de ocupación del suelo queda explicada en el capítulo \ref{chap:metod}.
+
+
 
 \begin{figure}
 \begin{center}
