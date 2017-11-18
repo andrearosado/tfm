@@ -65,19 +65,6 @@ En esta tabla de resumen también se puede ver que prácticamente todas las cons
 
 Las métricas marcadas como pendientes de aceptación en la tabla \ref{tab:metrics-ext} devuelven el resultado correcto con el paisaje de ejemplo descrito en este trabajo, por lo que \textbf{es de esperar que pronto pasen a formar parte del repositorio oficial de \textit{pg\_landmetrics}}.
 
-\begin{figure}
-\begin{center}
-\includegraphics[width=\textwidth]{ResultadosyDiscusion/Figs/Results/p_25.png}
-\caption{Calendario de actividad y contribuciones de este trabajo al proyecto \textit{pg\_landmetrics} (\textit{heatmap calendar}). \label{fig:p_25}}
-\end{center}
-\end{figure}
-
-\begin{figure}
-\begin{center}
-\includegraphics[width=\textwidth]{ResultadosyDiscusion/Figs/Results/c_25.png}
-\caption{Calendario de actividad y contribuciones de este trabajo al proyecto \textit{pg\_landmetrics} (\textit{heatmap calendar}). \label{fig:c_25}}
-\end{center}
-\end{figure}
 
 % Please add the following required packages to your document preamble:
 % \usepackage{booktabs}
@@ -163,8 +150,21 @@ Los usuarios finales de \textit{pg\_landmetrics} o de la base de datos del SIOSE
 
 \section{Caso de uso sobre el SIOSE-2011 \label{sec:caso_uso}}
 
+La puesta a prueba de la extensión \textit{pg\_landmetrics} ha permitido obtener una experiencia computacional al adquirir resultados de un caso de uso a partir del conjunto de datos del SIOSE 2011, descrito en el capítulo \ref{chap:metod}. Además, se ha mostrado que en una única consulta SQL ha servido para obtener todos los resultados necesarios. Es cierto que en un principio se desarrolló otra consulta que tenía 55 líneas frente a la consulta final que tiene 21 líneas como se muestra en el ejemplo de código \ref{list:runtests}.
 
-Listing con la consulta final, una única línea frente a las n líneas que serían necesarias en una única consulta SQL.
+Al aplicar este experimento a partir de la consulta SQL, se han extraído los resultados de las métricas \textit{Patch Area (AREA)}, \textit{Total (Class) Area (CA)} y \textit{Total Area (TCA)} en diferentes escalas de referencia. Exponer la tabla de los valores obtenidos puede tener gran complejidad a la hora de su interpretación. Por ello se han representado en una serie de figuras/mapas para mostrarlos de forma más sencilla y visual. 
 
-Figuras correlación entre dos zonas de estudio grandes...
 
+\begin{figure}
+\begin{center}
+\includegraphics[width=\textwidth]{ResultadosyDiscusion/Figs/Results/p_25.png}
+\caption{Calendario de actividad y contribuciones de este trabajo al proyecto \textit{pg\_landmetrics} (\textit{heatmap calendar}). \label{fig:p_25}}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=\textwidth]{ResultadosyDiscusion/Figs/Results/c_25.png}
+\caption{Calendario de actividad y contribuciones de este trabajo al proyecto \textit{pg\_landmetrics} (\textit{heatmap calendar}). \label{fig:c_25}}
+\end{center}
+\end{figure}
