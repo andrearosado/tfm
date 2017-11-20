@@ -1242,7 +1242,7 @@ wish to left align your text}
   \begin{minipage}[c]{\textwidth}
     \begin{center}
       \large \submissiontext \par
-      \large \textit {\@degreetitle} \par
+      \large {\@degreetitle} \par
     \end{center}
   \end{minipage}
 \end{lrbox}
@@ -1293,6 +1293,9 @@ wish to left align your text}
 \usepackage{graphicx}
 \setlength{\parskip}{0.3cm}
 \usepackage{colortbl}
+\usepackage[export]{adjustbox}
+\usepackage{subcaption}
+\usepackage[dvipsnames]{xcolor}
 
 \makeatletter
 \def\@makechapterhead#1{%
