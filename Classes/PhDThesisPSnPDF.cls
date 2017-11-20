@@ -1365,3 +1365,5 @@ language=SQL,                % choose the language of the code
  numbersep=14pt,
  breaklines=true
 }}{}
+
+\newcommand{\pgland}{\textit{pg\_landmetrics}}
