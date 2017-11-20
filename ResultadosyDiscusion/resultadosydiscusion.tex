@@ -6,14 +6,14 @@
 
 \begin{graybox}
 \begin{itemize}
-\item El principal resultado de este trabajo es la extensión pg\_landmetrics, en la cual se ha colaborado en un importante porcentaje de funcionalidades (\textit{commits}).
+\item El principal resultado de este trabajo es la extensión \pgland{}, en la cual se ha colaborado en un importante porcentaje de funcionalidades (\textit{commits}).
 \item Las métricas implementadas en forma de funciones se han validado sistemáticamente para asegurar que devuelven el resultado correcto.
 \item Se ha desarrollado un caso de uso completo basado en la aplicación propuesta en la introducción (ver Figura \ref{fig:visorweb}) con el que se han obtenido resultados prometedores (\textit{usabilidad} y volumen).
 \end{itemize}
 \end{graybox}
 
 
-En este capítulo se presentan los resultados de este trabajo siguiendo una secuencia lógica y utilizando  figuras que ayuden a \textbf{visualizar cómo \textit{pg\_landmetrics} se integra en una aplicación como la descrita en la figura \ref{fig:visorweb}.}
+En este capítulo se presentan los resultados de este trabajo siguiendo una secuencia lógica y utilizando  figuras que ayuden a \textbf{visualizar cómo \pgland{} se integra en una aplicación como la descrita en la figura \ref{fig:visorweb}.}
 
 Los resultados de este trabajo son prometedores y apuntan a que sí que se podrían publicar servicios de consulta, cómo el cálculo de las métricas del paisaje, a partir de la base de datos del SIOSE u otras de un volumen o complejidad similares.
 
@@ -21,18 +21,18 @@ En este capítulo también se destacan los  aspectos más novedosos y relevantes
 
 En la subsección \ref{sec:pglandmetrics} se describen las aportaciones realizadas al proyecto SIOSE-INNOVA y que corresponden al grueso del presente trabajo. A continuación, en la subsección \ref{sec:caso_uso} se presentan los resultados de un caso de uso o experiencia computacional en el que se ha puesto a prueba la extensión desarrollada. Entre los objetivos de este trabajo era importante permitir que los usuarios del SIOSE calculasen métricas de una manera sencilla e intuitiva, pero también que pudiesen manejar un gran volumen de datos, cosa que en otras aplicaciones muy conocidas no es posible (ver capítulo \nameref{chap:intro}).
 
-\section{pg\_landmetrics \label{sec:pglandmetrics}}
+\section{\pgland{} \label{sec:pglandmetrics}}
 
 Una parte importante de este trabajo ha consistido en aprender a colaborar en un equipo de desarrolladores de geodatabases. En la metodología de integración continua aplicada en el Laboratorio de Geomática de la Universidad de Alicante resulta relativamente sencillo hacer un repaso del trabajo realizado en cada fase del proyecto.
 
-El uso de un software de control de versiones como Git y la gestión del proyecto en la plataforma GitHub, hacen posible seguir y analizar las aportaciones que los miembros del proyecto SIOSE-INNOVA han hecho en la extensión \textit{pg\_landmetrics}.
+El uso de un software de control de versiones como Git y la gestión del proyecto en la plataforma GitHub, hacen posible seguir y analizar las aportaciones que los miembros del proyecto SIOSE-INNOVA han hecho en la extensión \pgland{}.
 
 La plataforma GitHub ofrece numerosas estadísticas del trabajo de cada usuario y también de la vitalidad de cada proyecto. Por ejemplo, en la figura \ref{fig:contrib} se puede ver un diagrama de tipo \textit{calendar heatmap} extraido de GitHub, en el que se aprecia el número total de aportaciones al proyecto (\textit{commits}). 
 
 \begin{figure}
 \begin{center}
 \includegraphics[width=\textwidth]{ResultadosyDiscusion/Figs/contributions.png}
-\caption{Calendario de actividad y contribuciones de este trabajo al proyecto \textit{pg\_landmetrics} (\textit{heatmap calendar}). \label{fig:contrib}}
+\caption{Calendario de actividad y contribuciones de este trabajo al proyecto \pgland{} (\textit{heatmap calendar}). \label{fig:contrib}}
 \end{center}
 \end{figure}
 
@@ -63,7 +63,7 @@ En la tabla \ref{tab:metrics-ext} se listan todas las métricas del paisaje impl
 
 En esta tabla de resumen también se puede ver que prácticamente todas las consultas se podían calcular manualmente (independientemente de la dificultad) salvo la distancia euclídea al vecino más próximo (ENN; Euclidean Nearest Neighbour Distance). Esta métrica implica numerosos cálculos de distancia entre polígonos, el uso de índices espaciales y la aplicación de una serie de filtros. Evidentemente, el calculo del ENN resultaría muy trabajoso si no se utiliza ningún lenguaje de programación. La consulta SQL para el ENN se realizó de un modo más o menos sencillo. Sin embargo, su implementación como función SQL de agregación está aún siendo revisada por el equipo del SIOSE-INNOVA.
 
-Las métricas marcadas como pendientes de aceptación en la tabla \ref{tab:metrics-ext} devuelven el resultado correcto con el paisaje de ejemplo descrito en este trabajo, por lo que \textbf{es de esperar que pronto pasen a formar parte del repositorio oficial de \textit{pg\_landmetrics}}.
+Las métricas marcadas como pendientes de aceptación en la tabla \ref{tab:metrics-ext} devuelven el resultado correcto con el paisaje de ejemplo descrito en este trabajo, por lo que \textbf{es de esperar que pronto pasen a formar parte del repositorio oficial de \pgland{}}.
 
 
 % Please add the following required packages to your document preamble:
@@ -76,7 +76,7 @@ Las métricas marcadas como pendientes de aceptación en la tabla \ref{tab:metri
 \label{tab:metrics-ext}
 \begin{tabular}{@{}lcccl@{}}
 \toprule
-\textbf{Métrica} & \textbf{Manual/QGIS} & \textbf{Consulta SQL} & \textbf{\textit{pg\_landmetrics}} \\ \midrule
+\textbf{Métrica} & \textbf{Manual/QGIS} & \textbf{Consulta SQL} & \textbf{\pgland{}} \\ \midrule
 \rowcolor[HTML]{F9F9D2}
 AREA                    & \bullet       & \bullet      & \bullet            \\
 \rowcolor[HTML]{F9F9D2}
@@ -143,13 +143,13 @@ SHIDI                   & \bullet       & \bullet      & \circ
 
 
 
-En relación con los objetivos de este trabajo y del proyecto SIOSE-INNOVA, resulta muy significativo el modo en que se han simplificado todas las tareas de desarrollo y cálculo de las métricas del paisaje. Los miembros del equipo de trabajo pueden disponer, en cuestión de minutos, de una versión actualizada de la extensión \textit{pg\_landmetrics} con los últimos cambios realizados por otro compañero. Esta versión actualizada se obtiene mediante la ejecución de un sencillo comando (\textit{docker-compose up}) y viene acompañada de todo el software necesario para trabajar, incluyendo las mismas opciones de configuración utilizadas por todo el equipo. Igualmente, resulta también sencillo trabajar en laboratorio desde un servidor o desde un portatil en casa. Más aún, la tecnología utilizada funciona en los sistemas operativos más utilizados (Linux GNU, Windows o Mac). 
+En relación con los objetivos de este trabajo y del proyecto SIOSE-INNOVA, resulta muy significativo el modo en que se han simplificado todas las tareas de desarrollo y cálculo de las métricas del paisaje. Los miembros del equipo de trabajo pueden disponer, en cuestión de minutos, de una versión actualizada de la extensión \pgland{} con los últimos cambios realizados por otro compañero. Esta versión actualizada se obtiene mediante la ejecución de un sencillo comando (\textit{docker-compose up}) y viene acompañada de todo el software necesario para trabajar, incluyendo las mismas opciones de configuración utilizadas por todo el equipo. Igualmente, resulta también sencillo trabajar en laboratorio desde un servidor o desde un portatil en casa. Más aún, la tecnología utilizada funciona en los sistemas operativos más utilizados (Linux GNU, Windows o Mac). 
 
-Los usuarios finales de \textit{pg\_landmetrics} o de la base de datos del SIOSE, también verán facilitado su trabajo, ya que las 25 métricas implementadas simplifican en gran medida las consultas necesarias para realizar este tipo de análisis. Por ejemplo, una métrica en apariencia tan sencilla como Total Core Area (TCA) pasa a calcularse en una única línea frente a las más de 20 líneas que serían necesarias en SQL (ver ejemplos de código \ref{lst:tca2} y \ref{lst:tca3}).
+Los usuarios finales de \pgland{} o de la base de datos del SIOSE, también verán facilitado su trabajo, ya que las 25 métricas implementadas simplifican en gran medida las consultas necesarias para realizar este tipo de análisis. Por ejemplo, una métrica en apariencia tan sencilla como Total Core Area (TCA) pasa a calcularse en una única línea frente a las más de 20 líneas que serían necesarias en SQL (ver ejemplos de código \ref{lst:tca2} y \ref{lst:tca3}).
 
 \section{Caso de uso sobre el SIOSE-2011 \label{sec:caso_uso}}
 
-Los objetivos de este trabajo incluyen la realización de una experiencia computacional sobre una geodatabase voluminosa. Se trata de poner a prueba la extensión \textit{pg\_landmetrics} (y las tecnologías sobre las que trabaja) para valorar si sería posible ofrecer un servicio de consultas sobre el SIOSE similar al descrito en la figura \ref{fig:visorweb} de este trabajo. Este caso de uso se ha descrito en detalle en el capítulo \ref{chap:metod}. El experimento completo se ha lanzado a partir de una única consulta SQL (ver ejemplo de código \ref{list:runtests}).
+Los objetivos de este trabajo incluyen la realización de una experiencia computacional sobre una geodatabase voluminosa. Se trata de poner a prueba la extensión \pgland{} (y las tecnologías sobre las que trabaja) para valorar si sería posible ofrecer un servicio de consultas sobre el SIOSE similar al descrito en la figura \ref{fig:visorweb} de este trabajo. Este caso de uso se ha descrito en detalle en el capítulo \ref{chap:metod}. El experimento completo se ha lanzado a partir de una única consulta SQL (ver ejemplo de código \ref{list:runtests}).
 
 En este experimento se calculan las métricas \textit{Patch Area (AREA)}, \textit{Total (Class) Area (CA)} y \textit{Total Area (TCA)} a diferentes escalas de referencia y se recuperan sus resultados junto con los tiempos de cálculo. Los resultados de este experimento pueden visualizarse en las figuras incluidas en esta sección y en el Anexo \ref{anex:results}. En estas figuras se ven las dos zonas cuya estructura se quiere comparar (zonas de Alicante y Zaragoza), cada celda representada se correspondería con una operación de \textit{zoom} o desplazamiento de un usuario dentro de un visor web.
 
