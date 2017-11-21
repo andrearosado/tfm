@@ -1296,6 +1296,8 @@ wish to left align your text}
 \usepackage[export]{adjustbox}
 \usepackage{subcaption}
 \usepackage[dvipsnames]{xcolor}
+\usepackage{setspace}
+
 
 \makeatletter
 \def\@makechapterhead#1{%

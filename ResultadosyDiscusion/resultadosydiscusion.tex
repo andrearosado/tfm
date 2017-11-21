@@ -19,7 +19,7 @@ Los resultados de este trabajo son prometedores y apuntan a que sí que se podr�
 
 En este capítulo también se destacan los  aspectos más novedosos y relevantes de este trabajo, así como las implicaciones de carácter práctico.
 
-En la subsección \ref{sec:pglandmetrics} se describen las aportaciones realizadas al proyecto SIOSE-INNOVA y que corresponden al grueso del presente trabajo. A continuación, en la subsección \ref{sec:caso_uso} se presentan los resultados de un caso de uso o experiencia computacional en el que se ha puesto a prueba la extensión desarrollada. Entre los objetivos de este trabajo era importante permitir que los usuarios del SIOSE calculasen métricas de una manera sencilla e intuitiva, pero también que pudiesen manejar un gran volumen de datos, cosa que en otras aplicaciones muy conocidas no es posible (ver capítulo \nameref{chap:intro}).
+En la sección \ref{sec:pglandmetrics} se describen las aportaciones realizadas al proyecto SIOSE-INNOVA y que corresponden al grueso del presente trabajo. A continuación, en la sección \ref{sec:caso_uso} se presentan los resultados de un caso de uso o experiencia computacional en el que se ha puesto a prueba la extensión desarrollada. Entre los objetivos de este trabajo era importante permitir que los usuarios del SIOSE calculasen métricas de una manera sencilla e intuitiva, pero también que pudiesen manejar un gran volumen de datos, cosa que en otras aplicaciones muy conocidas no es posible (ver capítulo \nameref{chap:intro}).
 
 \section{\pgland{} \label{sec:pglandmetrics}}
 
@@ -36,7 +36,7 @@ La plataforma GitHub ofrece numerosas estadísticas del trabajo de cada usuario 
 \end{center}
 \end{figure}
 
-Siguiendo con la figura \ref{fig:contrib}, los colores más intensos indican días de una mayor actividad, siendo el día 26 de julio el día en el que más aportaciones se realizó. Un numero tan grande de aportaciones es normal en la puesta en marcha de un proyecto de este tipo y en particular fue el día en el que se incorporaban sentencias SQL que habían sido testeadas en dias anteriores. Según la complejidad de las métricas o las funciones a desarrollar, hay días con una menor actividad y, en aquellos casos más problematicos, también hay días en los que los desarrollos los hacían otros miembros del equipo y había tiempo de preparar conjuntos de datos de ejemplo, preparar documentación o trabajar en la redacción del presente trabajo.
+Siguiendo con la figura \ref{fig:contrib}, los colores más intensos indican días de una mayor actividad, siendo el día 26 de julio el día en el que más aportaciones se realizó. Un número tan grande de aportaciones es normal en la puesta en marcha de un proyecto de este tipo y en particular fue el día en el que se incorporaban sentencias SQL que habían sido testeadas en días anteriores. Según la complejidad de las métricas o las funciones a desarrollar, hay días con una menor actividad y, en aquellos casos más problemáticos, también hay días en los que los desarrollos los hacían otros miembros del equipo y había tiempo de preparar conjuntos de datos de ejemplo, preparar documentación o trabajar en la redacción del presente trabajo.
 
 En total se ha contribuido al proyecto con 211 aportaciones, que posteriormente han sido aceptadas en la mayoría de los casos. El proyecto oficial únicamente muestra 209 contribuciones, pero ambas cifras no están directamente relacionadas. Hay que tener en cuenta que las acciones de \textit{pull request} explicadas en la figura \ref{fig:pullrequest} de la metodología suelen empaquetar varias actualizaciones o \textit{commits} que en el repositorio oficial aparecen como una única aportación. GitHub permite analizar el trabajo y la contribución de cada miembro del equipo de un modo muy minucioso.
 
@@ -57,14 +57,11 @@ En el diagrama de red de GitHub (ver figura \ref{fig:network}) se puede visualiz
 \end{center}
 \end{figure}
 
-En cuanto a los resultados concretos de este trabajo, se han desarrollado varias funciones sobre PostgreSQL/PostGIS que calculan métricas del paisaje de distintos tipos. Todas las funciones se han creado por duplicado (\textit{funciones sobrecargadas}) para trabajar con sistemas de coordenadas planas y con coordenadas geográficas. Esta decisión tiene que ver con que en bases de datos tan voluminosas como la del SIOSE, en ocasiones será necesario realizar cálculos con polígonos que se encuentren muy distantes, llegando incluso a representarse en usos o sistemas de referencia espacial distintos. El uso de coordenadas esféricas permite trabajar con una geodatabase sin preocuparse de este tipo de problemas, pero a cambio de poder utilizar un número menor de funciones de PostGIS. No obstante, resulta que todas las métricas seleccionadas a partir de la documentación de FRAGSTATS han podido ser calculadas partiendo del tipo \textit{geography} de PostGIS. Esto hace que las operaciones con el SIOSE resulten más sencillas si no es necesario dividir la base de datos por usos o comunidades autónomas.
+En cuanto a los resultados concretos de este trabajo, se han desarrollado 25 funciones sobre PostgreSQL/PostGIS que calculan métricas del paisaje de distintos tipos (a nivel de polígonos, a nivel de categorías y a nivel de paisaje). Todas las funciones se han creado por duplicado (\textit{funciones sobrecargadas}) para trabajar con sistemas de coordenadas planas y con coordenadas geográficas. Esta decisión tiene que ver con que en bases de datos tan voluminosas como la del SIOSE, en ocasiones será necesario realizar cálculos con polígonos que se encuentren muy distantes, llegando incluso a representarse en usos o sistemas de referencia espacial distintos. El uso de coordenadas esféricas permite trabajar con una geodatabase sin preocuparse de este tipo de problemas, pero a cambio de poder utilizar un número menor de funciones de PostGIS. No obstante, resulta que todas las métricas seleccionadas a partir de la documentación de FRAGSTATS han podido ser calculadas partiendo del tipo \textit{geography} de PostGIS. Esto hace que las operaciones con el SIOSE resulten más sencillas si no es necesario dividir la base de datos por usos o comunidades autónomas.
+
+A parte de todas las funciones de cada una de las métricas seleccionadas, se han desarrollado dos funciones tipo ya que así nos permite obtener los resultados estructurados, es decir, que el valor obtenido vaya acompañado de su etiqueta y de las unidades correspondientes. Además esto a facilitado el trabajo a la hora de simplificar las funciones de tipo agregado ya que a cada métrica y unidad de valor le correspondía un identificador único. Por otra parte, hay que tener en cuenta que también se ha tenido que desarrollar unas consultas test SQL para realizar el experimento y obtener resultados representativos que quedan expuestos en la sección \ref{sec:caso_uso} y la función final la cual nos permite obtener todos los resultados en una sola secuencia (ver la sección \ref{sec:exp}).
 
 En la tabla \ref{tab:metrics-ext} se listan todas las métricas del paisaje implementadas en la extensión. Los colores indican si la métrica se ha podido desarrollar como una función SQL simple o si por el contrario ha sido necesario crear una función de agregación (combinación de varias funciones). 
-
-En esta tabla de resumen también se puede ver que prácticamente todas las consultas se podían calcular manualmente (independientemente de la dificultad) salvo la distancia euclídea al vecino más próximo (ENN; Euclidean Nearest Neighbour Distance). Esta métrica implica numerosos cálculos de distancia entre polígonos, el uso de índices espaciales y la aplicación de una serie de filtros. Evidentemente, el calculo del ENN resultaría muy trabajoso si no se utiliza ningún lenguaje de programación. La consulta SQL para el ENN se realizó de un modo más o menos sencillo. Sin embargo, su implementación como función SQL de agregación está aún siendo revisada por el equipo del SIOSE-INNOVA.
-
-Las métricas marcadas como pendientes de aceptación en la tabla \ref{tab:metrics-ext} devuelven el resultado correcto con el paisaje de ejemplo descrito en este trabajo, por lo que \textbf{es de esperar que pronto pasen a formar parte del repositorio oficial de \pgland{}}.
-
 
 % Please add the following required packages to your document preamble:
 % \usepackage{booktabs}
@@ -141,11 +138,15 @@ SHIDI                   & \bullet       & \bullet      & \circ
 \end{tabular}
 \end{table}
 
+En esta tabla de resumen también se puede ver que prácticamente todas las consultas se podían calcular manualmente (independientemente de la dificultad) salvo la distancia euclídea al vecino más próximo (ENN; Euclidean Nearest Neighbour Distance). Esta métrica implica numerosos cálculos de distancia entre polígonos, el uso de índices espaciales y la aplicación de una serie de filtros. Evidentemente, el cálculo del ENN resultaría muy trabajoso si no se utiliza ningún lenguaje de programación. La consulta SQL para el ENN se realizó de un modo más o menos sencillo. Sin embargo, su implementación como función SQL de agregación está aún siendo revisada por el equipo del SIOSE-INNOVA.
 
+Las métricas marcadas como pendientes de aceptación en la tabla \ref{tab:metrics-ext} devuelven el resultado correcto con el paisaje de ejemplo descrito en este trabajo, por lo que \textbf{es de esperar que pronto pasen a formar parte del repositorio oficial de \pgland{}}.
 
 En relación con los objetivos de este trabajo y del proyecto SIOSE-INNOVA, resulta muy significativo el modo en que se han simplificado todas las tareas de desarrollo y cálculo de las métricas del paisaje. Los miembros del equipo de trabajo pueden disponer, en cuestión de minutos, de una versión actualizada de la extensión \pgland{} con los últimos cambios realizados por otro compañero. Esta versión actualizada se obtiene mediante la ejecución de un sencillo comando (\textit{docker-compose up}) y viene acompañada de todo el software necesario para trabajar, incluyendo las mismas opciones de configuración utilizadas por todo el equipo. Igualmente, resulta también sencillo trabajar en laboratorio desde un servidor o desde un portatil en casa. Más aún, la tecnología utilizada funciona en los sistemas operativos más utilizados (Linux GNU, Windows o Mac). 
 
 Los usuarios finales de \pgland{} o de la base de datos del SIOSE, también verán facilitado su trabajo, ya que las 25 métricas implementadas simplifican en gran medida las consultas necesarias para realizar este tipo de análisis. Por ejemplo, una métrica en apariencia tan sencilla como Total Core Area (TCA) pasa a calcularse en una única línea frente a las más de 20 líneas que serían necesarias en SQL (ver ejemplos de código \ref{lst:tca2} y \ref{lst:tca3}).
+
+Así mismo, la extensión \pgland{} está 
 
 \section{Caso de uso sobre el SIOSE-2011 \label{sec:caso_uso}}
 
@@ -181,13 +182,5 @@ A parte de la representación visual de los resultados, otro aspecto importante 
 \begin{center}
 \includegraphics[width=\textwidth]{ResultadosyDiscusion/Figs/Results/c_25.png}
 \caption{Resultado de la métrica CA en la zona de Alicante y Zaragoza a partir del grid 1:25.000. \label{fig:c_25}}
-\end{center}
-\end{figure}
-
-
-\begin{figure}
-\begin{center}
-\includegraphics[width=\textwidth]{ResultadosyDiscusion/Figs/visor-final.png}
-\caption{Ejemplo de comparación de estructuras de paisaje a partir del SIOSE mediante el visor cartográfico . \label{fig:visor-final}}
 \end{center}
 \end{figure}
