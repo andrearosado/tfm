@@ -264,32 +264,32 @@ Dentro de las opciones que permite PostgreSQL hay métricas que se han podido im
 
 \subsubsection{Funciones simples}
 
-Las funciones simples corresponden a las métricas de paisaje a nivel de polígono. Como ejemplo de ello, la métrica de paisaje \textit{Patch Area (AREA)} devuelve la suma del área del polígono dividido por 10.000 para obtener un valor en unidades de hectárea. Como se puede observar en el ejemplo de código (\ref{list:area1}), a partir de la fórmula matemática que calcula esta métrica, se ha construido su consulta SQL, la cual resulta sencilla de leer.
+Las funciones simples corresponden a las métricas de paisaje a nivel de polígono. Como ejemplo de ello, la métrica de paisaje \textit{Patch Area (AREA)} devuelve la suma del área del polígono dividido por 10.000 para obtener un valor en unidades de hectárea. Como se puede observar en el ejemplo de código (\ref{area1}), a partir de la fórmula matemática que calcula esta métrica, se ha construido su consulta SQL, la cual resulta sencilla de leer.
 
-\input{Metodologia/Listings/Query/p_area}\label{list:area1}
+\input{Metodologia/Listings/Query/p_area}
 
-Una vez escrita una consulta SQL (ejemplo \ref{list:area1}), se puede desarrollar una función de un modo bastante estructurado. Como se observa en el ejemplo de código \ref{list:area2}, la función se define a partir del nombre de la propia función, el tipo de valor que devuelve, la consulta SQL que se ha construido anteriormente y finalmente, un comentario en el que explica lo que la función tiene que devolver como resultado. Como se ha mencionado anteriormente, la función se ha elaborado tanto para \textit{geometry} como para \textit{geography}, ya que PostGIS lo permite.
+Una vez escrita una consulta SQL (ejemplo \ref{area1}), se puede desarrollar una función de un modo bastante estructurado. Como se observa en el ejemplo de código \ref{area2}, la función se define a partir del nombre de la propia función, el tipo de valor que devuelve, la consulta SQL que se ha construido anteriormente y finalmente, un comentario en el que explica lo que la función tiene que devolver como resultado. Como se ha mencionado anteriormente, la función se ha elaborado tanto para \textit{geometry} como para \textit{geography}, ya que PostGIS lo permite.
 
-\input{Metodologia/Listings/FunSimple/p_area}\label{list:area2}
+\input{Metodologia/Listings/FunSimple/p_area}
 
-Una vez se ha creado la función, se valida el resultado devuelto a través de un ejemplo de uso. Por ejemplo, en el ejemplo de código \ref{list:area3}) se calcula la métrica AREA a para todo el conjunto de datos de ejemplo.
+Una vez se ha creado la función, se valida el resultado devuelto a través de un ejemplo de uso. Por ejemplo, en el ejemplo de código \ref{area3}) se calcula la métrica AREA a para todo el conjunto de datos de ejemplo.
 
-\input{Metodologia/Listings/SampleUsage/p_area}\label{list:area3}
+\input{Metodologia/Listings/SampleUsage/p_area}
 
 
 \subsubsection{Funciones de agregación}
 
 No todas las métricas se pueden calcular como funciones simples de PostgreSQL. Las funciones simples aplican un cálculo individualmente a filas o polígonos de la base de datos. Cuando una métrica implica un sumatorio y/o operaciones entre varias filas o polígonos (diversidad, vecindad, etc), entonces es necesario utilizar funciones de agregación. Normalmente, todas las métricas a nivel de categoría o a nivel de paisaje serán funciones de agregación. Por ejemplo, las funciones SUM() o COUNT() de PostgreSQL, son algunas de las más utilizadas, pero \textbf{como se ha dicho en la subsección \ref{subsec:exten} es posible extender PostgreSQL/PostGIS con funciones de agregación propias.}
 
-A modo de ejemplo, la métrica \textit{Total Core Area (TCA)} devuelve la suma de los núcleos de las áreas (m2) de cada polígono, dividido por 10.000 (para obtener Hectáreas). Al igual que en el ejemplo de código \ref{list:area1}, se ha preparado una nueva consulta basada en la función matemática utilizada en FRAGSTATS. En el ejemplo de código (\ref{list:tca1}) se aprecian que en este caso es necesario específicar una \textit{profundidad de borde} (un buffer negativo) para calcular la métrica.
+A modo de ejemplo, la métrica \textit{Total Core Area (TCA)} devuelve la suma de los núcleos de las áreas (m2) de cada polígono, dividido por 10.000 (para obtener Hectáreas). Al igual que en el ejemplo de código \ref{area1}, se ha preparado una nueva consulta basada en la función matemática utilizada en FRAGSTATS. En el ejemplo de código (\ref{tca1}) se aprecian que en este caso es necesario específicar una \textit{profundidad de borde} (un buffer negativo) para calcular la métrica.
 
-\input{Metodologia/Listings/Query/c_tca}\label{list:tca1}
+\input{Metodologia/Listings/Query/c_tca}
 
-A partir de ésta consulta (ver ejemplo \ref{list:tca1}), se ha desarrollado la función de agregado. La diferencia que tiene esta función respecto a la de \textit{Patch Area} es que se necesita crear un agregado dentro de la función ya que el resultado que se quería obtener era agrupado según el tipo de categoría. Como se observa en el ejemplo de código \ref{list:tca2}, la función se estructura por el nombre de la propia función, el tipo de valor que devuelve que en este caso será etiquetado el resultado según el tipo cobertura de suelo al que corresponde, la consulta SQL que se ha construido anteriormente desglosada de distinta forma que la anterior ya que se quería obtener el sumatorio del resultado de los polígonos agrupados por categoría, un agregado que forma la estructura del resultado con el valor y la etiqueta de cobertura, y finalmente, un comentario en el que explique qué tiene que devolver como resultado. Como se ha mencionado, la función se ha elaborado tanto para \textit{geometry} como para \textit{geography}.
+A partir de ésta consulta (ver ejemplo \ref{tca1}), se ha desarrollado la función de agregado. La diferencia que tiene esta función respecto a la de \textit{Patch Area} es que se necesita crear un agregado dentro de la función ya que el resultado que se quería obtener era agrupado según el tipo de categoría. Como se observa en el ejemplo de código \ref{tca2}, la función se estructura por el nombre de la propia función, el tipo de valor que devuelve que en este caso será etiquetado el resultado según el tipo cobertura de suelo al que corresponde, la consulta SQL que se ha construido anteriormente desglosada de distinta forma que la anterior ya que se quería obtener el sumatorio del resultado de los polígonos agrupados por categoría, un agregado que forma la estructura del resultado con el valor y la etiqueta de cobertura, y finalmente, un comentario en el que explique qué tiene que devolver como resultado. Como se ha mencionado, la función se ha elaborado tanto para \textit{geometry} como para \textit{geography}.
 
-\input{Metodologia/Listings/FunAgregado/c_tca}\label{list:tca2}
+\input{Metodologia/Listings/FunAgregado/c_tca}
 
-Una vez se ha desarrollado la función de agregado, se ha ejecutado un ejemplo de uso (ver ejemplo de código \ref{list:tca3}) para obtener el cálculo de la métrica TCA a partir de un conjunto de datos (ver en la figura \ref{fig:fig_ejemplo}).
+Una vez se ha desarrollado la función de agregado, se ha ejecutado un ejemplo de uso (ver ejemplo de código \ref{tca3}) para obtener el cálculo de la métrica TCA a partir de un conjunto de datos (ver en la figura \ref{fig:fig_ejemplo}).
 
 \begin{figure}
 \begin{center}
@@ -298,7 +298,7 @@ Una vez se ha desarrollado la función de agregado, se ha ejecutado un ejemplo d
 \end{center}
 \end{figure}
 
-\input{Metodologia/Listings/SampleUsage/c_tca}\label{list:tca3}
+\input{Metodologia/Listings/SampleUsage/c_tca}
 
 En cuanto a las métricas a nivel de paisaje también se han desarrollado de tipo agregado para obtener \textbf{un solo resultado para el conjunto de todo el paisaje}. A partir de este punto, se han elaborado todas las funciones de las métricas que se han seleccionado en la sección \ref{sec:metricas}.
 
