@@ -146,7 +146,7 @@ En relación con los objetivos de este trabajo y del proyecto SIOSE-INNOVA, resu
 
 Los usuarios finales de \pgland{} o de la base de datos del SIOSE, también verán facilitado su trabajo, ya que las 25 métricas implementadas simplifican en gran medida las consultas necesarias para realizar este tipo de análisis. Por ejemplo, una métrica en apariencia tan sencilla como Total Core Area (TCA) pasa a calcularse en una única línea frente a las más de 20 líneas que serían necesarias en SQL (ver ejemplos de código \ref{lst:tca2} y \ref{lst:tca3}).
 
-Así mismo, la extensión \pgland{} está 
+Así mismo, todo el código fuente de la extensión \pgland{} está disponible en el repositorio\footnote{\url{https://github.com/siose-innova/pg_landmetrics}} para que cualquier usuario pueda utilizar, comprobar y realizar experimentos con cualquier geodatabase de ocupación del suelo.
 
 \section{Caso de uso sobre el SIOSE-2011 \label{sec:caso_uso}}
 
@@ -174,7 +174,7 @@ En la figura \ref{fig:p_25}, se muestran todos los cálculos de la métrica Patc
 
 Por otro lado, se ha querido mostrar el resultado del cálculo del área a nivel de categoría. Para ello se han seleccionado algunas que pertenezcan a la clase de forestal como: prados (290), pastizal (300), frondosas caducifolias (312), frondosas perennifolias (313), coníferas (316) y matorral (320). Cabe mencionar que la elaboración de esta clasificación de ocupación del suelo queda explicada en el capítulo \ref{chap:metod}. En la figura \ref{fig:c_25}, calculada la métrica Total (Class) Area (CA), a raíz de la selección de las categorías anteriores se puede apreciar aproximadamente la disposición del relieve donde en las zonas más interiores se encuentran los polígonos con mayor área.
 
-A parte de la representación visual de los resultados, otro aspecto importante es el tiempo de ejecución de todas las consultas SQL que se han realizado para cada una de las zonas con sus respectivas métricas y grids. A modo de síntesis, la métrica a nivel de paisaje presenta un tiempo menor respecto a las otras como también es el caso de la zona de Zaragoza respecto a la zona de Alicante. Esto puede ser motivo a que alguna de las dos zonas tenga que ejecutar la consulta para un número menor de polígonos o según la complejidad que presente el cálculo de la métrica de paisaje. Todo los resultados y tiempos se encuentran en el anexo \ref{anex:results}.
+Otro aspecto importante es el tiempo de ejecución que conllevan todas las consultas SQL que se han realizado para obtener los resultados que se han representado de forma más visual y de ejemplo que se encuentran en el anexo \ref{anex:results}. Con todos los tiempos extraídos, se observa que el número de polígonos que intersectan en la zona de estudio siempre dependerá del tiempo que pueda tardar en ejecutarse una consulta SQL. Aunque si es cierto que también puede depender del número de observaciones, en este caso celdas, que tenga la zona de estudio, al igual que el cálculo de cada métrica ya que algunas son menos complejas que otras.
 
 
 
