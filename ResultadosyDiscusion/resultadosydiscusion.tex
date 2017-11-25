@@ -164,13 +164,6 @@ En la figura \ref{fig:p_25}, se muestran todos los cálculos de la métrica Patc
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=\textwidth]{ResultadosyDiscusion/Figs/Results/p_25.png}
-\caption{Resultado de la métrica AREA en la zona de Alicante y Zaragoza a partir del grid 1:25.000. \label{fig:p_25}}
-\end{center}
-\end{figure}
-
-\begin{figure}
-\begin{center}
 \includegraphics[width=\textwidth]{ResultadosyDiscusion/Figs/ejemplo.png}
 \caption{Ejemplo de anomalía en la zona de Zaragoza. \label{fig:ejemplo}}
 \end{center}
@@ -183,10 +176,70 @@ Otro aspecto importante es el tiempo de ejecución que conllevan todas las consu
 Por otra parte, observando con más detalle, los tiempos de ejecución no son largos gracias a que se ha trabajado mediante un ordenador de sobremesa cuyo sistema es Ubuntu 17.10 y con un tamaño de 1,2 TB de disco. Esto ha permitido que los procesos tarden menos en ejecutarse, ya que con una máquina con tamaño de disco menor es posible que los tiempos de ejecución y consultas SQL tarden en ejecutarse y mostrar los reslutados deseados como también trabajar sobre geodatabases de gran volumen y complejas como es la del SIOSE.
 
 
+\begin{figure}
+  \centering
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{ResultadosyDiscusion/Figs/Results/p_25.pdf}
+    \caption{Grid 1:25.000}
+    \label{fig:p_25}   
+  \end{subfigure}             
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{ResultadosyDiscusion/Figs/Results/p_50.pdf}
+    \caption{Grid 1:50.000}
+    \label{fig:p_50}
+  \end{subfigure}             
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{ResultadosyDiscusion/Figs/Results/p_100.pdf}
+    \caption{Grid 1:100.000}
+    \label{fig:p_100}
+  \end{subfigure}
+  
+  \caption{Resultado de la métrica AREA en la zona de Alicante y Zaragoza a partir de distintos \textit{grids}.}
+  \label{fig:p_area}
+  \end{figure}
+
 
 \begin{figure}
-\begin{center}
-\includegraphics[width=\textwidth]{ResultadosyDiscusion/Figs/Results/c_25.png}
-\caption{Resultado de la métrica CA en la zona de Alicante y Zaragoza a partir del grid 1:25.000. \label{fig:c_25}}
-\end{center}
+  \centering
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{ResultadosyDiscusion/Figs/Results/c_25.pdf}
+    \caption{Grid 1:25.000}
+    \label{fig:c_25}   
+  \end{subfigure}             
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{ResultadosyDiscusion/Figs/Results/c_50.pdf}
+    \caption{Grid 1:50.000}
+    \label{fig:c_50}
+  \end{subfigure}             
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{ResultadosyDiscusion/Figs/Results/c_100.pdf}
+    \caption{Grid 1:100.000}
+    \label{fig:c_100}
+  \end{subfigure}
+  
+  \caption{Resultado de la métrica CA en la zona de Alicante y Zaragoza a partir de distintos \textit{grids}.}
+  \label{fig:c_area}
+  \end{figure}
+
+
+\begin{figure}
+  \centering
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{ResultadosyDiscusion/Figs/Results/l_25.pdf}
+    \caption{Grid 1:25.000}
+    \label{fig:l_25}   
+  \end{subfigure}             
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{ResultadosyDiscusion/Figs/Results/l_50.pdf}
+    \caption{Grid 1:50.000}
+    \label{fig:l_50}
+  \end{subfigure}             
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{ResultadosyDiscusion/Figs/Results/l_100.pdf}
+    \caption{Grid 1:100.000}
+    \label{fig:l_100}
+  \end{subfigure}
+  
+  \caption{Resultado de la métrica TA en la zona de Alicante y Zaragoza a partir de distintos \textit{grids}.}
+  \label{fig:l_area}
 \end{figure}
