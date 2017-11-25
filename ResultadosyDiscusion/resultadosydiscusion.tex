@@ -42,18 +42,12 @@ En total se ha contribuido al proyecto con 211 aportaciones, que posteriormente 
 
 El control de versiones sirve para recuperar un punto de trabajo anterior o también para supervisar cómo se ha ido desarrollando un trabajo. Aproximadamente, a partir de la figura \ref{fig:contrib} y otras similares es posible reconstruir las fases principales en que se desarrolló este trabajo. En julio se hizo una revisión bibliográfica y se aprendió a utilizar las herramientas vistas en la metodogía. A finales de julio se seleccionaron y se crearon consultas SQL para calcular la mayoría de las métricas. En agosto se creó un conjunto de datos de ejemplo y se validaron los resultados de cada consulta. En septiembre se convirtieron las consultas en funciones simples y, dado que no todas las métricas se podían implementar del mismo modo, en octubre se modificaron varias funciones para convertirlas en funciones de agregación. Finalmente, en noviembre se realizó el experimento computacional cuyos resultados se muestra en la sección \ref{sec:caso_uso}.
 
-En el diagrama de red de GitHub (ver figura \ref{fig:network}) se puede visualizar el trabajo colaborativo desarrollado desde el principio hasta la realización de la experiencia computacional presentada en este trabajo. Se trata de un diagrama dinámico en el cual se puede consultar el contenido de cada contribución, ya sea la creación de nuevas funciones o cambios. En la figura \ref{fig:network} se pueden ver varios \textit{commits} por parte de distintos colaboradores, una operación de \textit{pull upstream}, cuatro operaciones \textit{push} y una serie de contribuciones propias que aún no habían sido aceptadas por el equipo del proyecto SIOSE-INNOVA. Los colores de las líneas ayudan a interpretar mejor este tipo de diagramas:
-
-\begin{itemize}
-\item La línea negra muestra los \textit{commits} integrados en el repositorio oficial.
-\item Las líneas verdes y azules se refieren a aportaciones de este trabajo que finalmente fueron aceptadas por el equipo del SIOSE-INNOVA.
-\item La línea morada hace referencia a las últimas funciones creadas, pendientes de aceptación al término de este trabajo.
-\end{itemize}
+En el diagrama de red de GitHub (ver figura \ref{fig:network}) se puede visualizar el trabajo colaborativo desarrollado desde el principio hasta la realización de la experiencia computacional presentada en este trabajo. Se trata de un diagrama dinámico en el cual se puede consultar el contenido de cada contribución, ya sea la creación de nuevas funciones o cambios. En la figura \ref{fig:network} se pueden ver varios \textit{commits} por parte de distintos colaboradores, una operación de \textit{pull upstream}, cuatro operaciones \textit{push} y una serie de contribuciones propias que aún no habían sido aceptadas por el equipo del proyecto SIOSE-INNOVA.
 
 \begin{figure}
 \begin{center}
 \includegraphics[width=\textwidth]{ResultadosyDiscusion/Figs/network.png}
-\caption{Diagrama de red de GitHub. Fuente: \url{https://github.com/andrearosado/pg_landmetrics}. \label{fig:network}}
+\caption{Diagrama de red de GitHub; línea negra (\textit{commits} integrados en el repositorio oficial), verde y azul (aportaciones de este trabajo acepatadas por el equipo) y morada (últimas funciones creadas, pendientes de aceptación). Fuente: \url{https://github.com/andrearosado/pg_landmetrics}. \label{fig:network}}
 \end{center}
 \end{figure}
 
@@ -65,7 +59,7 @@ Esta decisión tiene que ver con que en bases de datos tan voluminosas como la d
 
 A parte de todas las funciones de cada una de las métricas seleccionadas, se han desarrollado dos funciones tipo ya que así permite obtener los resultados estructurados, es decir, que el valor obtenido vaya acompañado de su etiqueta a la métrica que corresponde, a la categoría a la que pertenece y de las unidades correspondientes. Además esto ha facilitado el trabajo a la hora de simplificar las funciones de tipo agregado ya que a cada métrica y unidad de valor le corresponde un identificador único. Por otra parte, hay que tener en cuenta que también se ha tenido que desarrollar unas consultas test SQL para realizar el experimento y obtener resultados representativos que quedan expuestos en la sección \ref{sec:caso_uso} y la función final la cual nos permite obtener todos los resultados en una sola secuencia (ver la sección \ref{sec:exp}). 
 
-En la tabla \ref{tab:metrics-ext} se listan todas las métricas del paisaje implementadas en la extensión. Los colores indican si la métrica se ha podido desarrollar como una función SQL simple o si por el contrario ha sido necesario crear una función de agregación (combinación de varias funciones). 
+En la tabla \ref{tab:metrics-ext} se listan todas las métricas del paisaje implementadas en la extensión. Los colores indican si la métrica se ha podido desarrollar como una función SQL simple o si por el contrario ha sido necesario crear una función de agregación (combinación de varias funciones) La primera columna corresponde a cuáles son las métricas que se han comprobado de forma manual desde la aplicación de QGIS como también la segunda columna pero este caso desde PgAdmin a partir de consultas SQL. Finalmente, la última corresponde a cuáles son aquellas métricas de paisaje que están aceptadas y pendientes en la extensión \pgland{}. 
 
 % Please add the following required packages to your document preamble:
 % \usepackage{booktabs}
@@ -133,7 +127,7 @@ SHIDI                   & \bullet       & \bullet      & \circ
 \\
 \cellcolor[HTML]{F9F9D2}Función simple &       &       & 
 \\
-\cellcolor[HTML]{DBF1DA}Función agreg.&   &       & 
+\cellcolor[HTML]{DBF1DA}Función agregación&   &       & 
 \\
 \bullet \ Aceptada              &         &       & 
 \\
@@ -160,20 +154,13 @@ En este experimento se calculan las métricas \textit{Patch Area (AREA)}, \texti
 
 En estas figuras, los resultados están representados mediante el método de clasificación de desviación estándar que muestra los valores medios en rangos iguales; aquellos valores que se encuentren más alejados de la media están representandos por distinto colores, naranja para aquellas celdas que presentan un valor menor, y morado para aquellas celdas con un valor mayor. En todas las figuras también es posible ver el tiempo total de cálculo para cada zona, es decir para varias operaciones de cálculo.
 
-En la figura \ref{fig:p_25}, se muestran todos los cálculos de la métrica Patch Area (AREA), de modo que se pueden comparar las dos zonas de estudio a escala 1:25.000. Este ejemplo presenta una estructura similar entre las dos zonas. Sin embargo, al noreste de la zona de Zaragoza se ve una peculiaridad. Si se observa con más detalle, la celda de color morado más oscuro presenta unos valores significativamente por encima de la media. Esto se debe a que la intersección de la celda con los polígonos del SIOSE afecta a 6 polígonos de una considerable extensión (ver figura \ref{fig:ejemplo}). Por lo tanto, es lógico que el cálculo realizado devuelva un valor tan elevado. De este modo, el cálculo de AREA a nivel de polígono puede utilizarse para interpretar la estructura del paisaje de un modo rápido. Allí donde se den anomalías que distingan un paisaje del otro estará relacionado con la presencia de polígonos relativamente extensos.
+En la figura \ref{fig:p_area}, se muestran todos los cálculos de la métrica Patch Area (AREA), de modo que se pueden comparar las dos zonas de estudio a escala 1:25.000. Este ejemplo presenta una estructura similar entre las dos zonas. Sin embargo, al noreste de la zona de Zaragoza se ve una peculiaridad. Si se observa con más detalle, la celda de color morado más oscuro presenta unos valores significativamente por encima de la media. Esto se debe a que la intersección de la celda con los polígonos del SIOSE afecta a 6 polígonos de una considerable extensión (ver figura \ref{fig:anomalia}). Por lo tanto, es lógico que el cálculo realizado devuelva un valor tan elevado. De este modo, el cálculo de AREA a nivel de polígono puede utilizarse para interpretar la estructura del paisaje de un modo rápido. Allí donde se den anomalías que distingan un paisaje del otro estará relacionado con la presencia de polígonos relativamente extensos.
 
-\begin{figure}
-\begin{center}
-\includegraphics[width=\textwidth]{ResultadosyDiscusion/Figs/ejemplo.png}
-\caption{Ejemplo de anomalía en la zona de Zaragoza. \label{fig:ejemplo}}
-\end{center}
-\end{figure}
+Por otro lado, se ha querido mostrar el resultado del cálculo del área a nivel de categoría. Para ello se han seleccionado algunas que pertenezcan a la clase de forestal como: prados (290), pastizal (300), frondosas caducifolias (312), frondosas perennifolias (313), coníferas (316) y matorral (320). Cabe mencionar que la elaboración de esta clasificación de ocupación del suelo queda explicada en el capítulo \ref{chap:metod}. En la figura \ref{fig:c_area}, calculada la métrica Total (Class) Area (CA), a raíz de la selección de las categorías anteriores se puede apreciar aproximadamente la disposición del relieve donde en las zonas más interiores se encuentran los polígonos con mayor área.
 
-Por otro lado, se ha querido mostrar el resultado del cálculo del área a nivel de categoría. Para ello se han seleccionado algunas que pertenezcan a la clase de forestal como: prados (290), pastizal (300), frondosas caducifolias (312), frondosas perennifolias (313), coníferas (316) y matorral (320). Cabe mencionar que la elaboración de esta clasificación de ocupación del suelo queda explicada en el capítulo \ref{chap:metod}. En la figura \ref{fig:c_25}, calculada la métrica Total (Class) Area (CA), a raíz de la selección de las categorías anteriores se puede apreciar aproximadamente la disposición del relieve donde en las zonas más interiores se encuentran los polígonos con mayor área.
+Otro aspecto importante es el tiempo de ejecución que conllevan todas las consultas SQL que se han realizado para obtener la representación de los resultados de ejemplo. Con todos los tiempos extraídos, se observa que el número de polígonos que intersectan en la zona de estudio siempre dependerá del tiempo que pueda tardar en ejecutarse una consulta SQL. Aunque si es cierto que también puede depender del número de observaciones, en este caso de celdas, que tenga la zona de estudio al igual que el cálculo de cada métrica ya que algunas son menos complejas que otras. 
 
-Otro aspecto importante es el tiempo de ejecución que conllevan todas las consultas SQL que se han realizado para obtener los resultados que se han representado de forma más visual y de ejemplo que se encuentran en el anexo \ref{anex:results}. Con todos los tiempos extraídos, se observa que el número de polígonos que intersectan en la zona de estudio siempre dependerá del tiempo que pueda tardar en ejecutarse una consulta SQL. Aunque si es cierto que también puede depender del número de observaciones, en este caso de celdas, que tenga la zona de estudio al igual que el cálculo de cada métrica ya que algunas son menos complejas que otras. 
-
-Por otra parte, observando con más detalle, los tiempos de ejecución no son largos gracias a que se ha trabajado mediante un ordenador de sobremesa cuyo sistema es Ubuntu 17.10 y con un tamaño de 1,2 TB de disco. Esto ha permitido que los procesos tarden menos en ejecutarse, ya que con una máquina con tamaño de disco menor es posible que los tiempos de ejecución y consultas SQL tarden en ejecutarse y mostrar los reslutados deseados como también trabajar sobre geodatabases de gran volumen y complejas como es la del SIOSE.
+Por otra parte, y con más detalle, los tiempos de ejecución no son largos gracias a que se ha trabajado a partir un ordenador de sobremesa como se describe en la sección \ref{sec:exp}. Esto ha permitido que los procesos tarden menos en ejecutarse, ya que con un ordenador de sobremesa con unas características menores, es posible que los tiempos de ejecución y consultas SQL tarden en ejecutarse y mostrar los reslutados deseados como también trabajar sobre geodatabases de gran volumen y complejas como es la del SIOSE.
 
 
 \begin{figure}
@@ -199,6 +186,33 @@ Por otra parte, observando con más detalle, los tiempos de ejecución no son la
   \end{figure}
 
 
+
+
+
+
+\begin{figure}
+  \centering
+  \begin{subfigure}[b]{0.7\textwidth}
+    \includegraphics[width=\textwidth]{ResultadosyDiscusion/Figs/anomalia_zaragoza.pdf}
+    \caption{Zona de Zaragoza}
+    \label{fig:p_25}   
+  \end{subfigure}             
+  \begin{subfigure}[b]{0.7\textwidth}
+    \includegraphics[width=\textwidth]{ResultadosyDiscusion/Figs/anomalia_alicante.pdf}
+    \caption{Zona de Alicante}
+    \label{fig:p_50}
+  \end{subfigure}             
+  
+  \caption{Ejemplos de anomalías en el cálculo de la métrica AREA a partir del grid 1:25.000.}
+  \label{fig:anomalia}
+  \end{figure}
+
+
+
+
+
+
+
 \begin{figure}
   \centering
   \begin{subfigure}[b]{0.4\textwidth}
@@ -220,6 +234,11 @@ Por otra parte, observando con más detalle, los tiempos de ejecución no son la
   \caption{Resultado de la métrica CA en la zona de Alicante y Zaragoza a partir de distintos \textit{grids}.}
   \label{fig:c_area}
   \end{figure}
+
+
+
+
+
 
 
 \begin{figure}
