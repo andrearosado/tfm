@@ -15,7 +15,6 @@ Este trabajo aplica una metodología de \textbf{integración continua y desarrol
 \item El trabajo colaborativo se ha coordinado utilizando \textit{Git} que es el sistema de \textbf{control de versiones} más popular de los últimos años (p.ej. utilizado en PostGIS, QGIS, CARTO y centenares de proyectos de ESRI, entre muchos otros).
 \item La \textbf{contenerización o \textit{dockers}} es una novedosa tecnología para la virtualización de software/servicios, frente a la virtualización de sistemas operativos (p.ej. máquinas virtuales). La \textit{orquestación de dockers} permite organizar complejos sistemas de información con muchas facilidades.
 \item PostgreSQL/PostGIS es la \textit{geodatabase libre} más potente del mercado, destacando por sus opciones de \textbf{extensibilidad} (p.ej. PostGIS en sí misma es una extensión de PostgreSQL).
-\item Este trabajo ha sido redactado, editado y formateado utilizando las mismas plataformas de desarrollo utilizadas para desarrollar la extensión \pgland{} (\textit{git y dockers}).
 \end{itemize}
 \end{graybox}
 
@@ -34,12 +33,12 @@ El control de versiones se aplica hoy en día en muchas plataformas de uso cotid
 
 \begin{itemize}
 \item\textbf{Git}\footnote{La documentación referente a Git está disponible a través de la página oficial del proyecto (\url{https://git-scm.com/}).} es un sistema de control para el mantenimiento de versiones de código fuente de archivos. Git se ha convertido en la opción más popular de los últimos años y es utilizado por muchos proyectos como por ejemplo PostGIS, QGIS, CARTO y centenares de proyectos de ESRI, entre otros también muy conocidos. El control de versiones se realiza mediante una serie de verbos o instrucciones intuitivas como \textit{clone} (clonar un repositorio), \textit{pull} (traer cambios), \textit{push} (enviar cambios), \textit{add} (añadir nuevos ficheros) o \textit{commit} (registrar cambios en local), entre otras opciones menos habituales.
-\item\textbf{GitHub}\footnote{La documentación de GitHub muestra distintos flujos de trabajo con Git así como documentación para distintas aplicaciones. Por ejemplo, es posible utilizar GitHub para crear una página web o una wiki (\url{https://github.com/}).} es una plataforma de desarrollo colaborativo que alberga proyectos y almacena el código fuente utilizando el sistema de control de versiones de \textit{Git}. Esto quiere decir que muchas de las tareas de Git pueden realizarse desde un navegador de Web de un modo sencillo. Además, GitHub es completamente gratuito a condición de que el código sea público, lo cual no es un problema en proyectos de software libre. En otras circunstancias, también existen otras plataformas similares como Bitbucket\footnote{\href{https://bitbucket.org}{https://bitbucket.org}} o GitLab\footnote{\href{https://about.gitlab.com/}{https://about.gitlab.com/}} con las que es posible que los repositorios privados sean gratuitos.
+\item\textbf{GitHub}\footnote{La documentación de GitHub muestra distintos flujos de trabajo con Git así como documentación para distintas aplicaciones. Por ejemplo, es posible utilizar GitHub para crear una página web o una wiki (\url{https://github.com/}).} es una plataforma de desarrollo colaborativo que alberga proyectos y almacena el código fuente utilizando el sistema de control de versiones de \textit{Git}. Esto quiere decir que muchas de las tareas de Git pueden realizarse desde un navegador de Web de un modo sencillo. Además, GitHub es completamente gratuito a condición de que el código sea público, lo cual no es un problema en proyectos de software libre. En otras circunstancias, también existen otras plataformas similares como Bitbucket\footnote{\url{https://bitbucket.org}} o GitLab\footnote{\url{https://about.gitlab.com/}} con las que es posible que los repositorios privados sean gratuitos.
 \end{itemize}
 
 \begin{figure}
 \includegraphics[width=\textwidth]{Metodologia/Figs/postgis-github}
-\caption{Estadísticas de la comunidad de desarrolladores de PostGIS en la plataforma GitHub. Paul Ramsey es un desarrollador muy activo también en foros de usuarios. \label{fig:postgis-github}}
+\caption{Estadísticas de la comunidad de desarrolladores de PostGIS en la plataforma GitHub. Paul Ramsey es un desarrollador muy activo también en foros de usuarios. Fuente: \url{https://github.com/postgis/postgis}. \label{fig:postgis-github}}
 \end{figure}
 
 La extensión \pgland{}, principal objetivo de este trabajo, ha sido desarrollada y alojada en un repositorio personal y público en GitHub\footnote{\url{https://github.com/andrearosado/pg_landmetrics}}. Cuando se crean nuevas partes de la extensión, y funcionan correctamente, se proponen cambios al repositorio oficial del proyecto SIOSE-INNOVA\footnote{\url{https://github.com/siose-innova/pg_landmetrics}} y, si el resto de los colaboradores están de acuerdo, estos cambios pasan a formar parte de la versión oficial del proyecto.
@@ -90,7 +89,7 @@ El trabajo con \textit{Dockers} es similar al trabajo con Git. Existen una serie
 
 El uso de \textit{dockers} permite aplicar una metodología de integración continua a la hora de desarrollar e implementar una extensión como \pgland{} (ver la figura \ref{fig:ci}). El usuario no necesita trabajar directamente con \textit{dockers} sino que se puede automatizar en gran medida utilizando \textit{docker-compose}. Gracias a un \textit{software de orquestación} las pruebas sucesivas de la extensión se pueden realizar con un número mínimo de comandos: \textit{docker-compose build, up y down}
 
-\textit{docker-compose build} se utiliza únicamente si la extensión ha sido modificada (p. ej. al añadir una nueva métrica). En caso contrario no sería necesario volver a construir todos los contenedores, solamente se utilizaría el comando \textit{docker-compose up} para lanzar la última versión de la extensión. En el proyecto actual, la instrucción \textit{docker-compose up} se ocupa de lanzar dos contenedores: PostgreSQL/PostGIS y PgAdmin4. Una vez han sido lanzados dichos contenedores y se han recibido las notificaciones de que la conexión ha tenido éxito, \textbf{el usuario ya dispone de la última versión del SGBD con la última versión de \pgland{} instalada y acceso a los datos de ejemplo, todo ello con \textit{una única intrucción}}. Durante la \textit{orquestación} el SGBS y PgAdmin4 quedan conectados y configurados para empezar a trabajar en nuevas métricas del paisaje, las nuevas funciones creadas quedan guardadas en el sistema y es posible operar con Git como se ha explicado en la subsección \ref{subsec:control}. Una vez modificada la extensión y guardados los cambios en el control de versiones, todo el software utilizado se \textit{desinstala o se desmonta} con una única instrucción (\textit{docker-compose down}).
+El comando \textit{docker-compose build} se utiliza únicamente si la extensión ha sido modificada (p. ej. al añadir una nueva métrica). En caso contrario no sería necesario volver a construir todos los contenedores, solamente se utilizaría el comando \textit{docker-compose up} para lanzar la última versión de la extensión. En el proyecto actual, la instrucción \textit{docker-compose up} se ocupa de lanzar dos contenedores: PostgreSQL/PostGIS y PgAdmin4. Una vez han sido lanzados dichos contenedores y se han recibido las notificaciones de que la conexión ha tenido éxito, \textbf{el usuario ya dispone de la última versión del SGBD con la última versión de \pgland{} instalada y acceso a los datos de ejemplo, todo ello con \textit{una única intrucción}}. Durante la \textit{orquestación} el SGBS y PgAdmin4 quedan conectados y configurados para empezar a trabajar en nuevas métricas del paisaje, las nuevas funciones creadas quedan guardadas en el sistema y es posible operar con Git como se ha explicado en la subsección \ref{subsec:control}. Una vez modificada la extensión y guardados los cambios en el control de versiones, todo el software utilizado se \textit{desinstala o se desmonta} con una única instrucción (\textit{docker-compose down}).
 
 \begin{figure}
 \begin{center}
@@ -125,7 +124,7 @@ La preparación de datos de ejemplo y la visualización de las consultas realiza
 \begin{figure}
 \begin{center}
 \includegraphics[width=\textwidth]{Metodologia/Figs/carga-siose-2011.png}
-\caption{Vista de la interfaz web de PgAdmin4. \label{fig:carga}}
+\caption{Vista de la interfaz web de PgAdmin4. Fuente: \url{http://localhost:5050/browser/}. \label{fig:carga}}
 \end{center}
 \end{figure}
 
@@ -165,7 +164,7 @@ Como se menciona en la sección \ref{sec:siose}, los polígonos del SIOSE pueden
 
 Una vez se han reclasificado todos los polígonos del SIOSE-2011, se han obtenido \textbf{\textit{grids}} (cuadrículas cartográficas) para el cálculo de métricas del paisaje a distintas escalas de referencia, a través del Centro de Descargas del Instituto Geográfico Nacional (CNIG)\footnote{\url{http://centrodedescargas.cnig.es/CentroDescargas/index.jsp}}.
 
-A partir del grid 1:500.000 se han escogido dos celdas de las zonas de estudio en las cuales se han calculado algunas métricas de paisaje. Estas dos zonas contienen la mayor parte de las provincias de Alicante y Zaragoza, así como los alrededores de cada una\footnote{Se han escogido estas dos zonas es por hacer referencia al lugar donde se han realizado las prácticas de empresa y dónde se ha cursado el \textit{máster}.}. A continuación se han seleccionado y extraído todas aquellas celdas que comprenden las dos celdas de las áreas de estudio con escala de referencia 1:25.000, 1:50.000 y 1:100.000. A partir de todas estas celdas ha simulado una serie de consultas como las que podrían darse en un visor web. La Figura \ref{fig:visorweb} ayuda a visualizar en que consiste la simulación o experimento que se análiza en el capítulo \ref{chap:result}.
+A partir del grid 1:500.000 se han escogido dos celdas de las zonas de estudio en las cuales se han calculado algunas métricas de paisaje. Estas dos zonas contienen la mayor parte de las provincias de Alicante y Zaragoza, así como los alrededores de cada una\footnote{Se han escogido estas dos zonas es por hacer referencia al lugar donde se han realizado las prácticas de empresa y dónde se ha cursado el \textit{máster}.}. A continuación se han seleccionado y extraído todas aquellas celdas que comprenden las dos celdas de las áreas de estudio con escala de referencia 1:25.000, 1:50.000 y 1:100.000. A partir de todas estas celdas ha simulado una serie de consultas como las que podrían darse en un visor web. La Figura \ref{fig:visorweb} ayuda a visualizar en que consiste la simulación o experimento que se analiza en el capítulo \ref{chap:result}.
 
 
 % Please add the following required packages to your document preamble:
@@ -195,14 +194,14 @@ A partir del grid 1:500.000 se han escogido dos celdas de las zonas de estudio e
 
 \begin{graybox}
 \begin{itemize}
-\item El número potencial de métricas del paisaje es \textbf{indeterminado} y depende de muchos factores (p.ej. objetivos del estudio, modelos de datos como \textit{raster/vector} o en red, niveles de agregación y/o escala, etc).
+\item El número potencial de métricas del paisaje es \textbf{muy amplio} y depende de muchos factores (p.ej. objetivos del estudio, modelos de datos como \textit{raster/vector} o en red, niveles de agregación y/o escala, etc).
 \item Resulta esencial determinar unas \textbf{métricas representativas} para esta primera propuesta.
 \end{itemize}
 \end{graybox}
 
 Como se indica en la sección \ref{sec:metrica}, existen cientos de métricas de paisaje que no siempre tienen significado para todas las aplicaciones de estudio, ya que su interés depende de muchos factores (p. ej. los objetivos del estudio, el modelo de datos, la escala, nivel de agregación etc). Por este mismo motivo y según los objetivos de este trabajo, se han seleccionado unas métricas del paisaje representativas y que aparecen frecuentemente en la bibliografía consultada.
 
-En la tabla \ref{tab:listmetricas} se listan las métricas acompañadas por su abreviatura. Se ha escogido un número de métricas repartidas por igual en tres niveles de agregación: a nivel de polígono (\textit{patch}), nivel de categoría (\textit{class}) y nivel de paisaje (\textit{landscape}). Además, se han escogido métricas que calculan operaciones simples, como por ejemplo el área o el perímetro, y por otro lado, métricas cuyos cálculos son más complejos, como por ejemplo la distancia al vecino más próximo o la densidad. El objetivo es encontrar la mayor variedad posible de contratiempos en el desarrollo de nuevas métricas.
+En la tabla \ref{tab:listmetricas} se listan las métricas acompañadas por su abreviatura. Se ha escogido un número de métricas repartidas por igual en tres niveles de agregación: a nivel de polígono (\textit{patch}), nivel de categoría (\textit{class}) y nivel de paisaje (\textit{landscape}). Además, se han escogido métricas que calculan operaciones simples, como por ejemplo el área o el perímetro, y por otro lado, métricas cuyos cálculos son más complejos, como por ejemplo la distancia al vecino más próximo o la densidad. El objetivo ha sido encontrar la mayor variedad posible de contratiempos en el desarrollo de nuevas métricas.
 
 % Please add the following required packages to your document preamble:
 % \usepackage{multirow}
