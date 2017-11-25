@@ -21,7 +21,7 @@ En este capítulo también se destacan los  aspectos más novedosos y relevantes
 
 En la sección \ref{sec:pglandmetrics} se describen las aportaciones realizadas al proyecto SIOSE-INNOVA y que corresponden al grueso del presente trabajo. A continuación, en la sección \ref{sec:caso_uso} se presentan los resultados de un caso de uso o experiencia computacional en el que se ha puesto a prueba la extensión desarrollada. Entre los objetivos de este trabajo era importante permitir que los usuarios del SIOSE calculasen métricas de una manera sencilla e intuitiva, pero también que pudiesen manejar un gran volumen de datos, cosa que en otras aplicaciones muy conocidas no es posible (ver capítulo \nameref{chap:intro}).
 
-\section{\pgland{} \label{sec:pglandmetrics}}
+\section{Aplicación de trabajo colaborativo para el desarrollo de \pgland{} \label{sec:pglandmetrics}}
 
 Una parte importante de este trabajo ha consistido en aprender a colaborar en un equipo de desarrolladores de geodatabases. En la metodología de integración continua aplicada en el Laboratorio de Geomática de la Universidad de Alicante resulta relativamente sencillo hacer un repaso del trabajo realizado en cada fase del proyecto.
 
@@ -32,7 +32,7 @@ La plataforma GitHub ofrece numerosas estadísticas del trabajo de cada usuario 
 \begin{figure}
 \begin{center}
 \includegraphics[width=\textwidth]{ResultadosyDiscusion/Figs/contributions.png}
-\caption{Calendario de actividad y contribuciones de este trabajo al proyecto \pgland{} (\textit{heatmap calendar}). \label{fig:contrib}}
+\caption{Calendario de actividad y contribuciones de este trabajo al proyecto \pgland{} (\textit{heatmap calendar}). Fuente: \url{https://github.com/andrearosado/pg_landmetrics}. \label{fig:contrib}}
 \end{center}
 \end{figure}
 
@@ -53,13 +53,17 @@ En el diagrama de red de GitHub (ver figura \ref{fig:network}) se puede visualiz
 \begin{figure}
 \begin{center}
 \includegraphics[width=\textwidth]{ResultadosyDiscusion/Figs/network.png}
-\caption{Diagrama de red de GitHub.  \label{fig:network}}
+\caption{Diagrama de red de GitHub. Fuente: \url{https://github.com/andrearosado/pg_landmetrics}. \label{fig:network}}
 \end{center}
 \end{figure}
 
-En cuanto a los resultados concretos de este trabajo, se han desarrollado 25 funciones sobre PostgreSQL/PostGIS que calculan métricas del paisaje de distintos tipos (a nivel de polígono, categorías y paisaje). Todas las funciones se han creado por duplicado (\textit{funciones sobrecargadas}) para trabajar con sistemas de coordenadas planas y con coordenadas geográficas. Esta decisión tiene que ver con que en bases de datos tan voluminosas como la del SIOSE, en ocasiones será necesario realizar cálculos con polígonos que se encuentren muy distantes, llegando incluso a representarse en usos o sistemas de referencia espacial distintos. El uso de coordenadas esféricas permite trabajar con una geodatabase sin preocuparse de este tipo de problemas, pero a cambio de poder utilizar un número menor de funciones de PostGIS. No obstante, resulta que todas las métricas seleccionadas a partir de la documentación de FRAGSTATS han podido ser calculadas partiendo del tipo \textit{geography} de PostGIS. Esto hace que las operaciones con el SIOSE resulten más sencillas si no es necesario dividir la base de datos por usos o comunidades autónomas.
+\section{Descripción de la extensión \pgland{} \label{sec:extension}}
 
-A parte de todas las funciones de cada una de las métricas seleccionadas, se han desarrollado dos funciones tipo ya que así permite obtener los resultados estructurados, es decir, que el valor obtenido vaya acompañado de su etiqueta a la métrica que corresponde, a la categoría a la que pertenece y de las unidades correspondientes. Además esto a facilitado el trabajo a la hora de simplificar las funciones de tipo agregado ya que a cada métrica y unidad de valor le corresponde un identificador único. Por otra parte, hay que tener en cuenta que también se ha tenido que desarrollar unas consultas test SQL para realizar el experimento y obtener resultados representativos que quedan expuestos en la sección \ref{sec:caso_uso} y la función final la cual nos permite obtener todos los resultados en una sola secuencia (ver la sección \ref{sec:exp}). 
+La extensión \pgland{} reúne  un total de 25 funciones sobre PostgreSQL/PostGIS que calculan métricas del paisaje de distintos tipos (a nivel de polígono, categorías y paisaje). Un ejemplo del conjunto de comando de una de estas funciones se observa en el Anexo \ref{anex:funcionestipo}, que representa las métricas AREA, CA y TA. Todas las funciones se han creado por duplicado (\textit{funciones sobrecargadas}) para trabajar con sistemas de coordenadas planas y con coordenadas geográficas. 
+
+Esta decisión tiene que ver con que en bases de datos tan voluminosas como la del SIOSE, en ocasiones será necesario realizar cálculos con polígonos que se encuentren muy distantes, llegando incluso a representarse en usos o sistemas de referencia espacial distintos. El uso de coordenadas esféricas permite trabajar con una geodatabase sin preocuparse de este tipo de problemas, pero a cambio de poder utilizar un número menor de funciones de PostGIS. No obstante, resulta que todas las métricas seleccionadas han podido ser calculadas partiendo del tipo \textit{geography} de PostGIS. Esto hace que las operaciones con el SIOSE resulten más sencillas si no es necesario dividir la base de datos por usos o comunidades autónomas.
+
+A parte de todas las funciones de cada una de las métricas seleccionadas, se han desarrollado dos funciones tipo ya que así permite obtener los resultados estructurados, es decir, que el valor obtenido vaya acompañado de su etiqueta a la métrica que corresponde, a la categoría a la que pertenece y de las unidades correspondientes. Además esto ha facilitado el trabajo a la hora de simplificar las funciones de tipo agregado ya que a cada métrica y unidad de valor le corresponde un identificador único. Por otra parte, hay que tener en cuenta que también se ha tenido que desarrollar unas consultas test SQL para realizar el experimento y obtener resultados representativos que quedan expuestos en la sección \ref{sec:caso_uso} y la función final la cual nos permite obtener todos los resultados en una sola secuencia (ver la sección \ref{sec:exp}). 
 
 En la tabla \ref{tab:metrics-ext} se listan todas las métricas del paisaje implementadas en la extensión. Los colores indican si la métrica se ha podido desarrollar como una función SQL simple o si por el contrario ha sido necesario crear una función de agregación (combinación de varias funciones). 
 
@@ -144,9 +148,9 @@ Las métricas marcadas como pendientes de aceptación en la tabla \ref{tab:metri
 
 En relación con los objetivos de este trabajo y del proyecto SIOSE-INNOVA, resulta muy significativo el modo en que se han simplificado todas las tareas de desarrollo y cálculo de las métricas del paisaje. Los miembros del equipo de trabajo pueden disponer, en cuestión de minutos, de una versión actualizada de la extensión \pgland{} con los últimos cambios realizados por otro compañero. Esta versión actualizada se obtiene mediante la ejecución de un sencillo comando (\textit{docker-compose up}) y viene acompañada de todo el software necesario para trabajar, incluyendo las mismas opciones de configuración utilizadas por todo el equipo. Igualmente, resulta también sencillo trabajar en laboratorio desde un servidor o desde un portatil en casa. Más aún, la tecnología utilizada funciona en los sistemas operativos más utilizados (Linux GNU, Windows o Mac). 
 
-Los usuarios finales de \pgland{} o de la base de datos del SIOSE, también verán facilitado su trabajo, ya que las 25 métricas implementadas simplifican en gran medida las consultas necesarias para realizar este tipo de análisis. Por ejemplo, una métrica en apariencia tan sencilla como Total Core Area (TCA) pasa a calcularse en una única línea frente a las más de 20 líneas que serían necesarias en SQL (ver ejemplos de código \ref{lst:tca2} y \ref{lst:tca3}).
+Los usuarios finales de \pgland{} o de la base de datos del SIOSE, también verán facilitado su trabajo, ya que las 25 métricas implementadas simplifican en gran medida las consultas necesarias para realizar este tipo de análisis. Por ejemplo, una métrica en apariencia tan sencilla como Total Core Area (TCA) pasa a calcularse en una única línea frente a las más de 20 líneas que serían necesarias en SQL (ver ejemplos de código \ref{tca2} y \ref{tca3}).
 
-Así mismo, todo el código fuente de la extensión \pgland{} está disponible en el repositorio\footnote{\url{https://github.com/siose-innova/pg_landmetrics}} para que cualquier usuario pueda utilizar, comprobar y realizar experimentos con cualquier geodatabase de ocupación del suelo.
+Así mismo, todo el código fuente de la extensión \pgland{} está disponible en el repositorio\footnote{\url{https://github.com/siose-innova/pg_landmetrics}} para que se pueda utilizar, comprobar y realizar experimentos con cualquier geodatabase de ocupación del suelo.
 
 \section{Caso de uso sobre el SIOSE-2011 \label{sec:caso_uso}}
 
