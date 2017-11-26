@@ -637,9 +637,9 @@ supported!}
     breaklinks=true,
     linktocpage,
     colorlinks=true,
-    linkcolor=blue,
-    urlcolor=blue,
-    citecolor=blue,
+    linkcolor=black,
+    urlcolor=black,
+    citecolor=black,
     anchorcolor=black
   }
   \ifsetCustomMargin
@@ -1372,3 +1372,5 @@ language=SQL,                % choose the language of the code
 }}{}
 
 \newcommand{\pgland}{\textit{pg\_landmetrics}}
+
+\captionsetup{labelfont=bf}
