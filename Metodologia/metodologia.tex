@@ -101,7 +101,7 @@ El comando \textit{docker-compose build} se utiliza únicamente si la extensión
 
 \subsection{Extensibilidad en PostgreSQL}\label{subsec:exten}
 
-PostgreSQL, y su extensión espacial PostGIS, fueron utilizados en las asignaturas del Máster a un nivel de usuario, lo cual ha resultado muy útil en la creación de funciones y métricas. Sin embargo, en este trabajo hay que destacar una de las características más notables de este SGBD: la extensibilidad.
+PostgreSQL, y su extensión espacial PostGIS, fueron utilizados en las asignaturas del Máster a un nivel de usuario, lo cual ha resultado muy útil en la creación de funciones y métricas. En este trabajo se han utilizado las últimas versiones de estos programas en el momento de realizar los experimentos (PostgreSQL 9.6 y PostGIS 2.3). En el desarrollo de las prácticas se han estudiado otras ventajas de estas tecnologías. Sin embargo, en este trabajo hay que destacar una de las características más notables de este SGBD: la extensibilidad.
 
 La \textit{extensibilidad} es la adaptabilidad de un \textit{software} frente a la introducción de nuevos cambios y funcionalidades. En este sentido PostgreSQL es un SGBD altamente extensible, ya que \textbf{toda su funcionalidad se añade como si de un catálogo se tratase}. El sistema de tipos, funciones, índices, operadores y funciones agregadas, son solo algunas de las características que pueden ser extendidas en PostgreSQL. Este diseño extensible ha servido para crear el propio PostGIS, que es una \textit{extensión}. Una extensión de Postgres sería un conjunto de nuevas funcionalidades que son añadidas de manera conjunta. Además, de las características ya mencionadas, los propios lenguajes procedurales serían extensiones en cierto modo. Lo más interesante es que estas extensiones se pueden programar en cualquiera de los lenguajes disponibles en PostgreSQL, incluido SQL.
 
@@ -303,7 +303,7 @@ En cuanto a las métricas a nivel de paisaje también se han desarrollado de tip
 
 \section{Experimento sobre la capacidad de cálculo de \pgland{}\label{sec:exp}}
 
-Finalmente, con todas las funciones implementadas, desarrolladas y testeadas sobre el conjunto de datos de ejemplo, resulta sencillo realizar pruebas de rendimiento de la extensión \pgland{} sobre el conjunto de datos del SIOSE-2011.
+Una vez todas las funciones han sido desarrolladas, implementadas y testeadas sobre el conjunto de datos de ejemplo, resulta sencillo realizar pruebas de rendimiento de la extensión \pgland{} sobre el conjunto de datos del SIOSE-2011.
 
 \textbf{Este experimento busca simular la consulta que un usuario podría realizar en un visor web del SIOSE que calculase métricas del paisaje de un modo ágil e interactivo (ver figura \ref{fig:visorweb}).} Cada vez que el usuario hace zoom o se desplaza por el visor Web SIG, se envían consultas sobre las métricas del paisaje para la superficie del mapa visible en ese momento (normalmente será una superficie rectangular). 
 
@@ -313,7 +313,7 @@ El movimiento del usuario se simula a partir de una secuencia de consultas utili
 
 Esta función construye una tabla virtual con los resultados organizados por columnas según la zona de estudio a la que corresponden (Zaragoza o Alicante), el número de celda sobre el que está intersectado, y los valores de cada métrica en su columna correcta. A continuación se ha ejecutado un \textit{script}, proporcionado por el personal del Laboratorio de Geomática, el cual extrae todos los valores calculados, para todas las escalas de referencia y en una sola tabla en formato CSV.
 
-Además, se ha desarrollado e implementado la extensión \pgland{} mediante un ordenador de sobremesa cuyo sistema es Ubuntu 17.10 con un tamaño de 1,2 TB de disco, así pues facilitar la ejecución de todas las consultas y funciones PostgreSQL.
+Resulta importante destacar que este experimento sobre la extensión \pgland{} se ha desarrollado en un ordenador de sobremesa, con Sistema Operativo Ubuntu 17.10 (64 bits), 7,7 GB de memoria, un procesador Intel Core i7-7700 CPU @ 6.60 GHz x 8 y con un disco duro de 1,2 TB. No se ha realizado ninguna configuración fuera de las opciones estándar de PostgreSQL.
 
 
 \section{Documentación de la extensión}
