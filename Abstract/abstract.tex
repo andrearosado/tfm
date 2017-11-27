@@ -3,6 +3,19 @@
 
 \begin{abstract}
 
+The existence of increasingly large and voluminous spatial database entails challenges in the sense of managing and providing agile and direct access to its information. The database of the Sistema de Información sobre Ocupación del Suelo de España (SIOSE) is a clear example of this situation, presenting the information of the codification and tens of millions of records, demanding from its users a great capacity for processing and storage.
+
+This work is part of the objectives proposed for the SIOSE-INNOVA Project, which proposes two lines of work, one of technical innovation and another applied, which seeks to enhance the \textit{usability} of the SIOSE in different types of study.
+
+Among the large number of possible applications from databases such as the SIOSE, landscape metrics are useful for analyzing the structure and behavior of the landscape. However, the great diversity of metrics, no program allows to calculate all the metrics nor is it designed to work with geodatabases as complex and voluminous as the SIOSE, which also refers to the problems of \textit{usability}.
+
+The main objective of this work is to create an extension on PostgreSQL/PostGIS able to calculate landscape metrics from the SIOSE database, facing \textit{usability} problems. The central question of this work is whether this extension is capable of dealing with the quoted problems that affect the SIOSE and similar geodatabases.
+
+The development of this extension, called \pgland{}, has been possible thanks to the use of collaborative development tools and containerization platforms or virtualization services. They have allowed the establishment of continuous integration workflows and generation of one functional extension capable of calculating landscape metrics based on the SIOSE-2011. A variety of database programming techniques have been used in databases so users are able to calculate landscape metrics in sentences of one or few lines. Finally, to test the extension, a computational experience on the SIOSE-2011 was carried out from the repeated metric queries.
+
+This work serves to highlight the collaborative work based on a series of version control, containerization and orchestration tools. This methodology will greatly facilitate a new way of adding new metrics and applying this extension to new studies related to landscape structure.\\
+
+\textbf{Keywords}: SIOSE, \textit{usability}, landscape metrics, PostGIS, reproducibility, containerization.
 
 
 
