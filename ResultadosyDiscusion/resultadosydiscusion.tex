@@ -134,13 +134,13 @@ SHIDI                   & \bullet       & \bullet      & \circ
 \end{tabular}
 \end{table}
 
-En esta tabla de resumen también se puede ver que prácticamente todas las consultas se podían calcular manualmente (independientemente de la dificultad) salvo la distancia euclídea al vecino más próximo (ENN; Euclidean Nearest Neighbour Distance). Esta métrica implica numerosos cálculos de distancia entre polígonos, el uso de índices espaciales y la aplicación de una serie de filtros. Evidentemente, el cálculo del ENN resultaría muy trabajoso si no se utiliza ningún lenguaje de programación. La consulta SQL para el ENN se realizó de un modo más o menos sencillo. Sin embargo, su implementación como función SQL de agregación está aún siendo revisada por el equipo del SIOSE-INNOVA.
+En esta tabla de resumen también se puede ver que prácticamente todas las consultas se podían calcular manualmente (independientemente de la dificultad) salvo la distancia euclídea al vecino más próximo (ENN; \textit{Euclidean Nearest Neighbour Distance}). Esta métrica implica numerosos cálculos de distancia entre polígonos, el uso de índices espaciales y la aplicación de una serie de filtros. Evidentemente, el cálculo del ENN resultaría muy trabajoso si no se utiliza ningún lenguaje de programación. La consulta SQL para el ENN se realizó de un modo más o menos sencillo. Sin embargo, su implementación como función SQL de agregación está aún siendo revisada por el equipo del SIOSE-INNOVA.
 
 Las métricas marcadas como pendientes de aceptación en la tabla \ref{tab:metrics-ext} devuelven el resultado correcto con el paisaje de ejemplo descrito en este trabajo, por lo que \textbf{es de esperar que pronto pasen a formar parte del repositorio oficial de \pgland{}}.
 
 En relación con los objetivos de este trabajo y del proyecto SIOSE-INNOVA, resulta muy significativo el modo en que se han simplificado todas las tareas de desarrollo y cálculo de las métricas del paisaje. Los miembros del equipo de trabajo pueden disponer, en cuestión de minutos, de una versión actualizada de la extensión \pgland{} con los últimos cambios realizados por otro compañero. Esta versión actualizada se obtiene mediante la ejecución de un sencillo comando (\textit{docker-compose up}) y viene acompañada de todo el software necesario para trabajar, incluyendo las mismas opciones de configuración utilizadas por todo el equipo. Igualmente, resulta también sencillo trabajar en laboratorio desde un servidor o desde un portatil en casa. Más aún, la tecnología utilizada funciona en los sistemas operativos más utilizados (Linux GNU, Windows o Mac). 
 
-Los usuarios finales de \pgland{} o de la base de datos del SIOSE, también verán facilitado su trabajo, ya que las 25 métricas implementadas simplifican en gran medida las consultas necesarias para realizar este tipo de análisis. Por ejemplo, una métrica en apariencia tan sencilla como Total Core Area (TCA) pasa a calcularse con una única línea de SQL frente a las más de 20 líneas que serían necesarias sin esta extensión (ver ejemplos de código \ref{tca2} y \ref{tca3}).
+Los usuarios finales de \pgland{} o de la base de datos del SIOSE, también verán facilitado su trabajo, ya que las 25 métricas implementadas simplifican en gran medida las consultas necesarias para realizar este tipo de análisis. Por ejemplo, una métrica en apariencia tan sencilla como T\textit{otal Core Area} (TCA) pasa a calcularse con una única línea de SQL frente a las más de 20 líneas que serían necesarias sin esta extensión (ver ejemplos de código \ref{tca2} y \ref{tca3}).
 
 Otros ejemplos de métricas pueden ser consultados en el código fuente de la extensión \pgland{} que está disponible en el repositorio oficial en GitHub\footnote{\url{https://github.com/siose-innova/pg_landmetrics}}. Dado que todo el código es libre y abierto, es posible que otros investigadores puedan estudiar el código y reutilizarlo para realizar experimentos con otras geodatabases de ocupación del suelo.
 
@@ -148,13 +148,13 @@ Otros ejemplos de métricas pueden ser consultados en el código fuente de la ex
 
 Los objetivos de este trabajo incluyen la realización de una experiencia computacional sobre una geodatabase voluminosa. Se trata de poner a prueba la extensión \pgland{} (y las tecnologías sobre las que trabaja) para valorar si sería posible ofrecer un servicio de consultas sobre el SIOSE similar al descrito en la figura \ref{fig:visorweb} de este trabajo. Este caso de uso se ha descrito en detalle en el capítulo \ref{chap:metod}. El experimento completo se ha lanzado a partir de una única consulta SQL (ver ejemplo de código \ref{list:runtests}).
 
-En este experimento se calculan las métricas \textit{Patch Area (AREA)}, \textit{Total (Class) Area (CA)} y \textit{Total Area (TCA)} a diferentes escalas de referencia y se recuperan sus resultados junto con los tiempos de cálculo. 
+En este experimento se calculan las métricas \textit{Patch Area (AREA)}, \textit{Total (Class) Area} (CA) y \textit{Total Area} (TCA) a diferentes escalas de referencia y se recuperan sus resultados junto con los tiempos de cálculo. 
 
-Los resultados de este experimento pueden visualizarse en las figuras incluidas en esta sección y en el Anexo \ref{anex:results}. En estas figuras se observan las dos zonas cuya estructura se quiere comparar (zonas de Alicante y Zaragoza), cada celda representada se correspondería con una operación de \textit{zoom} o desplazamiento de un usuario dentro de un visor web. En estas figuras, los resultados están representados mediante el método de clasificación de desviación estándar que muestra los valores medios en rangos iguales; aquellos valores que se encuentren más alejados de la media están representandos por distinto colores, naranja para aquellas celdas que presentan un valor menor, y morado para aquellas celdas con un valor mayor. En todas las figuras también es posible ver el tiempo total de cálculo para cada zona, lo cual incluye un distinto número de consultas según la escala, entre 25 y cerca de 360.
+Los resultados de este experimento pueden visualizarse en las figuras incluidas en esta sección. En éstas se observan las dos zonas cuya estructura se quiere comparar (zonas de Alicante y Zaragoza), cada celda representada se correspondería con una operación de \textit{zoom} o desplazamiento de un usuario dentro de un visor web. En estas figuras, los resultados están representados mediante el método de clasificación de desviación estándar que muestra los valores medios en rangos iguales; aquellos valores que se encuentren más alejados de la media están representandos por distinto colores, naranja para aquellas celdas que presentan un valor menor, y morado para aquellas celdas con un valor mayor. En todas las figuras también es posible ver el tiempo total de cálculo para cada zona, lo cual incluye un distinto número de consultas según la escala, entre 25 y cerca de 360.
 
-En la figura \ref{fig:p_area}, se muestran todos los cálculos de la métrica Patch Area (AREA), de modo que se pueden comparar las dos zonas de estudio a escala 1:25.000. Este ejemplo presenta una estructura similar entre las dos zonas. Sin embargo, al noreste de la zona de Zaragoza se ve una peculiaridad. Si se observa con más detalle, la celda de color morado más oscuro presenta unos valores significativamente por encima de la media. Esto se debe a que la intersección de la celda con los polígonos del SIOSE afecta a 6 polígonos de una considerable extensión (ver figura \ref{fig:anomalia}). Por lo tanto, es lógico que el cálculo realizado devuelva un valor tan elevado. De este modo, el cálculo de AREA a nivel de polígono puede utilizarse para interpretar la estructura del paisaje de un modo rápido. Allí donde se den anomalías que distingan un paisaje del otro estará relacionado con la presencia de polígonos relativamente extensos.
+En la figura \ref{fig:p_area}, se muestran todos los cálculos de la métrica P\textit{atch Area} (AREA), de modo que se pueden comparar las dos zonas de estudio a escala 1:25.000, como por ejemplo. Se presenta una estructura similar entre las dos zonas. Sin embargo, al noreste de la zona de Zaragoza se ve una peculiaridad. Si se observa con más detalle, la celda de color morado más oscuro presenta unos valores significativamente por encima de la media. Esto se debe a que la intersección de la celda con los polígonos del SIOSE afecta a 6 polígonos de una considerable extensión (ver figura \ref{fig:anomalia}) en la zona de Zaragoza. Sin embargo, en la zona de Alicante la interseccion afecta a muchos más polígonos que en la otra anomalía pero en este caso el valor que representa es menor ya que los polígonos del SIOSE presentan una área menos extensa. Por lo tanto, es lógico que el cálculo realizado devuelva un valor tan elevado. De este modo, el cálculo de AREA a nivel de polígono puede utilizarse para interpretar la estructura del paisaje de un modo rápido. Allí donde se den anomalías que distingan un paisaje del otro estará relacionado con la presencia de polígonos relativamente extensos.
 
-Dentro de este mismo experimento, se ha querido mostrar el resultado del cálculo del área a nivel de categoría. Para ello se han seleccionado algunas que pertenezcan a la clase de forestal como: prados (290), pastizal (300), frondosas caducifolias (312), frondosas perennifolias (313), coníferas (316) y matorral (320). Esta clasificación de ocupación del suelo quedaba explicada en el capítulo \ref{chap:metod}. En la figura \ref{fig:c_area}, calculada la métrica Total (Class) Area (CA), a raíz de la selección de las categorías anteriores se puede apreciar aproximadamente la disposición del relieve donde en las zonas más interiores se encuentran los polígonos con mayor área y menor competencia entre los distintos usos del suelo.
+Dentro de este mismo experimento, se ha querido mostrar el resultado del cálculo del área a nivel de categoría. Para ello se han seleccionado algunas que pertenezcan a la clase de forestal como: prados (290), pastizal (300), frondosas caducifolias (312), frondosas perennifolias (313), coníferas (316) y matorral (320). Esta clasificación de ocupación del suelo quedaba explicada en el capítulo \ref{chap:metod}. En la figura \ref{fig:c_area}, calculada la métrica \textit{Total (Class) Area} (CA), a raíz de la selección de las categorías anteriores se puede apreciar aproximadamente la disposición del relieve donde en las zonas más interiores se encuentran los polígonos con mayor área y menor competencia entre los distintos usos del suelo.
 
 El tiempo de ejecución que conllevan las consultas SQL es una cuestión del mayor interés en este trabajo. Una vez realizado todo el experimento, se observa que el número de polígonos que intersectan en la zona de estudio siempre influye en el tiempo que puede tardar en ejecutarse una consulta SQL. Los tiempos también dependen directamente del número de observaciones (celdas) que tenga la zona de estudio y de la complejidad de la métrica calculada. 
 
@@ -178,6 +178,11 @@ Los tiempos de ejecución no son muy prolongados a pesar de que se ha trabajado 
     \caption{Grid 1:100.000}
     \label{fig:p_100}
   \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{ResultadosyDiscusion/Figs/Results/leyenda1.pdf}
+    \label{fig:leyenda1}
+  \end{subfigure}
+  
   
   \caption{Resultado de la métrica AREA en la zona de Alicante y Zaragoza a partir de distintos \textit{grids}.}
   \label{fig:p_area}
@@ -228,6 +233,10 @@ Los tiempos de ejecución no son muy prolongados a pesar de que se ha trabajado 
     \caption{Grid 1:100.000}
     \label{fig:c_100}
   \end{subfigure}
+    \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{ResultadosyDiscusion/Figs/Results/leyenda2.pdf}
+    \label{fig:leyenda2}
+  \end{subfigure}
   
   \caption{Resultado de la métrica CA en la zona de Alicante y Zaragoza a partir de distintos \textit{grids}.}
   \label{fig:c_area}
@@ -255,6 +264,10 @@ Los tiempos de ejecución no son muy prolongados a pesar de que se ha trabajado 
     \includegraphics[width=\textwidth]{ResultadosyDiscusion/Figs/Results/l_100.pdf}
     \caption{Grid 1:100.000}
     \label{fig:l_100}
+  \end{subfigure}
+    \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{ResultadosyDiscusion/Figs/Results/leyenda3.pdf}
+    \label{fig:leyenda3}
   \end{subfigure}
   
   \caption{Resultado de la métrica TA en la zona de Alicante y Zaragoza a partir de distintos \textit{grids}.}

@@ -638,7 +638,7 @@ supported!}
     linktocpage,
     colorlinks=true,
     linkcolor=black,
-    urlcolor=black,
+    urlcolor=blue,
     citecolor=black,
     anchorcolor=black
   }
