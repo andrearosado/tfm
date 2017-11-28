@@ -3,17 +3,13 @@
 
 \begin{abstract}
 
-The existence of increasingly large and voluminous spatial database entails challenges in the sense of managing and providing agile and direct access to its information. The database of the Sistema de Información sobre Ocupación del Suelo de España (SIOSE) is a clear example of this situation, presenting the information of the codification and tens of millions of records, demanding from its users a great capacity for processing and storage.
+The spatial databases are increasingly complex and voluminous, generating new challenges in the use of geographic information. The data base of the Sistema de Información sobre Ocupación del Suelo de España (SIOSE) is a clear example of this trend, since it implements a relatively complex data model and collects tens of millions of records with territorial information.
 
-This work is part of the objectives proposed for the SIOSE-INNOVA Project, which proposes two lines of work, one of technical innovation and another applied, which seeks to enhance the \textit{usability} of the SIOSE in different types of study.
+Among the possible applications of databases such as the SIOSE, landscape metrics serve to analyze the structure of the landscape and other related phenomena. However, given the great diversity of possible metrics, no \textit{software} allows you to calculate them all, nor is it designed to work with geodatabases as complex and voluminous as the SIOSE.
+ 
+The main objective of this work is to create a database extension on PostgreSQL/PostGIS that calculates landscape metrics from the SIOSE database, addressing the aforementioned \textit{usability} problems. In this sense, the central question of this work is whether this extension will be able to face the problems of \textit{usability} that affect the SIOSE and other similar geodatabases.
 
-Among the large number of possible applications from databases such as the SIOSE, landscape metrics are useful for analyzing the structure and behavior of the landscape. However, the great diversity of metrics, no program allows to calculate all the metrics nor is it designed to work with geodatabases as complex and voluminous as the SIOSE, which also refers to the problems of \textit{usability}.
-
-The main objective of this work is to create an extension on PostgreSQL/PostGIS able to calculate landscape metrics from the SIOSE database, facing \textit{usability} problems. The central question of this work is whether this extension is capable of dealing with the quoted problems that affect the SIOSE and similar geodatabases.
-
-The development of this extension, called \pgland{}, has been possible thanks to the use of collaborative development tools and containerization platforms or virtualization services. They have allowed the establishment of continuous integration workflows and generation of one functional extension capable of calculating landscape metrics based on the SIOSE-2011. A variety of database programming techniques have been used in databases so users are able to calculate landscape metrics in sentences of one or few lines. Finally, to test the extension, a computational experience on the SIOSE-2011 was carried out from the repeated metric queries.
-
-This work serves to highlight the collaborative work based on a series of version control, containerization and orchestration tools. This methodology will greatly facilitate a new way of adding new metrics and applying this extension to new studies related to landscape structure.\\
+This work has contributed to the development of the extension \pgland{}, which calculates landscape metrics from simple SQL statements. The extension has been put to the test in a computational experience based on SIOSE-2011 data. It has been proved that \pgland{} allows us to answer hundreds of queries about landscape metrics in a few seconds, which suggests that this type of calculations could be offered as a web query service, thus solving the problems of \textit{usability}.\\
 
 \textbf{Keywords}: SIOSE, \textit{usability}, landscape metrics, PostGIS, reproducibility, containerization.
 
