@@ -1,21 +1,51 @@
-\documentclass[11pt]{beamer}
-\usetheme{Copenhagen}
-\usepackage[utf8]{inputenc}
-\usepackage[spanish]{babel}
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{amssymb}
-\usepackage{graphicx}
-\author{aNDREA}
-\title{TFM}
-\setbeamercovered{transparent} 
-\setbeamertemplate{navigation symbols}{} 
-%\logo{} 
-\institute{ UNIZAR} 
-\date{} 
-\subject{TFM de ...} 
-\begin{document}
+\documentclass{beamer}
+\mode<presentation>{
+\usetheme{Dresden}
+\setbeamercovered{transparent}
+\usecolortheme{lsc}
+}
 
+\mode<handout>{
+  % tema simples para ser impresso
+  \usepackage[bar]{beamerthemetree}
+  % Colocando um fundo cinza quando for gerar transparências para serem impressas
+  % mais de uma transparência por página
+  \beamertemplatesolidbackgroundcolor{black!5}
+}
+
+\usepackage{amsmath,amssymb}
+\usepackage[brazil]{varioref}
+\usepackage[spanish,brazil]{babel}
+\usepackage[utf8]{inputenc}
+%\usepackage[latin1]{inputenc}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{url}
+\usepackage{colortbl}
+
+\beamertemplatetransparentcovereddynamic
+
+\title[CÁLCULO DE MÉTRICAS DE PAISAJE A PARTIR DEL SIOSE]{CÁLCULO DE MÉTRICAS DE PAISAJE A PARTIR DEL SIOSE: UNA PROPUESTA ESCALABLE BASADA EN POSTGRESQL/POSTGIS}
+\author[Andrea Rosado Abad]{%
+  Andrea Rosado Abad \\
+  \footnotesize{Directores: Raquel Montorio Llovería y Daniel Borini Alves}}
+  \institute[Universidad de Zaragoza]{
+	Máster Universitario en Tecnologías de la Información Geográfica para la Ordenación del Territorio: SIG y Teledetección\\}
+
+% Se comentar a linha abaixo, irá aparecer a data quando foi compilada a apresentação  
+\date{x de Diciembre de 2017}
+
+\pgfdeclareimage[height=2cm]{inf}{Figs/unizar_logo.png}
+
+% pode-se colocar o LOGO assim
+%\logo{\pgfuseimage{inf}}
+
+\titlegraphic{\includegraphics[height=1cm]{Figs/unizar_logo}\hfill\includegraphics[height=1cm]{Figs/depart_logo}}
+
+\setbeamertemplate{navigation symbols}{} 
+
+
+\begin{document}
 
 {
 \setbeamertemplate{headline}{}
@@ -24,20 +54,31 @@
 \end{frame}
 
 \begin{frame}
+\frametitle{\textbf{Índice general}}
 \tableofcontents
 \end{frame}
 }
 
+\section{Contexto}
+
 \section{Introducción}
 
-\input{Introduccion/introduccion-slides}
-
+\section{Objetivos}
 
 \section{Metodología}
 
-\begin{frame}{Otra diapositiva}
+\section{Resultados}
 
+\section{Conclusiones y trabajo futuro}
+
+
+
+
+{
+\setbeamertemplate{headline}{}
+\begin{frame}
+\titlepage
 \end{frame}
 
-
 \end{document}
+}
