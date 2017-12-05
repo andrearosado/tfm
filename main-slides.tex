@@ -1,4 +1,4 @@
-\documentclass{beamer}
+\documentclass[aspectratio=169]{beamer}
 \mode<presentation>{
 \usetheme{Dresden}
 \setbeamercovered{transparent}
@@ -7,7 +7,7 @@
 
 \mode<handout>{
   % tema simples para ser impresso
-  \usepackage[bar]{beamerthemetree}
+  %\usepackage[bar]{beamerthemetree}
   % Colocando um fundo cinza quando for gerar transparências para serem impressas
   % mais de uma transparência por página
   \beamertemplatesolidbackgroundcolor{black!5}
@@ -25,24 +25,30 @@
 
 \beamertemplatetransparentcovereddynamic
 
-\title[CÁLCULO DE MÉTRICAS DE PAISAJE A PARTIR DEL SIOSE]{CÁLCULO DE MÉTRICAS DE PAISAJE A PARTIR DEL SIOSE: UNA PROPUESTA ESCALABLE BASADA EN POSTGRESQL/POSTGIS}
-\author[Andrea Rosado Abad]{%
-  Andrea Rosado Abad \\
+\title[\textit{Cálculo de métricas del paisaje a partir del SIOSE: una propuesta escalable basada en PostgreSQL/PostGIS}]{\textbf{CÁLCULO DE MÉTRICAS DE PAISAJE A PARTIR DEL SIOSE: UNA PROPUESTA ESCALABLE BASADA EN POSTGRESQL/POSTGIS}}
+\author[]{
+  \textbf{\small{Andrea Rosado Abad}} \\
   \footnotesize{Directores: Raquel Montorio Llovería y Daniel Borini Alves}}
-  \institute[Universidad de Zaragoza]{
-	Máster Universitario en Tecnologías de la Información Geográfica para la Ordenación del Territorio: SIG y Teledetección\\}
+  \institute[]{
+	\textit{\tiny{Máster Universitario en\\ Tecnologías de la Información Geográfica para la Ordenación del Territorio: SIG y Teledetección}}\\}
 
 % Se comentar a linha abaixo, irá aparecer a data quando foi compilada a apresentação  
-\date{x de Diciembre de 2017}
+\date{\footnotesize{14 de Diciembre de 2017}}
+	
 
-\pgfdeclareimage[height=2cm]{inf}{Figs/unizar_logo.png}
+%\pgfdeclareimage[height=2cm]{inf}{Figs/unizar_logo.png}
 
 % pode-se colocar o LOGO assim
 %\logo{\pgfuseimage{inf}}
 
-\titlegraphic{\includegraphics[height=1cm]{Figs/unizar_logo}\hfill\includegraphics[height=1cm]{Figs/depart_logo}}
+\titlegraphic{\includegraphics[height=0.4cm]{Figs/unizar}\hfill\includegraphics[height=0.4cm]{Figs/geo_unizar}\hfill\includegraphics[height=0.3cm]{Figs/ua_logo}\hfill\includegraphics[height=0.5cm]{Figs/iig_ua}}
 
 \setbeamertemplate{navigation symbols}{} 
+
+%Para quitar la barra del título de la diapositiva
+%\setbeamertemplate{frametitle}{}
+%\setbeamertemplate{frametitleshade}{}
+
 
 
 \begin{document}
@@ -62,15 +68,19 @@
 \section{Contexto}
 
 \section{Introducción}
+\input{Introduccion/introduccion-slides}
 
 \section{Objetivos}
+\input{Introduccion/objetivos-slides}
 
 \section{Metodología}
+\input{Metodologia/metodologia-slides}
 
 \section{Resultados}
+\input{ResultadosyDiscusion/resultados-slides}
 
 \section{Conclusiones y trabajo futuro}
-
+\input{ConclusionyFuturo/conclusiones-slides}
 
 
 

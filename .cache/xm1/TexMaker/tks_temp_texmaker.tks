@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TexmakerSession quickmode="3">
-    <document bookmark3="0" bookmark2="0" line="0" hasfocus="false" file="/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty" master="false" bookmark1="0"/>
-    <document bookmark3="0" bookmark2="0" line="14" hasfocus="true" file="/home/texmaker/main-slides.tex" master="false" bookmark1="0"/>
-    <document bookmark3="0" bookmark2="0" line="0" hasfocus="false" file="/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty" master="false" bookmark1="0"/>
+    <document bookmark2="0" bookmark3="0" master="false" hasfocus="true" line="42" bookmark1="0" file="/home/texmaker/main-slides.tex"/>
 </TexmakerSession>
