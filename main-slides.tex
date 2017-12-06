@@ -1,4 +1,4 @@
-\documentclass[aspectratio=169]{beamer}
+\documentclass[aspectratio=43]{beamer}
 \mode<presentation>{
 \usetheme{Dresden}
 \setbeamercovered{transparent}
@@ -48,6 +48,19 @@
 %Para quitar la barra del título de la diapositiva
 %\setbeamertemplate{frametitle}{}
 %\setbeamertemplate{frametitleshade}{}
+\setbeamerfont{caption}{size=\tiny}
+\usepackage{multirow}
+\usepackage{colortbl}
+\usepackage{xcolor}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage{amsmath,amssymb,latexsym}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  S L I D E S  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 
 
@@ -66,21 +79,22 @@
 }
 
 \section{Contexto}
+	\input{Prologo/contexto-slides}
 
 \section{Introducción}
-\input{Introduccion/introduccion-slides}
+	\input{Introduccion/introduccion-slides}
 
 \section{Objetivos}
-\input{Introduccion/objetivos-slides}
+	\input{Introduccion/objetivos-slides}
 
 \section{Metodología}
-\input{Metodologia/metodologia-slides}
+	\input{Metodologia/metodologia-slides}
 
 \section{Resultados}
-\input{ResultadosyDiscusion/resultados-slides}
+	\input{ResultadosyDiscusion/resultados-slides}
 
 \section{Conclusiones y trabajo futuro}
-\input{ConclusionyFuturo/conclusiones-slides}
+	\input{ConclusionyFuturo/conclusiones-slides}
 
 
 
@@ -92,3 +106,4 @@
 
 \end{document}
 }
+

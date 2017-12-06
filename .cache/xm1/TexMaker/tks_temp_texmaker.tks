@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TexmakerSession quickmode="3">
-    <document bookmark2="0" bookmark3="0" master="false" hasfocus="true" line="42" bookmark1="0" file="/home/texmaker/main-slides.tex"/>
+    <document bookmark1="0" file="/home/texmaker/main-slides.tex" hasfocus="true" bookmark2="0" bookmark3="0" master="false" line="51"/>
+    <document bookmark1="0" file="/home/texmaker/Metodologia/metodologia-slides.tex" hasfocus="false" bookmark2="0" bookmark3="0" master="false" line="112"/>
+    <document bookmark1="0" file="/home/texmaker/ResultadosyDiscusion/resultados-slides.tex" hasfocus="false" bookmark2="0" bookmark3="0" master="false" line="79"/>
 </TexmakerSession>
